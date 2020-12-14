@@ -1,0 +1,2 @@
+class CurrentAffairCategory < ApplicationRecord
+end
