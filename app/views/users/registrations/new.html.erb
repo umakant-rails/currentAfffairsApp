@@ -1,29 +1,71 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <div class="sign-up-container">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <div class="content">
+              <h5 class="title text-center"><strong>Sign Up</strong></h5>
+              <hr>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <button type="button" class="btn btn-block btn-trans btn-facebook bg btn-rad"><i class="fa fa-facebook"></i> Sign in with Facebook</button>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <button type="button" class="btn btn-block btn-trans btn-twitter bg btn-rad"><i class="fa fa-twitter"></i> Sign in with Twitter</button>
+                </div>
+              </div>
+              <p class="text-center">Or</p>
+              <div class="form-group">
+                <div class="col-sm-12 no-padding">
+                  <% if resource.errors.messages.present? %>
+                    <div class="input-group alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="font-size: 15px;">×</button>
+                      <%= get_errors(resource.errors.messages) %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                  <%= f.text_field :username, autofocus: true, class: 'form-control', id: 'inputUsername', placeholder: 'Username' %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <%= f.text_field :email, autofocus: true, class: 'form-control', id: 'inputEmail', placeholder: 'Email' %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                  <%= f.text_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', id: 'inputPassword', placeholder: 'Password' %>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputConfirmPassword" class="col-sm-2 col-form-label">Confirm Password</label>
+                <div class="col-sm-10">
+                  <%= f.text_field :password_confirmation, autofocus: true, autocomplete: 'off', class: 'form-control', id: 'inputConfirmPassword', placeholder: 'Confirm Password' %>
+                </div>
+              </div>
+              <p class="spacer">By creating an account, you agree with the <a href="#">Terms</a> and <a href="#">Conditions</a>.</p>
+              <div>
+                <%= f.submit "Sign up", class: "btn btn-primary btn-lg btn-block"%>
+              </div>
+            </div>
+            <br/>
+            <div class="shared-link" style="margin-top: -10px;">
+              <%= render "users/shared/links" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-lg-1"></div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <div class="col-lg-3"></div>
+</div>

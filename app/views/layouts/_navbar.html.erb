@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Current Affairs</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <% if current_user.blank? %>
+      <div class="float-right">
+        <ul class="nav navbar-nav float-right">
+          <li><a class="nav-link" href="<%= new_user_registration_path %>">Register</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a class="nav-link" href="<%= new_user_session_path %>">Log in</a></li>
+        </ul>
+      </div>
+    <% else %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.username%>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">My Account</a>
+            <a class="dropdown-item" href="#">Profile</a>
+            <div class="dropdown-divider"></div>
+            <a href="/users/sign_out" class="dropdown-item" data-method="delete" 
+              rel="nofollow">Sign Out</a>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</nav>
