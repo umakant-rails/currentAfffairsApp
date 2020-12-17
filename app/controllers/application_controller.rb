@@ -4,4 +4,12 @@ class ApplicationController < ActionController::Base
     home_path
   end
 
+  def after_sign_out_path_for(resource)
+    if @user.blank?
+       root_path
+    else
+       home_path
+    end
+  end
+
 end

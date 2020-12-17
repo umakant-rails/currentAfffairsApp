@@ -1,7 +1,11 @@
 class WelcomeController < ApplicationController
   
   def index 
-    @welcome_msg = "This is welcome page"
+    if current_user.blank?
+      @welcome_msg = "This is welcome page"
+    else
+      redirect_to home_path
+    end
   end
 
 end

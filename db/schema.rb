@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_14_190842) do
+ActiveRecord::Schema.define(version: 2020_12_16_154618) do
 
   create_table "current_affair_categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "scrapping_data", charset: "utf8mb4", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "source"
+    t.text "keypoints"
+    t.datetime "ca_date"
+    t.integer "state_id"
+    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

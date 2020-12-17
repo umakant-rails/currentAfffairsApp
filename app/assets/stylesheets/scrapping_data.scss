@@ -1,0 +1,23 @@
+.scrapping-row{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  //min-height: 50px;
+  margin-top: 20px;
+  padding: 8px;
+}
+.scrapping-widget {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding-top: 8px;
+  margin-right: 5px;
+  text-align: center;
+}
+.btn-fetch-btn{
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+.selelcted-data-source{
+  background-color: lightgreen !important;
+  border-color: green;
+  border: 2px solid;
+}
