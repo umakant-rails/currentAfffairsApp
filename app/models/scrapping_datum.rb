@@ -22,7 +22,7 @@ class ScrappingDatum < ApplicationRecord
         hdr_sqnc = (hdr_txt =~ /\d+\./) || hdr_txt.downcase.index("important")
         if(hdr_sqnc != nil) && (hdr_sqnc == 0)
           #puts child.text
-          ca_array[ca_array.length] = {'header' => child.text}
+          ca_array[ca_array.length] = {'title' => child.text}
         end
        end
       if child.name == "ul"

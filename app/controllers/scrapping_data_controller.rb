@@ -4,11 +4,19 @@ class ScrappingDataController < ApplicationController
   # GET /scrapping_data
   # GET /scrapping_data.json
   def index
+    scrapper = ScrappingDatum.new
     @scrapping_data = ScrappingDatum.all
   end
 
-  def fetch_data
-      
+  def fetch_data_from_bankder_adda
+    scrapper = ScrappingDatum.new
+    @scrapping_data = scrapper.ca_from_banker_adda
+    #@scrapping_data = ScrappingDatum.all
+    respond_to do |format|
+      format.html { redirect_to @ca_array, notice: 'Successfully fetch data from banker adda.' }
+      format.json {render json: @scrapping_data}
+    end
+
   end
   
   # GET /scrapping_data/1

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
   
   resources :scrapping_data do
-    get '/fetch_data/:data_source' => "scrapping_data#fetch_data", as: :fetch_data, on: :collection
+    get '/fetch_data/:data_source' => "scrapping_data#fetch_data_from_bankder_adda", as: :fetch_data, on: :collection
   end
 
 end
