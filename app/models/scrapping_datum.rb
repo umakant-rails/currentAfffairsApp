@@ -27,7 +27,7 @@ class ScrappingDatum < ApplicationRecord
        end
       if child.name == "ul"
         hs = ca_array[ca_array.length - 1]
-        hs['description'] = get_all_child(child)
+        hs['description'] = child.to_xml # get_all_child(child).join("\n")
         #puts child.text
       end
       if child.name == "div"

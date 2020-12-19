@@ -11,7 +11,7 @@ var functionsBlock = (function () {
     $(element).find("input:radio").prop("checked", true);
     $(element).find("input:radio").parent().addClass('selelcted-data-source');
   },
-  fetchDataFromBankerAdd = function(dataHref) {
+  fetchDataFromBankerAdd = function(dataSource) {
     /*$.ajax({
       url: dataHref,
       type:"GET",
@@ -22,17 +22,20 @@ var functionsBlock = (function () {
     });*/
     $.ajax({
       //url: '/scrapping_data',
-      url: '/scrapping_data/fetch_data/bankder_adda',
+      url: '/scrapping_data/scrap_data/' + dataSource,
       type:"GET",
       dataType: 'json',
+      //dataType: 'script',
       data: {},
       success: function (html) {
         console.log(html)
         var objCount = html.length;
         for ( var count=0; count< objCount; count++) {
           var element = html[count];
-          var htmlTxt = "<ul><li><h3>" + element['title'] +"</h3></li><li>"+
-            element['description']+"</li></ul>"
+          var htmlTxt = "<h3>" + element['title'] + "</h3><br/>" + element['description'];
+          /*if(element['keypoints'] != undefined && element['keypoints'].length > 0){
+            htmlTxt = '<h4> Keypoints : </h4> <br/>' + element['keypoints'];
+          }*/
           if(count == 0 ){
             $(".scrapping-data").html(htmlTxt);  
           } else {
@@ -55,12 +58,11 @@ $(document).ready(function(){
 
   $("#fetch_data").on("click", function(){
     //var data_source = $("input[name='scrapping_input']:checked").parent().text().trim();
-    var data_source = $(".scrapping-widget input:checked").val();
-    if(data_source.length == 0) {
+    var dataSource = $(".scrapping-widget input:checked").val();
+    if(dataSource.length == 0) {
       alert("Please select the data source")
     } else {
-      var href = "/scrapping_data/fetch_data/" + data_source;
-      functionsBlock.fetchDataFromBankerAdd(href)
+      functionsBlock.fetchDataFromBankerAdd(dataSource)
     }
   })
 });

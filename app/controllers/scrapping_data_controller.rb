@@ -8,15 +8,22 @@ class ScrappingDataController < ApplicationController
     @scrapping_data = ScrappingDatum.all
   end
 
-  def fetch_data_from_bankder_adda
+  def scrap_data
     scrapper = ScrappingDatum.new
-    @scrapping_data = scrapper.ca_from_banker_adda
+    if (params[:data_source] == "banker_adda")
+      @scrapping_data = scrapper.ca_from_banker_adda
+    elsif (params[:data_source] == "247_adda")
+    elsif (params[:data_source] == "byscoop")
+    elsif (params[:data_source] == "pendulum_edu")
+    else
+      @scrapping_data = []
+    end
     #@scrapping_data = ScrappingDatum.all
     respond_to do |format|
-      format.html { redirect_to @ca_array, notice: 'Successfully fetch data from banker adda.' }
+      format.html { redirect_to @scrapping_data, notice: 'Successfully fetch data from banker adda.' }
+      format.js {}
       format.json {render json: @scrapping_data}
     end
-
   end
   
   # GET /scrapping_data/1
