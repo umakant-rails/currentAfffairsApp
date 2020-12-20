@@ -21,7 +21,6 @@ var functionsBlock = (function () {
       }
     });*/
     $.ajax({
-      //url: '/scrapping_data',
       url: '/scrapping_data/scrap_data/' + dataSource,
       type:"GET",
       dataType: 'json',
@@ -32,9 +31,12 @@ var functionsBlock = (function () {
         var objCount = html.length;
         for ( var count=0; count< objCount; count++) {
           var element = html[count];
-          var htmlTxt = "<h3>" + element['title'] + "</h3><br/>" + element['description'];
+          var htmlTxt = "<div class='row data-title'>" + element['title'] + "</div>";
+          htmlTxt = htmlTxt + "<div class='row data-point'>" + element['description'] + "</div>";
+
           if(element['keypoints'] != undefined && element['keypoints'].length > 0){
-            htmlTxt = htmlTxt + '<h4> Keypoints : </h4> <br/>' + element['keypoints'];
+            htmlTxt = htmlTxt + "<div class='row data-title'>Keypoints : </div>";
+            htmlTxt = htmlTxt + "<div class='row data-point'>" + element['keypoints'] + "</div>";
           }
           if(count == 0 ){
             $(".scrapping-data").html(htmlTxt);  

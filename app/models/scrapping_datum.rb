@@ -1,6 +1,7 @@
 require "nokogiri"
 require "open-uri"
 require "pry"
+
 class ScrappingDatum < ApplicationRecord
 
   def ca_from_banker_adda
@@ -10,41 +11,10 @@ class ScrappingDatum < ApplicationRecord
 
     doc_adda = get_data(adda_ca_url)
     element_collection = doc_adda.css(".entry-content").children
-    ca_array = traverse_to_element(element_collection, ca_array)
-    return ca_array
-  end
-
-  def traverse_to_element(collection, ca_array)
-
-   collection.each_with_index do |child, index|
-     if child.name == "p" and child.children[0].name == "strong"
-        hdr_txt = child.text
-        hdr_sqnc = (hdr_txt =~ /\d+\./) || hdr_txt.downcase.index("important")
-        if(hdr_sqnc != nil) && (hdr_sqnc == 0)
-          #puts child.text
-          ca_array[ca_array.length] = {'title' => child.text}
-        end
-       end
-      if child.name == "ul"
-        hs = ca_array[ca_array.length - 1]
-        hs['description'] = child.to_xml # get_all_child(child).join("\n")
-        #puts child.text
-      end
-      if child.name == "div"
-        traverse_to_element(child.children, ca_array)
-      end
-    end
+    ca_array = traverse_to_element(element_collection, ca_array, false)
     return ca_array
   end
     
-  def get_all_child(child)
-    ar = []
-    child.css("li").each do | li |
-      ar << li.text
-    end
-    return ar 
-  end
-
   def ca_from_pendulum
     ca_array = []
     url_pendulum_page = "https://pendulumedu.com/current-affairs"
@@ -67,34 +37,35 @@ class ScrappingDatum < ApplicationRecord
   def ca_from_byscoop
     # update on evening
     ca_array = []
-    is_keypoints = false
+    is_only_header = false
     url_byscoop_page = "https://www.byscoop.com/daily-current-affairs/"
     byscoop_ca_url = get_byscoop_ca_lnk(url_byscoop_page)
     
     doc_byscoop = get_data(byscoop_ca_url)
     collection = doc_byscoop.css(".entry-content")
-
+    #pry.binding
     collection.children.each do | child |
-      if (child.name == "h3") && (child.children[0].attributes["class"].value == "ez-toc-section")
-        ca_array[ca_array.length] = {'title': child.to_xml}
+      if (child.name == "h3") && (child.at("span").attributes["class"].value == "ez-toc-section")
+        #ch.at("span").attributes["class"].value 
+        if (ca_array.length > 0) && (ca_array[ca_array.length - 1]["description"].blank?)
+          ca_array[ca_array.length - 1] = {'title': child.text}
+        else
+          ca_array[ca_array.length] = {'title': child.text}
+        end
+      elsif child.name == "p" && child.children[0].name=="span" && child.children[0].children[0].name == "strong"
+        ca_array[ca_array.length] = {'title': child.text}
+        is_only_header = true;
       end
       if child.name == "ul"
         hs = ca_array[ca_array.length-1]
-        if is_keypoints == true
-          hs['keypoints'] = child.to_xml
-          is_keypoints = false
-        else
-          hs['description'] = child.to_xml
-        end
-      end
-      if child.name == "p" && (child.text.index("Key features") == 0)
-        is_keypoints = true;
+        hs['description'] = child.to_xml
+        is_only_header = false;
       end
     end
     return ca_array
   end
     
-  def ca_from_adda247
+  def ca_from_adda_247
     # update on evening
     ca_array = []
     url_247 = "https://currentaffairs.adda247.com/"
@@ -115,7 +86,45 @@ class ScrappingDatum < ApplicationRecord
     return ca_array
   end
 
+  def save_scrap_data(scrapping_data, data_source)
+    scrapping_data.each do | datum |
+      scrapping_datum = ScrappingDatum.where(title: datum["title"])
+      ScrappingDatum.create(title: datum["title"], description: datum["description"], keypoints: datum['keypoints'], source: data_source, ca_date: Time.now) if scrapping_datum.blank?
+    end
+  end
+
   private
+
+  def traverse_to_element(collection, ca_array, is_keypoints)
+
+    collection.each_with_index do |child, index|
+      if child.name == "p" and child.children[0].name == "strong"
+        hdr_txt = child.text
+        title = (hdr_txt =~ /\d+\./)
+        keypoints = hdr_txt.downcase.index("important")
+        if(title != nil) && (title == 0) && keypoints.blank?
+          ca_array[ca_array.length] = {'title' => child.text}
+        elsif keypoints.present? && (keypoints == 0) && title.blank?
+          is_keypoints = true;
+        end
+      end
+      if child.name == "ul"
+        hs = ca_array[ca_array.length - 1]
+        if !is_keypoints
+          hs['description'] = child.to_xml # get_all_child(child).join("\n")
+        elsif is_keypoints
+          hs['keypoints'] = child.to_xml
+          is_keypoints = false
+        end
+        #puts child.text
+      end
+      if child.name == "div"
+        traverse_to_element(child.children, ca_array, is_keypoints)
+        is_keypoints = false
+      end
+    end
+    return ca_array
+  end
 
   def get_247_link_ca_data(title, doc_of_247_link)
     is_keypoints = false
@@ -172,6 +181,6 @@ class ScrappingDatum < ApplicationRecord
     html_data = open(url)
     return Nokogiri::HTML(html_data)
   end
-    
+
 end
-#scrap = Scrapper.new.ca_from_banker_adda
+

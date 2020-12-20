@@ -10,21 +10,29 @@ class ScrappingDataController < ApplicationController
 
   def scrap_data
     scrapper = ScrappingDatum.new
+    @scrapping_notice = ''
     if (params[:data_source] == "banker_adda")
       @scrapping_data = scrapper.ca_from_banker_adda
-    elsif (params[:data_source] == "247_adda")
-      @scrapping_data = scrapper.ca_from_adda247
+      #scrapper.save_scrap_data(@scrapping_data, "banker_adda")
+      @scrapping_notice = "Successfully fetch data from Banker adda."
+    elsif (params[:data_source] == "adda_247")
+      @scrapping_data = scrapper.ca_from_adda_247
+      #scrapper.save_scrap_data(@scrapping_data, "adda_247")
+      @scrapping_notice = "Successfully fetch data from 247 adda."
     elsif (params[:data_source] == "byscoop")
       @scrapping_data = scrapper.ca_from_byscoop
+      #scrapper.save_scrap_data(@scrapping_data, "byscoop")
+      @scrapping_notice = "Successfully fetch data from byscoop."
     elsif (params[:data_source] == "pendulum_edu")
       @scrapping_data = scrapper.ca_from_pendulum
+      #scrapper.save_scrap_data(@scrapping_data, "pendulum_edu")
+      @scrapping_notice = "Successfully fetch data from Pendulum Education."
     else
       @scrapping_data = []
     end
 
-    #@scrapping_data = ScrappingDatum.all
     respond_to do |format|
-      format.html { redirect_to @scrapping_data, notice: 'Successfully fetch data from banker adda.' }
+      format.html { redirect_to @scrapping_data, notice: @scrapping_notice }
       format.js {}
       format.json {render json: @scrapping_data}
     end
@@ -85,22 +93,15 @@ class ScrappingDataController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_scrapping_datum
-      @scrapping_datum = ScrappingDatum.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def scrapping_datum_params
-      params.fetch(:scrapping_datum, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_scrapping_datum
+    @scrapping_datum = ScrappingDatum.find(params[:id])
+  end
 
-    def get_data_from_banker_add
-     scrapper = Scrapper.new
-      @collection = scrapper.ca_from_banker_adda
-      @collection.each do | hs |
-        CurrentAffair.create(title: hs["header"], description: hs["description"].join("\n")) if hs["description"].present?
-      end
-    end
-  
+  # Only allow a list of trusted parameters through.
+  def scrapping_datum_params
+    params.fetch(:scrapping_datum, {})
+  end
+
 end
