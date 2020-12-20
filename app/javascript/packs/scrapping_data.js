@@ -33,9 +33,9 @@ var functionsBlock = (function () {
         for ( var count=0; count< objCount; count++) {
           var element = html[count];
           var htmlTxt = "<h3>" + element['title'] + "</h3><br/>" + element['description'];
-          /*if(element['keypoints'] != undefined && element['keypoints'].length > 0){
-            htmlTxt = '<h4> Keypoints : </h4> <br/>' + element['keypoints'];
-          }*/
+          if(element['keypoints'] != undefined && element['keypoints'].length > 0){
+            htmlTxt = htmlTxt + '<h4> Keypoints : </h4> <br/>' + element['keypoints'];
+          }
           if(count == 0 ){
             $(".scrapping-data").html(htmlTxt);  
           } else {
