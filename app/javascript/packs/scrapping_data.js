@@ -53,7 +53,7 @@ var functionsBlock = (function () {
   }
 })();
 
-$(document).ready(function(){
+$(document).on("turbolinks:load", function(){
   $(".scrapping-widget").on("click", function(){
     functionsBlock.selectDataSource(this);
   });
@@ -61,7 +61,7 @@ $(document).ready(function(){
   $("#fetch_data").on("click", function(){
     //var data_source = $("input[name='scrapping_input']:checked").parent().text().trim();
     var dataSource = $(".scrapping-widget input:checked").val();
-    if(dataSource.length == 0) {
+    if(dataSource == undefined || dataSource.length == 0) {
       alert("Please select the data source")
     } else {
       functionsBlock.fetchDataFromBankerAdd(dataSource)

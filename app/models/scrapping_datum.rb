@@ -24,11 +24,11 @@ class ScrappingDatum < ApplicationRecord
     collection = doc_pendulum.css("#discriptionca")
     collection.children.each do | child |
       if (child.name == "h2") && (child.children[0].name == "strong")
-        ca_array[ca_array.length] = {'title': child.to_xml}
+        ca_array[ca_array.length] = {title: child.text}
       end
       if child.name == "ul"
         hs = ca_array[ca_array.length-1]
-        hs['description'] = child.to_xml
+        hs[:description] = child.to_xml
       end
     end
     return ca_array
@@ -40,25 +40,24 @@ class ScrappingDatum < ApplicationRecord
     is_only_header = false
     url_byscoop_page = "https://www.byscoop.com/daily-current-affairs/"
     byscoop_ca_url = get_byscoop_ca_lnk(url_byscoop_page)
-    
     doc_byscoop = get_data(byscoop_ca_url)
     collection = doc_byscoop.css(".entry-content")
-    #pry.binding
+
     collection.children.each do | child |
       if (child.name == "h3") && (child.at("span").attributes["class"].value == "ez-toc-section")
         #ch.at("span").attributes["class"].value 
         if (ca_array.length > 0) && (ca_array[ca_array.length - 1]["description"].blank?)
-          ca_array[ca_array.length - 1] = {'title': child.text}
+          ca_array[ca_array.length - 1] = {title: child.text}
         else
-          ca_array[ca_array.length] = {'title': child.text}
+          ca_array[ca_array.length] = {title: child.text}
         end
       elsif child.name == "p" && child.children[0].name=="span" && child.children[0].children[0].name == "strong"
-        ca_array[ca_array.length] = {'title': child.text}
+        ca_array[ca_array.length] = {title: child.text}
         is_only_header = true;
       end
       if child.name == "ul"
         hs = ca_array[ca_array.length-1]
-        hs['description'] = child.to_xml
+        hs[:description] = child.to_xml
         is_only_header = false;
       end
     end
@@ -74,6 +73,7 @@ class ScrappingDatum < ApplicationRecord
     current_affairs_date = get_recently_ca_date(ca_list_collection[0])
 
     ca_list_collection.each do | record |
+
       ca_date = get_recently_ca_date(record)
       if current_affairs_date == ca_date
         title = record.children.at("a").text
@@ -88,8 +88,8 @@ class ScrappingDatum < ApplicationRecord
 
   def save_scrap_data(scrapping_data, data_source)
     scrapping_data.each do | datum |
-      scrapping_datum = ScrappingDatum.where(title: datum["title"])
-      ScrappingDatum.create(title: datum["title"], description: datum["description"], keypoints: datum['keypoints'], source: data_source, ca_date: Time.now) if scrapping_datum.blank?
+      scrapping_datum = ScrappingDatum.where(title: datum[:title])
+      ScrappingDatum.create(title: datum[:title], description: datum[:description], keypoints: datum[:keypoints], source: data_source, ca_date: Time.now) if scrapping_datum.blank?
     end
   end
 
@@ -103,7 +103,7 @@ class ScrappingDatum < ApplicationRecord
         title = (hdr_txt =~ /\d+\./)
         keypoints = hdr_txt.downcase.index("important")
         if(title != nil) && (title == 0) && keypoints.blank?
-          ca_array[ca_array.length] = {'title' => child.text}
+          ca_array[ca_array.length] = {title: child.text}
         elsif keypoints.present? && (keypoints == 0) && title.blank?
           is_keypoints = true;
         end
@@ -111,9 +111,9 @@ class ScrappingDatum < ApplicationRecord
       if child.name == "ul"
         hs = ca_array[ca_array.length - 1]
         if !is_keypoints
-          hs['description'] = child.to_xml # get_all_child(child).join("\n")
+          hs[:description] = child.to_xml # get_all_child(child).join("\n")
         elsif is_keypoints
-          hs['keypoints'] = child.to_xml
+          hs[:keypoints] = child.to_xml
           is_keypoints = false
         end
         #puts child.text
@@ -147,7 +147,7 @@ class ScrappingDatum < ApplicationRecord
         end
       end
     end
-    return {"title" => title, "description" => paragraphe_txt, "keypoints" => keypoints}
+    return {title: title, description: paragraphe_txt, keypoints: keypoints}
   end
 
   def get_recently_ca_date(record)

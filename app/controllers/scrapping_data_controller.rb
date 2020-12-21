@@ -1,4 +1,5 @@
 class ScrappingDataController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_scrapping_datum, only: [:show, :edit, :update, :destroy]
 
   # GET /scrapping_data
@@ -13,19 +14,19 @@ class ScrappingDataController < ApplicationController
     @scrapping_notice = ''
     if (params[:data_source] == "banker_adda")
       @scrapping_data = scrapper.ca_from_banker_adda
-      #scrapper.save_scrap_data(@scrapping_data, "banker_adda")
+      scrapper.save_scrap_data(@scrapping_data, "banker_adda")
       @scrapping_notice = "Successfully fetch data from Banker adda."
     elsif (params[:data_source] == "adda_247")
       @scrapping_data = scrapper.ca_from_adda_247
-      #scrapper.save_scrap_data(@scrapping_data, "adda_247")
+      scrapper.save_scrap_data(@scrapping_data, "adda_247")
       @scrapping_notice = "Successfully fetch data from 247 adda."
     elsif (params[:data_source] == "byscoop")
       @scrapping_data = scrapper.ca_from_byscoop
-      #scrapper.save_scrap_data(@scrapping_data, "byscoop")
+      scrapper.save_scrap_data(@scrapping_data, "byscoop")
       @scrapping_notice = "Successfully fetch data from byscoop."
     elsif (params[:data_source] == "pendulum_edu")
       @scrapping_data = scrapper.ca_from_pendulum
-      #scrapper.save_scrap_data(@scrapping_data, "pendulum_edu")
+      scrapper.save_scrap_data(@scrapping_data, "pendulum_edu")
       @scrapping_notice = "Successfully fetch data from Pendulum Education."
     else
       @scrapping_data = []
