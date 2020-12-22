@@ -1,2 +1,0 @@
-class CurrentAffairCategory < ApplicationRecord
-end

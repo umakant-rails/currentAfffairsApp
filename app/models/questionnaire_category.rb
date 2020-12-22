@@ -1,0 +1,2 @@
+class QuestionnaireCategory < ApplicationRecord
+end

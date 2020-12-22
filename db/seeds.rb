@@ -32,16 +32,20 @@ State.create!(name: "Udisa") if State.where(name: "Udisa").blank?
 State.create!(name: "Asam") if State.where(name: "Asam").blank?
 State.create!(name: "Goa") if State.where(name: "Goa").blank?
 
-CurrentAffairCategory.create(name: 'Appointments, Resigns & Deaths') if CurrentAffairCategory.where(name: 'Appointments, Resigns & Deaths').blank?
-CurrentAffairCategory.create(name: 'Abbreviations') if CurrentAffairCategory.where(name: 'Abbreviations').blank?
-CurrentAffairCategory.create(name: 'Awards & Honours') if CurrentAffairCategory.where(name: 'Awards & Honours').blank?
-CurrentAffairCategory.create(name: 'Books') if CurrentAffairCategory.where(name: 'Books').blank?
-CurrentAffairCategory.create(name: 'Committees') if CurrentAffairCategory.where(name: 'Committees').blank?
-CurrentAffairCategory.create(name: 'Conferences') if CurrentAffairCategory.where(name: 'Conferences').blank?
-CurrentAffairCategory.create(name: 'Days & Dates') if CurrentAffairCategory.where(name: 'Days & Dates').blank?
-CurrentAffairCategory.create(name: 'Finance and Economy') if CurrentAffairCategory.where(name: 'Finance and Economy').blank?
-CurrentAffairCategory.create(name: 'Places') if CurrentAffairCategory.where(name: 'Places').blank?
-CurrentAffairCategory.create(name: 'Politics') if CurrentAffairCategory.where(name: 'Politics').blank?
-CurrentAffairCategory.create(name: 'Science & Technology') if CurrentAffairCategory.where(name: 'Science & Technology').blank?
-CurrentAffairCategory.create(name: 'Sports & Games') if CurrentAffairCategory.where(name: 'Sports & Games').blank? 
-CurrentAffairCategory.create(name: 'New Program/Scheme') if CurrentAffairCategory.where(name: 'New Program/Scheme').blank?
+QuestionCategory.create(name: 'Appointments, Resigns & Deaths') if QuestionCategory.where(name: 'Appointments, Resigns & Deaths').blank?
+QuestionCategory.create(name: 'International affairs') if QuestionCategory.where(name: 'International affairs').blank?
+QuestionCategory.create(name: 'Awards & Honours') if QuestionCategory.where(name: 'Awards & Honours').blank?
+QuestionCategory.create(name: 'Books') if QuestionCategory.where(name: 'Books').blank?
+QuestionCategory.create(name: 'Committees') if QuestionCategory.where(name: 'Committees').blank?
+QuestionCategory.create(name: 'Conferences') if QuestionCategory.where(name: 'Conferences').blank?
+QuestionCategory.create(name: 'Days & Dates') if QuestionCategory.where(name: 'Days & Dates').blank?
+QuestionCategory.create(name: 'Banking and Finance') if QuestionCategory.where(name: 'Banking and Finance').blank?
+QuestionCategory.create(name: 'Places') if QuestionCategory.where(name: 'Places').blank?
+QuestionCategory.create(name: 'Politics') if QuestionCategory.where(name: 'Politics').blank?
+QuestionCategory.create(name: 'Science & Technology') if QuestionCategory.where(name: 'Science & Technology').blank?
+QuestionCategory.create(name: 'Sports & Games') if QuestionCategory.where(name: 'Sports & Games').blank? 
+QuestionCategory.create(name: 'New Program/Scheme') if QuestionCategory.where(name: 'New Program/Scheme').blank?
+
+QuestionnaireCategory.create(name: 'Daily Current Affairs') if QuestionCategory.where(name: 'Daily Current Affairs').blank?
+QuestionnaireCategory.create(name: 'Computer Awareness') if QuestionCategory.where(name: 'Computer Awareness').blank?
+QuestionnaireCategory.create(name: 'Banking') if QuestionCategory.where(name: 'Banking').blank?

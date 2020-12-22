@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_154618) do
+ActiveRecord::Schema.define(version: 2020_12_21_085307) do
 
   create_table "current_affair_categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "question_categories", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "questionnaire_categories", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "questions", charset: "utf8mb4", force: :cascade do |t|
+    t.text "question"
+    t.string "option1"
+    t.string "option2"
+    t.string "option3"
+    t.string "option4"
+    t.string "answer"
+    t.text "keypoints"
+    t.text "facts"
+    t.string "state_id"
+    t.integer "question_category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
