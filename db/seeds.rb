@@ -1,5 +1,5 @@
 User.create(username: 'umakant005', email: 'umakantrajpoot@gmail.com', 
-  password: '12345678', password_confirmation: '12345678', 
+  password: '12345678', password_confirmation: '12345678', role_id:1,
   confirmed_at: Date.today) if User.where(email: 'umakantrajpoot@gmail.com').blank?
 
 State.create!(name: "Arunachal Pradesh") if State.where(name: "Arunachal Pradesh").blank?
@@ -45,6 +45,7 @@ QuestionCategory.create(name: 'Politics') if QuestionCategory.where(name: 'Polit
 QuestionCategory.create(name: 'Science & Technology') if QuestionCategory.where(name: 'Science & Technology').blank?
 QuestionCategory.create(name: 'Sports & Games') if QuestionCategory.where(name: 'Sports & Games').blank? 
 QuestionCategory.create(name: 'New Program/Scheme') if QuestionCategory.where(name: 'New Program/Scheme').blank?
+QuestionCategory.create(name: 'National Affairs') if QuestionCategory.where(name: 'National Affairs').blank?
 
 QuestionnaireCategory.create(name: 'Daily Current Affairs') if QuestionCategory.where(name: 'Daily Current Affairs').blank?
 QuestionnaireCategory.create(name: 'Computer Awareness') if QuestionCategory.where(name: 'Computer Awareness').blank?

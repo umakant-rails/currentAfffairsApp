@@ -1,0 +1,17 @@
+<%= form_with(model: scrapping_datum) do |form| %>
+  <% if scrapping_datum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(scrapping_datum.errors.count, "error") %> prohibited this scrapping_datum from being saved:</h2>
+
+      <ul>
+        <% scrapping_datum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

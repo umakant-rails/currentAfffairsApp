@@ -5,7 +5,7 @@ class CreateScrappingData < ActiveRecord::Migration[6.1]
       t.text :description
       t.string :source
       t.text :keypoints
-      t.datetime :ca_date
+      t.date :ca_date
       t.integer :state_id
       t.integer :category_id
 

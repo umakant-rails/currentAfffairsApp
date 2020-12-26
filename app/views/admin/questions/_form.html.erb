@@ -1,0 +1,86 @@
+<%= form_with(model: [:admin, question]) do |f| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <ul>
+        <% question.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <label for="question">Question</label>
+    <%= f.text_area :question, row: "2", class:"form-control textarea-custom", id: "question" %>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="option1">
+        Option1
+        (&nbsp;<div class="form-check form-check-inline">
+         <%= f.radio_button :answer, class:"form-check-input", name: "answer", id: "answer1", value:"option1"%>&nbsp;
+          <label class="form-check-label" for="answer1">Check if annswer</label>
+        </div>)
+      </label>
+      <%= f.text_field :option1, class:"form-control", id: "option1", placeholder: "Option1" %>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="option2">
+        Option2
+        (&nbsp;<div class="form-check form-check-inline">
+         <%= f.radio_button :answer, class:"form-check-input", name: "answer", id: "answer2", value:"option2"%>&nbsp;
+          <label class="form-check-label" for="answer2">Check if annswer</label>
+        </div>)
+      </label>
+      <%= f.text_field :option2, class:"form-control", id: "option2", placeholder: "Option2" %>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="option3">
+        Option3
+        (&nbsp;<div class="form-check form-check-inline">
+         <%= f.radio_button :answer, class:"form-check-input", name: "answer", id: "answer3", value:"option3"%>&nbsp;
+          <label class="form-check-label" for="answer3">Check if annswer</label>
+        </div>)
+      </label>
+      <%= f.text_field :option3, class:"form-control", id: "option3", placeholder: "Option3" %>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="option4">
+        Option4
+        (&nbsp;<div class="form-check form-check-inline">
+         <%= f.radio_button :answer, class:"form-check-input", name: "answer", id: "answer4", value:"option4"%>&nbsp;
+          <label class="form-check-label" for="answer4">Check if annswer</label>
+        </div>)
+      </label>
+      <%= f.text_field :option4, class:"form-control", id: "option4", placeholder: "Option4" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="keypoints">Keypoints</label>
+    <%= f.text_area :keypoints, class:"form-control textarea-custom", id: "keypoints" %>
+  </div>
+  <div class="form-group">
+    <label for="facts">Facts</label>
+    <%= f.text_area :facts, class:"form-control textarea-custom", id: "facts" %>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="state_id">State</label>
+      <% states_hash = Hash[@states.map{|state| [state.name, state.id]}] %>
+      <%= f.select :state_id, options_for_select(states_hash, f.object.state_id),
+        {prompt: "Select State"}, class:"form-control", id: "state_id" %>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="question_category_id">Category</label>
+      <% category_hash = Hash[@que_categories.map{|que_cat| [que_cat.name, que_cat.id]}] %>
+      <%= f.select :state_id, options_for_select(category_hash, f.object.question_category_id),
+        {prompt: "Select Category"}, class:"form-control", id: "question_category_id" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary btn-large col-lg-12" %>
+  </div>
+  
+<%end%>

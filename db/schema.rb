@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_12_21_085307) do
 
-  create_table "current_affair_categories", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "question_categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -50,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_085307) do
     t.text "description"
     t.string "source"
     t.text "keypoints"
-    t.datetime "ca_date"
+    t.date "ca_date"
     t.integer "state_id"
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false

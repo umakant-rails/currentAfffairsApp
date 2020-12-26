@@ -21,7 +21,7 @@ var functionsBlock = (function () {
       }
     });*/
     $.ajax({
-      url: '/scrapping_data/scrap_data/' + dataSource,
+      url: '/admin/scrapping_data/scrap_data/' + dataSource,
       type:"GET",
       dataType: 'json',
       //dataType: 'script',
