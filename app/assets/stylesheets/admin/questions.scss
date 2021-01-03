@@ -1,7 +1,7 @@
- .textarea-custom{
+.textarea-custom{
    height: 60px !important;
  }
- .question-form-title{
+.question-form-title{
   font-size: 22px;
   font-weight: bold;
   text-decoration: underline;
@@ -12,3 +12,20 @@
   border-bottom: 1px solid lightgray;
   margin: 8px 0px;
 }
+/*
+@font-face {
+  font-family: 'kruti-dev';
+  src:url('fonts/k010.eot');
+  src:url('fonts/k010.eot?#iefix') format('embedded-opentype'),
+    url('fonts/k010.ttf') format('truetype'),
+    url('fonts/k010.woff') format('woff'),
+    url('fonts/k010.svg#icofonts') format('svg');
+  font-weight: bold;
+  //font-style: normal;
+} 
+
+.kruti-dev-fnt{
+  font-family: 'kruti-dev';
+  font-size: 20px !important;
+}
+*/

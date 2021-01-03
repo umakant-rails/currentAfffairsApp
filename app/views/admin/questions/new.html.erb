@@ -17,3 +17,23 @@
     <%= render 'form', question: @question, states: @states %>
   </div>
 </div>
+<script type="text/javascript">
+  google.load("elements", "1", {
+    packages: "transliteration"
+  });
+  /*google.charts.load('current', {packages: ['transliteration']});*/
+  function onLoad() {
+    var options = {
+        sourceLanguage:
+            google.elements.transliteration.LanguageCode.ENGLISH,
+        destinationLanguage:
+            [google.elements.transliteration.LanguageCode.HINDI],
+        shortcutKey: 'ctrl+g',
+        transliterationEnabled: true
+    };
+    var control =
+        new google.elements.transliteration.TransliterationControl(options);
+    control.makeTransliteratable(["question", "option1", "option2", "option3", "option4", "keypoints", "facts"]);
+  }
+  google.setOnLoadCallback(onLoad);
+</script>

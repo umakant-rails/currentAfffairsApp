@@ -10,6 +10,7 @@ import "channels"
 require("bootstrap");
 require("@fortawesome/fontawesome-free");
 require("packs/scrapping_data")
+require("packs/transliteration.I")
 
 Rails.start()
 Turbolinks.start()
