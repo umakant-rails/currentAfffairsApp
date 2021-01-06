@@ -1,0 +1,3 @@
+$("#question_form").trigger("reset");
+$(".alert-success").html(<%= flash[:notice] %>);
+$("#scrapping-data-block").html("<%= escape_javascript(render 'scrapping_data', scrapping_data: @scrapping_data) %>")

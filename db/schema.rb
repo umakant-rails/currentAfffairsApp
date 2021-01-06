@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_085307) do
+ActiveRecord::Schema.define(version: 2021_01_05_024321) do
 
   create_table "question_categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 2020_12_21_085307) do
   end
 
   create_table "questionnaire_categories", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "questionnaires", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -35,8 +41,11 @@ ActiveRecord::Schema.define(version: 2020_12_21_085307) do
     t.text "facts"
     t.string "state_id"
     t.integer "question_category_id"
+    t.integer "questionnaire_category_id"
+    t.integer "questionnaire_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "scrapping_datum_id"
   end
 
   create_table "scrapping_data", charset: "utf8mb4", force: :cascade do |t|
@@ -47,6 +56,8 @@ ActiveRecord::Schema.define(version: 2020_12_21_085307) do
     t.date "ca_date"
     t.integer "state_id"
     t.integer "category_id"
+    t.boolean "is_read", default: false
+    t.boolean "is_hold", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

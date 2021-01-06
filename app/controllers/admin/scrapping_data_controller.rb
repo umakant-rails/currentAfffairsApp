@@ -6,12 +6,14 @@ class Admin::ScrappingDataController < ApplicationController
   # GET /scrapping_data.json
   def index
     scrapper = ScrappingDatum.new
-    @scrapping_data = ScrappingDatum.all
+    scrapping_data_tmp = ScrappingDatum.where("is_read=false and is_hold=false")
+    @scrapping_data = Kaminari.paginate_array(scrapping_data_tmp).page(params[:page]).per(1)
   end
 
   def scrap_data
     scrapper = ScrappingDatum.new
     @scrapping_notice = ''
+
     if (params[:data_source] == "banker_adda")
       @scrapping_data = scrapper.ca_from_banker_adda
       scrapper.save_scrap_data(@scrapping_data, "banker_adda")

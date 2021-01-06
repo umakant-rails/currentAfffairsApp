@@ -11,7 +11,7 @@ State.create!(name: "Uttar Pradesh") if State.where(name: "Uttar Pradesh").blank
 State.create!(name: "Chhattisgarh") if State.where(name: "Chhattisgarh").blank?
 State.create!(name: "Maharashtra") if State.where(name: "Maharashtra").blank?
 State.create!(name: "West Bengal") if State.where(name: "West Bengal").blank?
-State.create!(name: "Uttranchal") if State.where(name: "Uttranchal").blank?
+State.create!(name: "Uttarakhand") if State.where(name: "Uttarakhand").blank?
 State.create!(name: "Rajasthan") if State.where(name: "Rajasthan").blank?
 State.create!(name: "Tamilnadu") if State.where(name: "Tamilnadu").blank?
 State.create!(name: "Telangana") if State.where(name: "Telangana").blank?
@@ -46,6 +46,7 @@ QuestionCategory.create(name: 'Science & Technology') if QuestionCategory.where(
 QuestionCategory.create(name: 'Sports & Games') if QuestionCategory.where(name: 'Sports & Games').blank? 
 QuestionCategory.create(name: 'New Program/Scheme') if QuestionCategory.where(name: 'New Program/Scheme').blank?
 QuestionCategory.create(name: 'National Affairs') if QuestionCategory.where(name: 'National Affairs').blank?
+QuestionCategory.create(name: 'Others') if QuestionCategory.where(name: 'Others').blank?
 
 QuestionnaireCategory.create(name: 'Daily Current Affairs') if QuestionCategory.where(name: 'Daily Current Affairs').blank?
 QuestionnaireCategory.create(name: 'Computer Awareness') if QuestionCategory.where(name: 'Computer Awareness').blank?

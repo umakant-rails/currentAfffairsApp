@@ -1,27 +1,19 @@
 <div class="row">
-  <% datum = @scrapping_data[0] %>
-  <div class="col-lg-6" id="current-affairs-block">
-    <div class="row ca-header">
-      <%= raw datum.title %>
-    </div>
-    <div class="row ca-description">
-      <%= raw datum.description %>
-    </div>
-    <div class="row ca-keypoints">
-      <%= raw datum.keypoints %>
-    </div>
+  <div class="col-lg-6" id ="scrapping-data-block">
+    <%= render 'scrapping_data', scrapping_data: @scrapping_data, question: @question, states: @states %>
   </div>
   <div class="col-lg-6" id="current-affairs-block">
     <div class="question-form-title"><center> Create Question Form</center></div>
     <div class="clear form-title-divider"></div>
-    <%= render 'form', question: @question, states: @states %>
+    <div class="question-form-block">
+      <%= render 'form', question: @question, states: @states %>
+    </div>
   </div>
 </div>
 <script type="text/javascript">
   google.load("elements", "1", {
     packages: "transliteration"
   });
-  /*google.charts.load('current', {packages: ['transliteration']});*/
   function onLoad() {
     var options = {
         sourceLanguage:

@@ -4,6 +4,8 @@ require "pry"
 
 class ScrappingDatum < ApplicationRecord
 
+  has_one :question
+
   def ca_from_banker_adda
     ca_array = []
     url_banker_adda = "https://www.bankersadda.com/current-affairs-december-2020/"
@@ -14,7 +16,7 @@ class ScrappingDatum < ApplicationRecord
     ca_array = traverse_to_element(element_collection, ca_array, false)
     return ca_array
   end
-    
+
   def ca_from_pendulum
     ca_array = []
     url_pendulum_page = "https://pendulumedu.com/current-affairs"

@@ -1,4 +1,4 @@
-<%= form_with(model: [:admin, question]) do |f| %>
+<%= form_with(model: [:admin, question], html: {id: "question_form"}, local: false) do |f| %>
   <% if question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -12,13 +12,15 @@
   <div class="form-group">
     <label for="question">Question</label>
     <%= f.text_area :question, row: "2", class:"form-control textarea-custom", id: "question" %>
+    <%= f.hidden_field :scrapping_datum_id, class:"form-control", id: "scrapping_datum_id" %>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="option1">
         Option1
-        (&nbsp;<div class="form-check form-check-inline">
-         <%= f.radio_button :answer, class:"form-check-input", name: "answer", id: "answer1", value:"option1"%>&nbsp;
+        (&nbsp;<div class="form-check form-check-inline answer_option">
+          <input type="radio" class="form-check-input" id="answer1" data-option_id="option1">
+          &nbsp;
           <label class="form-check-label" for="answer1">Check if annswer</label>
         </div>)
       </label>
@@ -27,8 +29,8 @@
     <div class="form-group col-md-6">
       <label for="option2">
         Option2
-        (&nbsp;<div class="form-check form-check-inline">
-         <%= f.radio_button :answer, class:"form-check-input" , name: "answer", id: "answer2", value:"option2"%>&nbsp;
+        (&nbsp;<div class="form-check form-check-inline answer_option">
+         <input type="radio" class="form-check-input" id="answer2" data-option_id="option2">&nbsp;
           <label class="form-check-label" for="answer2">Check if annswer</label>
         </div>)
       </label>
@@ -39,8 +41,8 @@
     <div class="form-group col-md-6">
       <label for="option3">
         Option3
-        (&nbsp;<div class="form-check form-check-inline">
-         <%= f.radio_button :answer, class:"form-check-input", name: "answer", id: "answer3", value:"option3"%>&nbsp;
+        (&nbsp;<div class="form-check form-check-inline answer_option">
+         <input type="radio" class="form-check-input" id="answer3" data-option_id="option3">&nbsp;
           <label class="form-check-label" for="answer3">Check if annswer</label>
         </div>)
       </label>
@@ -49,14 +51,15 @@
     <div class="form-group col-md-6">
       <label for="option4">
         Option4
-        (&nbsp;<div class="form-check form-check-inline">
-         <%= f.radio_button :answer, class:"form-check-input", name: "answer", id: "answer4", value:"option4"%>&nbsp;
+        (&nbsp;<div class="form-check form-check-inline answer_option">
+         <input type="radio" class="form-check-input" id="answer4" data-option_id="option4">&nbsp;
           <label class="form-check-label" for="answer4">Check if annswer</label>
         </div>)
       </label>
       <%= f.text_field :option4, class:"form-control", id: "option4" %>
     </div>
   </div>
+  <%= f.hidden_field :answer, class:"form-control", id: "answer" %>
   <div class="form-group">
     <label for="keypoints">Keypoints</label>
     <%= f.text_area :keypoints, class:"form-control textarea-custom", id: "keypoints" %>
