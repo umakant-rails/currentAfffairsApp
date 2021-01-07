@@ -1,4 +1,4 @@
-module Admin::CurrentAffairsHelper
+module Admin::QuestionnairesHelper
 
   def questionnaire_categories_hash(questionnaire_categories)
     arr = []

@@ -11,6 +11,7 @@ require("bootstrap");
 require("@fortawesome/fontawesome-free");
 require("packs/scrapping_data")
 require("packs/question")
+require("packs/questionnaire")
 require("packs/transliteration.I")
 require("packs/layout.js")
 

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :scrapping_data do
       get '/scrap_data/:data_source' => "scrapping_data#scrap_data", as: :scrap_data, on: :collection
     end
-    resources :current_affairs
+    resources :questionnaires
     resources :questions
   end
   

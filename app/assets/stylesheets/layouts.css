@@ -34,3 +34,8 @@
 .hide{
   display: none;  
 }
+#crt-afr-icon{
+  padding: 2px;
+  border: 2px solid gray;
+  border-radius: 20px;
+}
