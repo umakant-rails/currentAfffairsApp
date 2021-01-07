@@ -13,6 +13,7 @@ class CreateQuestions < ActiveRecord::Migration[6.1]
       t.integer :question_category_id
       t.integer :questionnaire_category_id
       t.integer :questionnaire_id
+      t.integer :scrapping_datum_id
 
       t.timestamps
     end

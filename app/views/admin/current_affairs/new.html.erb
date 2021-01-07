@@ -1,17 +1,34 @@
 <div class="row">
-  <% datum = @scrapping_data[0] %>
-  <div class="col-lg-6" id="current-affairs-block">
-    <div class="row ca-header">
-      <%= raw datum.title %>
-    </div>
-    <div class="row ca-description">
-      <%= raw datum.description %>
-    </div>
-    <div class="row ca-keypoints">
-      <%= raw datum.keypoints %>
-    </div>
-  <div>
-  <div class="col-lg-6" id="current-affairs-block">
-    <%= render 'form', question: @question %>
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="question-form-title"><center> Create Questionnaire Form</center></div>
+    <div class="clear form-title-divider"></div>
+    <%= form_for(@questionnaire, url: admin_current_affairs_path(@questionnaire), html: {id: "questionnaire_form"}) do |f| %>
+      <% if @questionnaire.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+          <ul>
+            <% question.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <label for="name">Questionnaire Type</label>
+         <%= f.select :questionnaire_category_id, options_for_select(questionnaire_categories_hash(@questionnaire_categories)), {:prompt => "Select Questionnaire Category"}, class:"form-control mandatory_field" %>
+      </div>
+      <div class="form-group">
+        <label for="name">Questionnaire Name</label>
+        <%= f.text_field :name, class:"form-control", id: "name" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: "btn btn-primary btn-large col-lg-12" %>
+      </div>
+    <% end %>
   </div>
+  <div class="col-md-2"></div>
 </div>
+<script type="text/javascript">
+  
+</script>

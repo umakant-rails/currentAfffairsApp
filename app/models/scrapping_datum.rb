@@ -8,7 +8,7 @@ class ScrappingDatum < ApplicationRecord
 
   def ca_from_banker_adda
     ca_array = []
-    url_banker_adda = "https://www.bankersadda.com/current-affairs-december-2020/"
+    url_banker_adda = "https://www.bankersadda.com/current-affairs-"+(Date.today.strftime("%B"))+"-2021/"
     adda_ca_url = get_adda_ca_lnk(url_banker_adda)
 
     doc_adda = get_data(adda_ca_url)

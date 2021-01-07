@@ -12,6 +12,7 @@ require("@fortawesome/fontawesome-free");
 require("packs/scrapping_data")
 require("packs/question")
 require("packs/transliteration.I")
+require("packs/layout.js")
 
 Rails.start()
 Turbolinks.start()

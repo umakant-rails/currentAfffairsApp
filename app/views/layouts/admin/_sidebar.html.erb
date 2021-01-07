@@ -5,9 +5,9 @@
         <span class="menu-collapsed">Scrapping Home</span>
       </div>
     </a>
-    <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+    <a id="submenuList1" href="#submenu1" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Current Affairs</span>
+        <span class="menu-collapsed">Current Affairs</span>&nbsp;&nbsp;<i id="crt-afr-icon" class="fa fa-plus"></i>
       </div>
     </a>
     <!-- Submenu content -->
@@ -15,8 +15,8 @@
       <a href="<%= new_admin_question_path %>" class="list-group-item list-group-item-action">
         <span class="menu-collapsed">Create Questions</span>
       </a>
-      <a href="#" class="list-group-item list-group-item-action ">
-        <span class="menu-collapsed">Reports</span>
+      <a href="<%= new_admin_current_affair_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Create Questionnaire</span>
       </a>
       <a href="#" class="list-group-item list-group-item-action">
         <span class="menu-collapsed">Tables</span>

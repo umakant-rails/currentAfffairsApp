@@ -40,3 +40,19 @@
 .set-answer{
   color: green;
 }
+
+.ca-header{
+  color: #dc3545;
+  font-weight: bold;
+  font-size: 18px;
+  display: inline-block !important;
+}
+.ca-header>.read-status{
+    padding: 2px 5px;
+    border: 1px solid green;
+    border-radius: 5px;
+    color: green;
+    background-color: lightgreen;
+    text-decoration: none !important;
+    margin-left: 8px;
+  }

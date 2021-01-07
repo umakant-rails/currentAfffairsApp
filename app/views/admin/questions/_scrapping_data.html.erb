@@ -1,7 +1,7 @@
 <% scrapping_data.each do |datum|%>
   <div class="scrapping-data" data-scrap_data_id="<%= datum.id %>">
     <div class="row ca-header">
-      <%= raw datum.title %>
+      <%= raw datum.title %><span class="read-status <%= 'hide' unless datum.is_read %>">READ</span>
     </div>
     <div class="row ca-description">
       <%= raw datum.description %>
@@ -10,5 +10,5 @@
       <%= raw datum.keypoints %>
     </div>
   </div>
-  <%= paginate scrapping_data, window:1,  remote: true %>
+  <%= paginate scrapping_data,  window:1,  remote: true %>
 <% end %>

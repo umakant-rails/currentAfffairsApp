@@ -3,8 +3,7 @@ class Admin::CurrentAffairsController < ApplicationController
   layout 'admin'
 
   def new
-    @question = Question.new
-    @scrapping_data = ScrappingDatum.all
+    @questionnaire = Questionnaire.new
   end
 
 end
