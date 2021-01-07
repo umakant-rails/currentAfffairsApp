@@ -3,7 +3,7 @@
   <div class="col-md-8">
     <div class="question-form-title"><center> Create Questionnaire Form</center></div>
     <div class="clear form-title-divider"></div>
-    <%= form_for(@questionnaire, url: admin_questionnaires_path(@questionnaire), html: {id: "questionnaire_form"}) do |f| %>
+    <%= form_for(@questionnaire, url: admin_questionnaires_path(@questionnaire), html: {id: "questionnaire_form", onsubmit: "return validateQuestionnaireForm()"}) do |f| %>
       <% if @questionnaire.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -23,7 +23,7 @@
         <%= f.text_field :name, class:"form-control", id: "name" %>
       </div>
       <div class="form-group">
-        <%= f.submit class: "btn btn-primary btn-large col-lg-12" %>
+        <%= f.submit id: "questionnaire_submit",class: "btn btn-primary btn-large col-lg-12" %>
       </div>
     <% end %>
   </div>

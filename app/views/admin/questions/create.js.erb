@@ -1,6 +1,7 @@
 $("#question_form").trigger("reset");
 $("#alert-message").addClass("alert-success");
-$("#alert-message").append("<%= flash[:notice] %>");
+$("#alert-message-span").html("<%= flash[:notice] %>");
+$("#alert-message").show();
 $("#alert-message").fadeOut(2000);
 $(".read-status").removeClass('hide');
 $(".set-answer").removeClass("set-answer");
