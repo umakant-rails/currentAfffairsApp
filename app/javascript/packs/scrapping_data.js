@@ -27,7 +27,6 @@ var functionsBlock = (function () {
       //dataType: 'script',
       data: {},
       success: function (html) {
-        console.log(html)
         var objCount = html.length;
         for ( var count=0; count< objCount; count++) {
           var element = html[count];

@@ -12,15 +12,7 @@ var questionnaireFunctions = (function () {
     } else {
       $("#name").val("");
     }
-  },
-  setMessage = function(msg){
-    if(!$("#alert-message").hasClass("alert-danger")){
-      $("#alert-message").addClass("alert-danger");
-    }
-    $("#alert-message-span").html(msg);
-    $("#alert-message").show();
-    $("#alert-message").fadeOut(2000);
-  },
+  };
   validateQuestionnaireForm = function(){
     var isTrue = true;
     var questionnaireType = $("#questionnaire_questionnaire_category_id").val();
@@ -28,19 +20,17 @@ var questionnaireFunctions = (function () {
 
     if(questionnaireType.length == 0){
       isTrue = false;
-      questionnaireFunctions.setMessage("Questionnaire Type can't be blank.");
-    }else if(questionnaireName.length == 0){
+      appFunctions.setAlertMessage("Questionnaire Type can't be blank.", "alert-danger");
+    } else if(questionnaireName.length == 0){
       isTrue = false;
-      questionnaireFunctions.setMessage("Questionnaire Name can't be blank.");
-
+      appFunctions.setAlertMessage("Questionnaire Name can't be blank.", "alert-danger");
     }
     return isTrue;
   };
   return {
     setCurrentAffairName: setCurrentAffairName,
-    validateQuestionnaireForm: validateQuestionnaireForm,
-    setMessage: setMessage
-  }
+    validateQuestionnaireForm: validateQuestionnaireForm
+  };
 })();
 
 $(document).on("turbolinks:load", function(){
@@ -50,7 +40,6 @@ $(document).on("turbolinks:load", function(){
   });
   $("#name").on("focusout", function(){
     var vl = $(this).val().trim();
-    console.log(vl);
     if(vl.length > 0) {
       $("#questionnaire_submit").prop("disabled", false);
     }

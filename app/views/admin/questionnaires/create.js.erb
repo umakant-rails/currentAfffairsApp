@@ -1,0 +1,7 @@
+<% if @questionnaire.errors.present? %>
+  var error_msgs = "<%= @questionnaire.errors.full_messages.join('\n') %>";
+  appFunctions.setAlertMessage(error_msgs.replaceAl("\n", "<br/>"), "alert-danger");
+<% else %>
+  $("#questionnaire_form").trigger("reset");
+  appFunctions.setAlertMessage("<%= flash[:notice] %>", "alert-success");
+<% end %>

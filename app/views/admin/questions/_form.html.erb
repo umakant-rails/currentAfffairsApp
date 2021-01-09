@@ -83,6 +83,6 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.submit class: "btn btn-primary btn-large col-lg-12" %>
+    <%= f.submit id:"question_submit", class: "btn btn-primary btn-large col-lg-12", onClick: "return validateQuestionForm();"  %>
   </div>
 <%end%>

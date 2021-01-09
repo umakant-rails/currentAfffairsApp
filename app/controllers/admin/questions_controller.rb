@@ -15,7 +15,7 @@ class Admin::QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    if @question.save!
+    if @question.save
       @question.scrapping_datum.update(is_read: true)
       get_scrapping_data
       respond_to do |format|
@@ -26,7 +26,7 @@ class Admin::QuestionsController < ApplicationController
     else
       respond_to do |format|
         format.html { render :new }
-        format.js { render json: @question.errors, status: :unprocessable_entity }
+        format.js {}
       end
     end
   end

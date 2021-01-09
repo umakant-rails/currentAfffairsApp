@@ -1,7 +1,10 @@
-$("#question_form").trigger("reset");
-$("#alert-message").addClass("alert-success");
-$("#alert-message-span").html("<%= flash[:notice] %>");
-$("#alert-message").show();
-$("#alert-message").fadeOut(2000);
-$(".read-status").removeClass('hide');
-$(".set-answer").removeClass("set-answer");
+<% if @question.errors.present? %>
+  var error_msgs = "<%= @question.errors.full_messages.join('\n') %>";
+  appFunctions.setAlertMessage(error_msgs.replaceAll("\n", "<br/>"), "alert-danger");
+<% else %>
+  $("#question_form").trigger("reset");
+  $("#scrapping_datum_id").val("");
+  $("#answer").val("");
+  appFunctions.setAlertMessage("<%= flash[:notice] %>", "alert-success");
+  $(".set-answer").removeClass("set-answer");
+<% end %>
