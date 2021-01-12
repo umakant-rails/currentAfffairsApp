@@ -1,4 +1,4 @@
-<% if @questionnaire.errors.present? %>
+<% if @questionnaire.errors && @questionnaire.errors.present? %>
   var error_msgs = "<%= @questionnaire.errors.full_messages.join('\n') %>";
   appFunctions.setAlertMessage(error_msgs.replaceAl("\n", "<br/>"), "alert-danger");
 <% else %>

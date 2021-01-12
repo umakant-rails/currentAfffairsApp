@@ -5,10 +5,10 @@ window.appFunctions = function () {
     $("#alert-message").addClass(cls);
     $("#alert-message-span").html($.parseHTML(msg));
     $("#alert-message").show();
-    $("#alert-message").fadeOut(3000);
+    $("#alert-message").fadeOut(2000);
     setTimeout(() => {
       $("#alert-message").removeClass(cls);
-    }, 3000);
+    }, 2000);
   }
   return {
     setAlertMessage: function(msg, cls){ setAlertMessage(msg, cls);}

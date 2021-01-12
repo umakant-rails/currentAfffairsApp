@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="question-form-title col-md-12"><center> Add  Questions In Questionnaire</center></div>
+  <div class="clear form-title-divider col-md-12"></div>
+</div>
+<div class="row">
+  <div class="col-lg-4 px-0">
+    <%= select_tag 'questionnaire_id', options_from_collection_for_select(@questionnaires, "id", "name"), :prompt => "Select Questionnaire", class:"form-control" %>
+  </div>
+  <div class="col-lg-2 txt-question-count">
+    Added Ques : <span id="added-question-count" data-count="">0</span>
+  </div>
+  <div class="col-lg-2 txt-question-count">
+    Selected Ques : <span id="selected-question-count" data-count="">0</span>
+  </div>
+  <div class="col-lg-4">
+    <input type="button" id="add_questions" value="Add Question in Questionnaire" class="btn btn-primary form-control"/>
+  </div>
+</div>
+<div class="row" id="questionnaire-question-list">
+  <%= render "questionnaire_question_list", questions: @questions %>
+</div>

@@ -14,8 +14,16 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
-    if @question.save
+    @question = Question.where(scrapping_datum_id: params[:question][:scrapping_datum_id])
+
+    if @question.present?
+      respond_to do |format|
+        flash[:notice] = 'Question is craete already for this data.'
+        format.html { redirect_to new_admin_question_path}
+        format.js {}
+      end
+    elsif @question.blank?
+      @question = Question.new(question_params)
       @question.scrapping_datum.update(is_read: true)
       get_scrapping_data
       respond_to do |format|

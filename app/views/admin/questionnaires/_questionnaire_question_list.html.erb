@@ -1,0 +1,18 @@
+<% questions && questions.each do | question |%>
+  <div class="col-lg-6 question-block" id="question<%= question.id %>">
+    <div class="form-check question-div">
+      <input class="form-check-input question-checkbox" type="checkbox" value="<%= question.id %>" id="question<%= question.id %>">
+      <label class="form-check-label" for="question<%= question.id %>">
+        <%= question.question %>
+      </label>
+    </div>
+    <div class="question-date">
+      <%= question.created_at.strftime("%B %d, %Y")%>
+    </div>
+  </div>
+<% end %>
+<% if questions.blank? %>
+  <div class="col-lg-12 question-block">
+    <center>There is no question available now.</center>
+  </div>
+<% end %>

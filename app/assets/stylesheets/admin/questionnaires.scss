@@ -1,3 +1,22 @@
-// Place all the styles related to the admin::Questionnaires controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.questionnaire-title{
+  text-align: center;  
+}
+.question-block{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 5px !important;
+  margin: 3px 0px;
+  .question-div {
+    font-weight: bold;  
+    color: #dc3545;
+  }
+  .question-date{
+    font-size: 12px !important;
+    margin-left: 20px;
+    color: gray;
+    font-weight: bold;
+  }
+}
+.txt-question-count{
+  padding-top: 6px;
+}
