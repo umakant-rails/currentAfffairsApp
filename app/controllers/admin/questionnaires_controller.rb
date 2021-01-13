@@ -1,6 +1,8 @@
 class Admin::QuestionnairesController < ApplicationController
   before_action :authenticate_user!
-  layout 'admin'
+  #layout 'admin', only: [:new, :create, :show, :add_questions_page, :get_questions, :add_questions_in_questionnaire, ]
+  #layout 'presentation', only: [:questionnaire_presentation]
+  layout :set_layout
 
   def new
     @questionnaire = Questionnaire.new
@@ -52,7 +54,11 @@ class Admin::QuestionnairesController < ApplicationController
     @questions = questionnaire.questions
     respond_to do |format|
       format.html {}
-      format.js{render json: @questions}
+      if params[:is_presentation] == "true"
+        format.js{}
+      else
+        format.js{render json: @questions}
+      end
     end
   end
 
@@ -73,13 +79,21 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   def questionnaire_presentation
-    render layout: 'presentation'
+    @questionnaires = Questionnaire.all.order("created_at DESC").last(5)
   end
 
   private
 
     def questionnaire_params
       params.require(:questionnaire).permit(:name, :questionnaire_category_id)
+    end
+
+    def set_layout
+      if params[:action] == "questionnaire_presentation"
+        return 'presentation'
+      else
+        return 'admin'
+      end
     end
 
 end

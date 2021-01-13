@@ -27,14 +27,17 @@ var questionnaireFunctions = (function () {
     }
     return isTrue;
   };
-  var getQuestionnaireQuestions = function(questionnaireId){
+  var getQuestionnaireQuestions = function(questionnaireId, isPresentation){
     $.ajax({
       url: '/admin/questionnaires/'+questionnaireId+'/get_questions',
       type:"GET",
+      data: {'is_presentation': isPresentation},
       dataType: 'script',
       success: function (response) {
-        $("#added-question-count").attr('data-count', JSON.parse(response).length);
-        $("#added-question-count").html(JSON.parse(response).length);
+        if(!isPresentation){
+          $("#added-question-count").attr('data-count', JSON.parse(response).length);
+          $("#added-question-count").html(JSON.parse(response).length);
+        }
       }
     });
   };
@@ -93,7 +96,13 @@ $(document).on("turbolinks:load", function(){
   $("#questionnaire_id").on("change", function(){
     var questionnaireId = $(this).val();
     if(questionnaireId.length != ""){
-      questionnaireFunctions.getQuestionnaireQuestions(questionnaireId);
+      questionnaireFunctions.getQuestionnaireQuestions(questionnaireId, '');
+    }
+  });
+  $("#presentation_id").on("change", function(){
+    var questionnaireId = $(this).val();
+    if(questionnaireId.length != ""){
+      questionnaireFunctions.getQuestionnaireQuestions(questionnaireId, true);
     }
   });
 

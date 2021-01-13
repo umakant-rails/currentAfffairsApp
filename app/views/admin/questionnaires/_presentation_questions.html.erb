@@ -1,0 +1,11 @@
+<% questions.each_with_index do | question, index | %>
+  <div id="question<%= index + 1%>" data-id="<%= index+1 %>" style="display:none;">
+    <div id="current-affair-title"> 
+    <%= question.question %> 
+    </div>
+    <div class="crt-afr-subtitle">  
+    </div>
+    <div class="crt-afr-writer">  
+    </div>
+  </div>
+<% end %>
