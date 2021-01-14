@@ -9,9 +9,24 @@ window.appFunctions = function () {
     setTimeout(() => {
       $("#alert-message").removeClass(cls);
     }, 2000);
-  }
+  };
+  var getQuestionnaireQuestions = function(questionnaireId, isPresentation){
+    $.ajax({
+      url: '/admin/questionnaires/'+questionnaireId+'/get_questions',
+      type:"GET",
+      data: {'is_presentation': isPresentation},
+      dataType: 'script',
+      success: function (response) {
+        if(!isPresentation){
+          $("#added-question-count").attr('data-count', JSON.parse(response).length);
+          $("#added-question-count").html(JSON.parse(response).length);
+        }
+      }
+    });
+  };
   return {
-    setAlertMessage: function(msg, cls){ setAlertMessage(msg, cls);}
+    setAlertMessage: setAlertMessage,
+    getQuestionnaireQuestions: getQuestionnaireQuestions
   };
 }();
 

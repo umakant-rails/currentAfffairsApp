@@ -1,7 +1,9 @@
-<a href="<%= admin_dashboards_path %>" class="presentation-back float-right">Back</a>
-<div class="row">
-  <a href="<%= admin_dashboards_path %>" class="presentation-back">Back</a>
+<div class="row float-right">
+  <a href="<%= admin_dashboards_path %>" class="presentation-node float-right">Back</a>
+  <a href="<%= questionnaire_presentation_admin_questionnaires_path %>" class="presentation-node float-right">Presentation Home</a>
+  <a href="<%= questionnaire_presentation_admin_questionnaires_path %>" class="presentation-node float-right">Help</a>
 </div>
+<div class="clearfix"></div>
 <div class="row" id="select-questionnaire-block">
   <div class="col-md-2"></div>
   <div class="col-md-8">
@@ -9,12 +11,11 @@
   </div>
   <div class="col-md-2"></div>
 </div>
-<br/><br/><br/><br/><br/><br/>
 <div class="row current-affair-block" style="display: none;">
   <div class="col-md-1 non-active" id="presentation-left-arrow" data-id="0" >
     <i class="fa fa-angle-left left-icon" aria-hidden="true"></i>
   </div>
-  <div class="col-md-10" id="questions-block">
+  <div class="col-md-10 margin-top-200" id="questions-block">
     <div class="" id="question0">
       <span id="x" class="questionnaire-close">
         <i class="fa fa-times" aria-hidden="true"></i>
