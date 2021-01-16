@@ -52,7 +52,8 @@ var functionsBlock = (function () {
   }
 })();
 
-$(document).on("turbolinks:load", function(){
+//$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
   $(".scrapping-widget").on("click", function(){
     functionsBlock.selectDataSource(this);
   });

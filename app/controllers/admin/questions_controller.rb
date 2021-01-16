@@ -24,7 +24,7 @@ class Admin::QuestionsController < ApplicationController
       end
     elsif @question.blank?
       @question = Question.new(question_params)
-      @question.scrapping_datum.update(is_read: true)
+      @question.scrapping_datum.update(is_read: true) if @question.save
       get_scrapping_data
       respond_to do |format|
         flash[:notice] = 'Question is created successfully.'

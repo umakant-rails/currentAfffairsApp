@@ -80,7 +80,8 @@ var presentationFunctions = (function () {
   };
 })();
 
-$(document).on("turbolinks:load", function(){
+//$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
   $("#presentation_id").on("change", function(){
     var questionnaireId = $(this).val();
     if(questionnaireId.length != ""){
@@ -93,21 +94,19 @@ $(document).on("turbolinks:load", function(){
       presentationFunctions.showNewQuestion(this, traverseType)
     }
   });
+  //$("#presentation-container").on("click", "#presentation-right-arrow", function()
   $("#presentation-right-arrow").on("click", function(){
     var traverseType = 'right';
     if($(this).hasClass('active')){
       presentationFunctions.showNewQuestion(this, traverseType)
     }
   });
-  $(".questionnaire-close").on("click", function(){
+  $(".current-affair-block").on("click", ".questionnaire-close", function(){
     presentationFunctions.resetQuestionnaireSelectionBlock();
-  });
-  $(".question-option:visible").on("dblclick", function(){
-    alert('show');
-    presentationFunctions.showAnswerOfQuestion();
   });
 
   $(document).on("keyup", function(e){
+  //$("#presentation-container").on("keyup", function(e){
     console.log(e.keyCode);
     if(e.keyCode == 39){
       var traverseType = 'right';
@@ -128,4 +127,5 @@ $(document).on("turbolinks:load", function(){
       presentationFunctions.showKeypointsOfQuestion();
     }
   });
+
 });

@@ -50,8 +50,8 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   def get_questions
-    questionnaire = Questionnaire.find(params[:questionnaire_id])
-    @questions = questionnaire.questions
+    @questionnaire = Questionnaire.find(params[:questionnaire_id])
+    @questions = @questionnaire.questions
     respond_to do |format|
       format.html {}
       if params[:is_presentation] == "true"

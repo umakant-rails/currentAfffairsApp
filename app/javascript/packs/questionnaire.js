@@ -56,7 +56,7 @@ var questionnaireFunctions = (function () {
   };
 })();
 
-$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
 
   $("#questionnaire_questionnaire_category_id").on("change", function(){
     questionnaireFunctions.setCurrentAffairName(this);

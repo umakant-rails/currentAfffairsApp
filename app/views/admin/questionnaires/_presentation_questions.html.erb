@@ -1,3 +1,17 @@
+<div class="" id="question0">
+  <span id="x" class="questionnaire-close">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </span>
+  <div id="current-affair-title">
+    <%= @questionnaire.name %> 
+  </div>
+  <div class="crt-afr-subtitle">  
+    Important Questions Of Current Affairs
+  </div>
+  <div class="crt-afr-writer">  
+    By Umakant Rajpoot
+  </div>
+</div>
 <% questions.each_with_index do | question, index | %>
   <div id="question<%= index + 1%>" data-id="<%= index+1 %>" style="display:none;">
     <div class="row">
@@ -10,7 +24,7 @@
         <div class="question-option" data-answer= "<%= question.option1 %>" id="crt-afr-option1">
           A.&nbsp;<%= question.option1 %>
         </div>
-        <div class="question-option" data-answer= "<%= question.option2 %>" id="crt-afr-option2">  
+        <div class="question-option" data-answer= "<%= question.option2 %>" id="crt-afr-option2">
           B.&nbsp;<%= question.option2 %>
         </div>
         <div class="question-option" data-answer= "<%= question.option3 %>" id="crt-afr-option3">
@@ -19,10 +33,11 @@
         <div class="question-option" data-answer= "<%= question.option4 %>" id="crt-afr-option4">
           D.&nbsp;<%= question.option4 %>
         </div>
-        <div class="crt-afr-writer">  
+        <div class="crt-afr-writer">
         </div>
       </div>
       <div class="col-md-7 question-keypoints" id="keypoints<%= index +1 %>" style="display:none">
+        <div class="keypoints-label">Keypoints :</div>
         <%=raw question.keypoints.gsub("\n", "<br/>") %>
       </div>
     </div>

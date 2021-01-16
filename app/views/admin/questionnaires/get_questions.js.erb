@@ -1,5 +1,5 @@
 <% if params[:is_presentation] == "true" %>
-  $("#questions-block").append("<%= escape_javascript(render 'presentation_questions', questions: @questions) %>");
+  $("#questions-block").html("<%= escape_javascript(render 'presentation_questions', questions: @questions) %>");
 <% else %>
   //var questionnaireQuestions = "<%= @questions.to_json %>";
   //$("#added-question-count").attr('data-count', JSON.parse(questionnaireQuestions).length);

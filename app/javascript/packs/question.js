@@ -47,7 +47,7 @@ var questionFunctions = (function () {
   };
 })();
 
-$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
   $(".answer_option").on("click", function(){
     questionFunctions.setAnswer(this);
   });
