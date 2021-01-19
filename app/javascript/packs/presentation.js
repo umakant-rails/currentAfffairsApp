@@ -13,6 +13,7 @@ var presentationFunctions = (function () {
     $("#select-questionnaire-block").show();
     $(".current-affair-block").hide();
     $("#presentation_id").val("");
+    $("#download-pdf").attr("href", "javascript:void(0);");
   }
   var setDataIdAndShowQuestion = function(oldDataId, newDataId){
     $("#presentation-left-arrow").attr('data-id', newDataId);
@@ -69,6 +70,13 @@ var presentationFunctions = (function () {
       $("#keypoints"+dataId).show();
     }
   };
+  var showHideHelpBox = function(){
+    if($(".help-block").is(':visible')){
+      $(".help-block").hide();
+    } else {
+      $(".help-block").show();
+    }
+  };
   return {
     setPresentationName: setPresentationName,
     showNewQuestion: showNewQuestion,
@@ -76,7 +84,8 @@ var presentationFunctions = (function () {
     resetQuestionnaireSelectionBlock: resetQuestionnaireSelectionBlock,
     showAnswerOfQuestion: showAnswerOfQuestion,
     hideAnswerOfQuestion: hideAnswerOfQuestion,
-    showKeypointsOfQuestion: showKeypointsOfQuestion
+    showKeypointsOfQuestion: showKeypointsOfQuestion,
+    showHideHelpBox: showHideHelpBox
   };
 })();
 
@@ -103,6 +112,9 @@ $(document).ready(function(){
   });
   $(".current-affair-block").on("click", ".questionnaire-close", function(){
     presentationFunctions.resetQuestionnaireSelectionBlock();
+  });
+  $("#help-node").on("click", function(){
+    presentationFunctions.showHideHelpBox();
   });
 
   $(document).on("keyup", function(e){

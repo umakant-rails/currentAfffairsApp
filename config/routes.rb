@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get '/get_questions' => "questionnaires#get_questions", as: :get_questions
       get '/add_questions' => "questionnaires#add_questions_in_questionnaire", as: :add_questions
       get '/questionnaire_presentation' => "questionnaires#questionnaire_presentation", as: :questionnaire_presentation, on: :collection
+      get '/generate_pdf' => "questionnaires#generate_pdf", as: :generate_pdf
     end
     resources :questions
   end

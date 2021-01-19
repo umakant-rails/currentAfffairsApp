@@ -1,0 +1,30 @@
+<% @questions.each_with_index do | question, index | %>
+  <% if index % 4 == 0%>
+    <div class="page">
+  <% end %>
+  <div class="pdf-question-block">
+    <div class="current-affair-question">
+      <span class="ques-index">Que <%= index+1%>.</span> &nbsp;<%= question.question%>
+    </div>
+    <div class="options-block">
+      <div class="question-option">
+        <div class="option <%= is_answer(question, 1) %>">A.&nbsp;<%= question.option1%></div>
+        <div class="option <%= is_answer(question, 2) %>">B.&nbsp;<%= question.option2%></div>
+        <div class="option <%= is_answer(question, 3) %>">C.&nbsp;<%= question.option3%></div>
+        <div class="option <%= is_answer(question, 4) %>">D.&nbsp;<%= question.option4%></div>
+      </div>
+      <% if question.keypoints.present? %>
+        <div class="question-keypoints">
+          <div class="keypoints-label">Keypoints :</div>
+          <%=raw question.keypoints.gsub("\n", "<br/>") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if (index % 4 == 3) || (question.id == @questions.last.id)%>
+    </div>
+  <% end %>
+  <% if question.id == @questions.last.id %>
+    <div></div>
+  <% end %>
+<% end %>

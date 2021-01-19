@@ -1,5 +1,6 @@
 <% if params[:is_presentation] == "true" %>
   $("#questions-block").html("<%= escape_javascript(render 'presentation_questions', questions: @questions) %>");
+  $("#download-pdf").attr("href", "/admin/questionnaires/<%= params[:questionnaire_id] %>/generate_pdf");
 <% else %>
   //var questionnaireQuestions = "<%= @questions.to_json %>";
   //$("#added-question-count").attr('data-count', JSON.parse(questionnaireQuestions).length);

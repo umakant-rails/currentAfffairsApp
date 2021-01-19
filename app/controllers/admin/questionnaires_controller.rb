@@ -82,6 +82,20 @@ class Admin::QuestionnairesController < ApplicationController
     @questionnaires = Questionnaire.all.order("created_at DESC").last(5)
   end
 
+  def generate_pdf
+    @questionnaire = Questionnaire.find(params[:questionnaire_id])
+    @questions = @questionnaire.questions
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render  pdf: "file_name",   # Excluding ".pdf" extension.
+          template: "admin/questionnaires/generate_pdf.html.erb",
+          layout:   "pdf.html.erb",
+          :page_size => "A4"
+      end
+    end
+  end
+
   private
 
     def questionnaire_params
@@ -91,6 +105,8 @@ class Admin::QuestionnairesController < ApplicationController
     def set_layout
       if params[:action] == "questionnaire_presentation"
         return 'presentation'
+      elsif params[:action] == "generate_pdf"
+        return "pdf"
       else
         return 'admin'
       end

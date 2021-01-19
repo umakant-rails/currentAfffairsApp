@@ -1,11 +1,3 @@
-.presentation-node{
-  font-size: 10px;
-  margin-left: 8px;
-}
-.presentation-home{
- margin-right: 10px;
- font-size: 10px; 
-}
 #current-affair-block{
   border: 1px solid lightgray;
   border-radius: 2px;
@@ -95,7 +87,7 @@
 }
 #watermark-text{
   position:absolute;
-  z-index:0;
+  z-index:-1;
   color:lightgrey;
   font-size:80px;
   //transform:rotate(-45deg);
@@ -104,4 +96,23 @@
   left: 200px;
   font-weight:bold;
   color: #ffe6f2;
+}
+.presentation-node{
+  font-size: 15px;
+  padding: 0px 5px;
+  .help-sign{font-size:15px;}
+  .pdf-sign{font-size:15px;color:red;}
+  .presentation-home{font-size:15px;}
+}
+.help-block{
+  right: 2px;
+  position: absolute;
+  top: 20px;
+  border: 1px solid lightblue;
+  width: 350px;
+  padding: 5px;
+  z-index: 1;
+  background-color: #ffeee6;
+  height: 300px;
+  border-radius: 5px;
 }

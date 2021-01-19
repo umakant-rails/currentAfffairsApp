@@ -1,7 +1,7 @@
 /*(function(){})(); is anonymous function, it can't be assign to any name.*/
 
 window.appFunctions = function () {
-  var setAlertMessage = function(msg, cls){
+  setAlertMessage = function(msg, cls){
     $("#alert-message").addClass(cls);
     $("#alert-message-span").html($.parseHTML(msg));
     $("#alert-message").show();
@@ -10,7 +10,7 @@ window.appFunctions = function () {
       $("#alert-message").removeClass(cls);
     }, 2000);
   };
-  var getQuestionnaireQuestions = function(questionnaireId, isPresentation){
+  getQuestionnaireQuestions = function(questionnaireId, isPresentation){
     $.ajax({
       url: '/admin/questionnaires/'+questionnaireId+'/get_questions',
       type:"GET",
@@ -26,7 +26,7 @@ window.appFunctions = function () {
   };
   return {
     setAlertMessage: setAlertMessage,
-    getQuestionnaireQuestions: getQuestionnaireQuestions
+    getQuestionnaireQuestions: getQuestionnaireQuestions,
   };
 }();
 

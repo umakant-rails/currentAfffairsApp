@@ -1,7 +1,27 @@
 <div class="row float-right">
-  <a href="<%= admin_dashboards_path %>" class="presentation-node float-right">Back</a>
-  <a href="<%= questionnaire_presentation_admin_questionnaires_url %>" class="presentation-node float-right">Presentation Home</a>
-  <a href="<%= questionnaire_presentation_admin_questionnaires_path %>" class="presentation-node float-right">Help</a>
+  <a title="Home" href="<%= admin_dashboards_path %>" class="presentation-node">
+    <i class="fas fa-home"></i>
+  </a>
+  <a title="Presentation Home" href="<%= questionnaire_presentation_admin_questionnaires_url %>" class="presentation-node">
+    <i class="fas fa-laptop-house presentation-home"></i>
+  </a>
+  <!--<a title="Download PDF" href="<%= admin_questionnaire_generate_pdf_path(1, {:format => 'pdf'})%>" class="presentation-node" id="download-pdf">-->
+  <a title="Download PDF" href="javascript:void(0);" class="presentation-node" id="download-pdf">
+    <i class="far fa-file-pdf pdf-sign"></i>
+  </a>
+  <a title="Help" href="javascript:void(0);" id="help-node" 
+    class="presentation-node">
+    <i class="far fa-question-circle help-sign"></i>
+  </a>
+</div>
+<div class="help-block" style="display:none">
+  <i class="fas fa-arrow-left"></i> /
+  <i class="fas fa-arrow-right"></i>
+  <strong> : </strong> Move Questions Forward/Backward.<br/>
+  <i class="fas fa-arrow-up"></i> /
+  <i class="fas fa-arrow-down"></i>
+  <strong> : </strong> Show/Hide answer.<br/>
+  <strong>ALT Key : </strong> Show/Hide Keypoints
 </div>
 <div class="clearfix"></div>
 <div class="row" id="select-questionnaire-block">

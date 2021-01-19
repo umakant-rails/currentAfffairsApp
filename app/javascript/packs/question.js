@@ -11,7 +11,7 @@ var questionFunctions = (function () {
     $("#answer").val($("#"+optionId).val());
     $(element).find("input:radio").parent().addClass('set-answer');
   };
-  setScrappingDataId = function(element) {
+  var setScrappingDataId = function(element) {
     var question = $(element).val();
     if(question.length > 8){
       var scrappingDataId = $(".scrapping-data").data("scrap_data_id");
@@ -26,7 +26,6 @@ var questionFunctions = (function () {
     var option3 = $("#option3").val().trim();
     var option4 = $("#option4").val().trim();
     var answer = $("#answer").val().trim();
-
     if(question.length == 0){
       isTrue = false;
       appFunctions.setAlertMessage("Question can't be blank.", "alert-danger");

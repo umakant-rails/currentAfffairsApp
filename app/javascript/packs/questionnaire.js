@@ -13,7 +13,7 @@ var questionnaireFunctions = (function () {
       $("#name").val("");
     }
   };
-  var validateQuestionnaireForm = function(){
+  validateQuestionnaireForm = function(){
     var isTrue = true;
     var questionnaireType = $("#questionnaire_questionnaire_category_id").val();
     var questionnaireName = $("#name").val().trim();
@@ -50,7 +50,6 @@ var questionnaireFunctions = (function () {
   return {
     setCurrentAffairName: setCurrentAffairName,
     validateQuestionnaireForm: validateQuestionnaireForm,
-    //getQuestionnaireQuestions: getQuestionnaireQuestions,
     addQuestions: addQuestions,
     setSelectedQuestions: setSelectedQuestions
   };
