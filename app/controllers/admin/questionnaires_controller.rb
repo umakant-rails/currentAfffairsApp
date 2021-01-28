@@ -1,7 +1,5 @@
 class Admin::QuestionnairesController < ApplicationController
   before_action :authenticate_user!
-  #layout 'admin', only: [:new, :create, :show, :add_questions_page, :get_questions, :add_questions_in_questionnaire, ]
-  #layout 'presentation', only: [:questionnaire_presentation]
   layout :set_layout
 
   def index
@@ -53,19 +51,6 @@ class Admin::QuestionnairesController < ApplicationController
     @questions = Question.where(questionnaires: nil)
   end
 
-  def get_questions
-    @questionnaire = Questionnaire.find(params[:questionnaire_id])
-    @questions = @questionnaire.questions
-    respond_to do |format|
-      format.html {}
-      if params[:is_presentation] == "true"
-        format.js{}
-      else
-        format.js{render json: @questions}
-      end
-    end
-  end
-
   def add_questions_in_questionnaire
     params[:question_array].each do | question_id |
       @questionnaire = Questionnaire.find(params[:questionnaire_id])
@@ -79,24 +64,6 @@ class Admin::QuestionnairesController < ApplicationController
       flash[:notice] = 'Question added successfully in Questionnaire.'
       format.html {}
       format.js{}
-    end
-  end
-
-  def questionnaire_presentation
-    @questionnaires = Questionnaire.all.order("created_at DESC").last(5)
-  end
-
-  def generate_pdf
-    @questionnaire = Questionnaire.find(params[:questionnaire_id])
-    @questions = @questionnaire.questions
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render  pdf: "file_name",   # Excluding ".pdf" extension.
-          template: "admin/questionnaires/generate_pdf.html.erb",
-          layout:   "pdf.html.erb",
-          :page_size => "A4"
-      end
     end
   end
 

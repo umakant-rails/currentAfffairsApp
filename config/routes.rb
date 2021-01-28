@@ -15,13 +15,13 @@ Rails.application.routes.draw do
     resources :questionnaires do
       get '/add_questions_page' => "questionnaires#add_questions_page", 
         as: :add_questions_page, on: :collection
-      get '/get_questions' => "questionnaires#get_questions", as: :get_questions
       get '/add_questions' => "questionnaires#add_questions_in_questionnaire", as: :add_questions
-      get '/questionnaire_presentation' => "questionnaires#questionnaire_presentation", as: :questionnaire_presentation, on: :collection
-      get '/generate_pdf' => "questionnaires#generate_pdf", as: :generate_pdf
     end
     resources :questions
+    resources :presentations do
+      get '/get_questions' => "presentations#get_questions", as: :get_questions
+      get '/generate_pdf' => "presentations#generate_pdf", as: :generate_pdf
+    end
   end
   
-
 end

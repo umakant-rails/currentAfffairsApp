@@ -12,7 +12,7 @@ window.appFunctions = function () {
   };
   getQuestionnaireQuestions = function(questionnaireId, isPresentation){
     $.ajax({
-      url: '/admin/questionnaires/'+questionnaireId+'/get_questions',
+      url: '/admin/presentations/'+questionnaireId+'/get_questions',
       type:"GET",
       data: {'is_presentation': isPresentation},
       dataType: 'script',
