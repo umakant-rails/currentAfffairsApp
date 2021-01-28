@@ -1,1 +1,19 @@
-index
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="question-form-title"><center>Questionnaire List</center></div>
+    <div class="clear form-title-divider"></div>
+    <form>
+      <div class="form-group row">
+        <label for="inputQuestionnaires" class="col-sm-2 col-form-label">Questionnaires</label>
+        <div class="col-sm-10">
+          <%= select_tag 'questionnaire_id', options_from_collection_for_select(@questionnaires, "id", "name"), :prompt => "Select Questionnaire", class:"form-control", id: "inputQuestionnaires" %>
+        </div>
+      </div>
+    </form>
+    <div id="questionnaire-edit-block">
+      
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>

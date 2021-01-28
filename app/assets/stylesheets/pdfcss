@@ -2,7 +2,7 @@ div.alwaysbreak { page-break-before: always; }
 div.nobreak:before { clear:both; }
 div.nobreak{ page-break-inside: avoid; }
 
-.pdf-page{
+.page{
   height:1300px;
   border: 2px solid black;
   margin-bottom: 25px;
@@ -12,7 +12,7 @@ div.nobreak{ page-break-inside: avoid; }
   border: 2px solid black;
   margin-bottom: 25px;
 }
-.pdf-channel-name {
+.channel-name {
   padding-top: 45%;
   font-size: 50px;
   font-weight: bold;
@@ -20,7 +20,7 @@ div.nobreak{ page-break-inside: avoid; }
   text-align: center;
   margin-bottom: 25%;
 }
-.pdf-channel-widget{
+.channel-widget{
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 20px;
@@ -73,11 +73,17 @@ div.nobreak{ page-break-inside: avoid; }
   margin-top: 15px;
   margin-left: -15px;
 }
-.pdf-options-block{
+#crt-afr-option1, #crt-afr-option2, 
+#crt-afr-option3, #crt-afr-option4{
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.options-block{
   display: inline-block;
   width: 100%;
 }
-.pdf-question-option{
+.question-option{
   width: 35%;
   float: left;
   margin-left: -15px;
@@ -91,7 +97,7 @@ div.nobreak{ page-break-inside: avoid; }
 .option-is-answer{
   color: #00b300;
 }
-.pdf-question-keypoints{
+.question-keypoints{
   font-size: 18px;
   font-weight: bold;
   color: #3377ff;
@@ -103,7 +109,7 @@ div.nobreak{ page-break-inside: avoid; }
   width: 65%;
   float: left;
 }
-.pdf-keypoints-label{
+.keypoints-label{
   margin-left: -15px;
   margin-right: -15px;
   margin-bottom: 5px;
@@ -114,15 +120,31 @@ div.nobreak{ page-break-inside: avoid; }
   background-color: #ff661a; //#f73;
   border-radius: 8px 8px 0px 0px;
 }
-#pdf-watermark-text{
+#watermark-text{
   position:absolute;
   z-index:-1;
   color:lightgrey;
   font-size:65px;
   //transform:rotate(-45deg);
   //-webkit-transform:rotate(-45deg);
-  top: 600px;
-  left: 200px;
+  top: 50px;
+  left: 150px;
   font-weight:bold;
   color: #ffe6f2;
 }
+
+/*.row{
+  display: flex;
+  flex-wrap: wrap;
+  //margin-right: -15px;
+  //margin-left: -15px;
+}
+.col-md-1{
+  flex: 0 0 8.3333333333%;
+  max-width: 8.3333333333%;
+}
+.col-md-10{
+  flex: 0 0 83.33333333333334%;
+  width: 83.33333333333334%;
+}
+*/

@@ -37,7 +37,7 @@
   margin-top: 250px;
 }
 .margin-top-200{
-  margin-top: 200px;
+  margin-top: 150px;
 }
 .left-icon, .right-icon{
   font-size: 100px;
@@ -85,17 +85,19 @@
   padding-left: 5px; // 5px 5px 5px;
   border-radius: 8px 8px 0px 0px;
 }
-#watermark-text{
-  position:absolute;
-  z-index:-1;
-  color:lightgrey;
-  font-size:80px;
-  //transform:rotate(-45deg);
-  //-webkit-transform:rotate(-45deg);
-  top: 50px;
-  left: 200px;
-  font-weight:bold;
-  color: #ffe6f2;
+.channel-name {
+  font-size: 50px;
+  font-weight: bold;
+  color: #00a3cc;
+  text-align: center;
+  margin-bottom: 75px;
+}
+.channel-widget{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 20px;
+  color: white;
+  background-color: #ff661a;
 }
 .presentation-node{
   font-size: 15px;

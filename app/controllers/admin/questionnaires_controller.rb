@@ -4,6 +4,10 @@ class Admin::QuestionnairesController < ApplicationController
   #layout 'presentation', only: [:questionnaire_presentation]
   layout :set_layout
 
+  def index
+    @questionnaires = Questionnaire.order("created_at desc").last(30)
+  end
+
   def new
     @questionnaire = Questionnaire.new
   end

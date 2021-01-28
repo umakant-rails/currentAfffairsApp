@@ -22,4 +22,8 @@ module Admin::QuestionnairesHelper
     end 
     return answer_cls 
   end
+
+  def is_keypoints_exist(question)
+    return question.keypoints.present?
+  end
 end

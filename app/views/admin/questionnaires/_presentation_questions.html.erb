@@ -1,4 +1,7 @@
 <div class="" id="question0">
+  <div class="channel-name">
+    <span class="channel-widget">Xpress News</span>
+  </div>
   <span id="x" class="questionnaire-close">
     <i class="fa fa-times" aria-hidden="true"></i>
   </span>
@@ -36,7 +39,8 @@
         <div class="crt-afr-writer">
         </div>
       </div>
-      <div class="col-md-7 question-keypoints" id="keypoints<%= index +1 %>" style="display:none">
+      <div class="col-md-7 question-keypoints" id="keypoints<%= index +1 %>" 
+        data-ispresent="<%= is_keypoints_exist(question) %>" style="display:none">
         <div class="keypoints-label">Keypoints :</div>
         <%=raw question.keypoints.gsub("\n", "<br/>") %>
       </div>

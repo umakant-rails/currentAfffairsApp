@@ -101,4 +101,13 @@ $(document).ready(function(){
     questionnaireFunctions.addQuestions(questionnaireId, questionArray);
   });
 
+  $("#inputQuestionnaires").on('change', function(){
+    var questionnaireId = $(this).val();
+    if(questionnaireId.length > 0){
+
+    } else {
+
+    }
+  });
+
 });

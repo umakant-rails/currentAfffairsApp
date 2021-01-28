@@ -39,3 +39,6 @@
   border: 2px solid gray;
   border-radius: 20px;
 }
+#question, #questionnaire, #questionnaire-presentation, #scrapping-home{
+  background-color: #edf0ef;
+}

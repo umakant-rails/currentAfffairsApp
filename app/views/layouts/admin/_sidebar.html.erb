@@ -1,29 +1,44 @@
 <div class="sidebar-sticky">
   <ul class="nav flex-column">
-    <a href="<%= admin_scrapping_data_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
+    <a id="scrapping-home" href="<%= admin_scrapping_data_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
         <span class="menu-collapsed">Scrapping Home</span>
       </div>
     </a>
-    <a id="submenuList1" href="#submenu1" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+    <a id="question" href="#questionList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Current Affairs</span>&nbsp;&nbsp;<i id="crt-afr-icon" class="fa fa-plus"></i>
+        <span class="menu-collapsed">Questions</span>&nbsp;&nbsp;<i id="crt-afr-icon" class="fa fa-plus"></i>
       </div>
     </a>
-    <!-- Submenu content -->
-    <div id='submenu1' class="collapse sidebar-submenu">
+    <div id='questionList' class="collapse sidebar-submenu">
       <a href="<%= new_admin_question_path %>" class="list-group-item list-group-item-action">
         <span class="menu-collapsed">Create Questions</span>
       </a>
       <a href="<%= new_admin_questionnaire_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Edit Question</span>
+      </a>
+    </div>
+    <a id="questionnaire" href="#questionnaireList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-start align-items-center">
+        <span class="menu-collapsed">Questionnaires</span>&nbsp;&nbsp;<i id="crt-afr-icon" class="fa fa-plus"></i>
+      </div>
+    </a>
+    <!-- Submenu content -->
+    <div id='questionnaireList' class="collapse sidebar-submenu">
+      <a href="<%= new_admin_questionnaire_path %>" class="list-group-item list-group-item-action ">
         <span class="menu-collapsed">Create Questionnaire</span>
+      </a>
+      <a href="<%= admin_questionnaires_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Edit Questionnaires</span>
       </a>
       <a href="<%= add_questions_page_admin_questionnaires_path %>" class="list-group-item list-group-item-action">
         <span class="menu-collapsed">Add Questions In Questionnaire</span>
       </a>
-      <a href="<%= questionnaire_presentation_admin_questionnaires_path %>" class="list-group-item list-group-item-action">
-        <span class="menu-collapsed">Questionnaire Presentation</span>
-      </a>
     </div>
+    <a id="questionnaire-presentation" href="<%= questionnaire_presentation_admin_questionnaires_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-start align-items-center">
+        <span class="menu-collapsed">Questionnaire Presentation</span>
+      </div>
+    </a>
   </ul>      
 </div>

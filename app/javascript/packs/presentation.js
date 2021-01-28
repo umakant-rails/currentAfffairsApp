@@ -64,6 +64,11 @@ var presentationFunctions = (function () {
   };
   var showKeypointsOfQuestion = function(){
     var dataId = $("#presentation-left-arrow").attr('data-id');
+    
+    var isPresent = $("#keypoints"+dataId).attr("data-ispresent");
+    if(isPresent == "false")
+      return false;
+
     if($("#keypoints"+dataId).is(':visible')){
       $("#keypoints"+dataId).hide();
     } else {
@@ -135,7 +140,6 @@ $(document).ready(function(){
     } else if(e.keyCode == 38){
       presentationFunctions.hideAnswerOfQuestion();
     } else if (e.keyCode == 18){  // alt key
-      console.log("alt key");
       presentationFunctions.showKeypointsOfQuestion();
     }
   });
