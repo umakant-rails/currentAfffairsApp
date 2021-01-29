@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get '/add_questions_page' => "questionnaires#add_questions_page", 
         as: :add_questions_page, on: :collection
       get '/add_questions' => "questionnaires#add_questions_in_questionnaire", as: :add_questions
+      get '/edit_page' => "questionnaires#edit_page", as: :questionnaires_edit_page, on: :collection
     end
     resources :questions
     resources :presentations do

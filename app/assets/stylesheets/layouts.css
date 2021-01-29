@@ -34,11 +34,11 @@
 .hide{
   display: none;  
 }
-#crt-afr-icon{
+.crt-afr-icon{
   padding: 2px;
   border: 2px solid gray;
   border-radius: 20px;
 }
-#question, #questionnaire, #questionnaire-presentation, #scrapping-home{
-  background-color: #edf0ef;
+#question-menu, #questionnaire-menu, #questionnaire-presentation, #scrapping-home{
+  background-color: #edf0ef ;
 }

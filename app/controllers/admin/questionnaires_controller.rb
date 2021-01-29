@@ -46,6 +46,35 @@ class Admin::QuestionnairesController < ApplicationController
   def show
   end
 
+  def edit_page
+    @questionnaires = Questionnaire.order("created_at desc").last(30)
+  end
+
+  def edit
+    @questionnaire = Questionnaire.find(params[:id])
+
+    respond_to do |format|
+      flash[:notice] = 'Question added successfully in Questionnaire.'
+      format.html {}
+      format.js{}
+    end
+  end
+
+  def update
+    @questionnaire = Questionnaire.find(params[:id])
+
+    if @questionnaire.update(questionnaire_params)
+      respond_to do |format|
+        flash[:notice] = 'Questionnaire updated successfully.'
+        format.html {}
+        format.js{}
+      end
+    else
+      format.html { render :edit }
+      format.js {}
+    end
+  end
+
   def add_questions_page
     @questionnaires = Questionnaire.all.order("created_at DESC").last(8)
     @questions = Question.where(questionnaires: nil)

@@ -3,30 +3,7 @@
   <div class="col-md-8">
     <div class="question-form-title"><center> Create Questionnaire Form</center></div>
     <div class="clear form-title-divider"></div>
-    <%= form_for(@questionnaire, url: admin_questionnaires_path(@questionnaire), html: {id: "questionnaire_form"}, remote: true) do |f| %>
-    <%# form_with(model: [:admin, question], html: {id: "question_form", onsubmit: "return validateQuestionForm()"}, local: false) do |f| %>
-      <% if @questionnaire.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
-          <ul>
-            <% question.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <div class="form-group">
-        <label for="name">Questionnaire Type</label>
-         <%= f.select :questionnaire_category_id, options_for_select(questionnaire_categories_hash(@questionnaire_categories)), {:prompt => "Select Questionnaire Category"}, class:"form-control mandatory_field" %>
-      </div>
-      <div class="form-group">
-        <label for="name">Questionnaire Name</label>
-        <%= f.text_field :name, class:"form-control", id: "name" %>
-      </div>
-      <div class="form-group">
-        <%= f.submit id: "questionnaire_submit", class: "btn btn-primary btn-large col-lg-12", onClick: "return validateQuestionnaireForm();" %>
-      </div>
-    <% end %>
+    <%= render 'form', questionnaire: @questionnaire, questionnaire_categories: @questionnaire_categories %>
   </div>
   <div class="col-md-2"></div>
 </div>

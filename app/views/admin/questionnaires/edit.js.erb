@@ -1,0 +1,2 @@
+$("#questionnaire-block").show();
+$("#edit-questionnaire-block").html("<%= escape_javascript(render 'form', questionnaire: @questionnaire, questionnaire_categories: @questionnaire_categories) %>")

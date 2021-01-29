@@ -24,22 +24,30 @@ window.appFunctions = function () {
       }
     });
   };
+  var hideAndShowSubmenu = function(element){
+    console.log($(element).find(".crt-afr-icon").hasClass("fa-plus"));
+    if($(element).find(".crt-afr-icon").hasClass("fa-plus")){
+      $(element).find(".crt-afr-icon").removeClass("fa-plus").addClass("fa-minus");
+      //$(".crt-afr-icon").addClass("fa-minus");
+    } else {
+      $(element).find(".crt-afr-icon").removeClass("fa-minus").addClass("fa-plus");
+      //$(".crt-afr-icon").addClass("fa-plus");
+    }
+  };
   return {
     setAlertMessage: setAlertMessage,
     getQuestionnaireQuestions: getQuestionnaireQuestions,
+    hideAndShowSubmenu: hideAndShowSubmenu
   };
 }();
 
 $(document).ready(function(){
   
-  $("#submenuList1").on('click', function(){
-    if(!$("#submenu1").hasClass("show")){
-      $("#crt-afr-icon").removeClass("fa-plus");
-      $("#crt-afr-icon").addClass("fa-minus");
-    } else {
-      $("#crt-afr-icon").removeClass("fa-minus");
-      $("#crt-afr-icon").addClass("fa-plus");
-    }
+  $("#question").on('click', function(){
+    appFunctions.hideAndShowSubmenu(this);
+  });
+  $("#questionnaire").on('click', function(){
+    appFunctions.hideAndShowSubmenu(this);
   });
 
 });

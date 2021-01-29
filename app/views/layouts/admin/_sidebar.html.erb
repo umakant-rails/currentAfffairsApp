@@ -5,9 +5,9 @@
         <span class="menu-collapsed">Scrapping Home</span>
       </div>
     </a>
-    <a id="question" href="#questionList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+    <a id="question-menu" href="#questionList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Questions</span>&nbsp;&nbsp;<i id="crt-afr-icon" class="fa fa-plus"></i>
+        <span class="menu-collapsed">Questions</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
       </div>
     </a>
     <div id='questionList' class="collapse sidebar-submenu">
@@ -18,9 +18,9 @@
         <span class="menu-collapsed">Edit Question</span>
       </a>
     </div>
-    <a id="questionnaire" href="#questionnaireList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+    <a id="questionnaire-menu" href="#questionnaireList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Questionnaires</span>&nbsp;&nbsp;<i id="crt-afr-icon" class="fa fa-plus"></i>
+        <span class="menu-collapsed">Questionnaires</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
       </div>
     </a>
     <!-- Submenu content -->
@@ -28,7 +28,7 @@
       <a href="<%= new_admin_questionnaire_path %>" class="list-group-item list-group-item-action ">
         <span class="menu-collapsed">Create Questionnaire</span>
       </a>
-      <a href="<%= admin_questionnaires_path %>" class="list-group-item list-group-item-action ">
+      <a href="<%= questionnaires_edit_page_admin_questionnaires_path %>" class="list-group-item list-group-item-action ">
         <span class="menu-collapsed">Edit Questionnaires</span>
       </a>
       <a href="<%= add_questions_page_admin_questionnaires_path %>" class="list-group-item list-group-item-action">

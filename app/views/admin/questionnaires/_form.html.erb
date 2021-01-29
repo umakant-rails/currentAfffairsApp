@@ -1,0 +1,23 @@
+<%= form_with(model: [:admin, questionnaire], html: {id: "questionnaire_form"}, local: false) do |f| %>
+  <% if questionnaire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <ul>
+        <% question.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <label for="name">Questionnaire Type</label>
+     <%= f.select :questionnaire_category_id, options_for_select(questionnaire_categories_hash(questionnaire_categories), @questionnaire.questionnaire_category_id), {:prompt => "Select Questionnaire Category"}, class:"form-control mandatory_field" %>
+  </div>
+  <div class="form-group">
+    <label for="name">Questionnaire Name</label>
+    <%= f.text_field :name, class:"form-control", id: "name" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit id: "questionnaire_submit", class: "btn btn-primary btn-large col-lg-12", onClick: "return validateQuestionnaireForm();" %>
+  </div>
+<% end %>
