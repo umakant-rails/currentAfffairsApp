@@ -3,7 +3,8 @@ class Admin::QuestionnairesController < ApplicationController
   layout :set_layout
 
   def index
-    @questionnaires = Questionnaire.order("created_at desc").last(30)
+    questionnaires_tmp = Questionnaire.order("created_at desc")
+    @questionnaires = Kaminari.paginate_array(questionnaires_tmp).page(params[:page]).per(1)
   end
 
   def new
@@ -44,20 +45,11 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   def show
-  end
-
-  def edit_page
-    @questionnaires = Questionnaire.order("created_at desc").last(30)
+    @questionnaire = Questionnaire.find(params[:id])
   end
 
   def edit
     @questionnaire = Questionnaire.find(params[:id])
-
-    respond_to do |format|
-      flash[:notice] = 'Question added successfully in Questionnaire.'
-      format.html {}
-      format.js{}
-    end
   end
 
   def update
@@ -66,12 +58,10 @@ class Admin::QuestionnairesController < ApplicationController
     if @questionnaire.update(questionnaire_params)
       respond_to do |format|
         flash[:notice] = 'Questionnaire updated successfully.'
-        format.html {}
-        format.js{}
+        format.html { render 'show'}
       end
     else
       format.html { render :edit }
-      format.js {}
     end
   end
 

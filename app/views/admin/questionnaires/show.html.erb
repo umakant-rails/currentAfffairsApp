@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="question-form-title"><center>Questionnaire</center></div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<div class="clear form-title-divider"></div>
+<br/>
+<div class="questionnaire-show-block">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3 qestnre-hdr">
+      Name :
+    </div>
+    <div class="col-md-7">
+      <%= @questionnaire.name %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3 qestnre-hdr">
+      Category :
+    </div>
+    <div class="col-md-7">
+      <%= @questionnaire.questionnaire_category.name %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-7">
+      <%= link_to edit_admin_questionnaire_path(@questionnaire), class: 'edit_questionnaire' do %>
+        <i class="fas fa-edit" aria-hidden="true"></i> Edit
+      <% end %>&nbsp;&nbsp;
+      <%= link_to admin_questionnaire_path(@questionnaire), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_questionnaire' do %>
+          <i class="fas fa-trash-alt"></i> Delete
+      <% end %>&nbsp;&nbsp;
+      <%= link_to  'Back to Index', admin_questionnaires_path, class: "back_to_index" %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>

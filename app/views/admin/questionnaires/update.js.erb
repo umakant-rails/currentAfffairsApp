@@ -1,8 +1,0 @@
-<% if @questionnaire.errors && @questionnaire.errors.present? %>
-  var error_msgs = "<%= @questionnaire.errors.full_messages.join('\n') %>";
-  appFunctions.setAlertMessage(error_msgs.replaceAll("\n", "<br/>"), "alert-danger");
-<% else %>
-  $("#inputQuestionnaires").val("")
-  $("#questionnaire-block").hide();
-  appFunctions.setAlertMessage("<%= flash[:notice] %>", "alert-success");
-<% end %>

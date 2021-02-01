@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="question-form-title"><center>Edit Questionnaire</center></div>
+    <div class="clear form-title-divider"></div>
+    <div id="questionnaire-block">
+      <div id="edit-questionnaire-block">
+        <%= render 'form', questionnaire: @questionnaire, questionnaire_categories: @questionnaire_categories, remote_true: false %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>

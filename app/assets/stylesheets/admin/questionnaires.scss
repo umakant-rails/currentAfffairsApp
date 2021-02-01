@@ -20,19 +20,26 @@
 .txt-question-count{
   padding-top: 6px;
 }
-#edit-questionnaire-label{
-  font-weight: bold;
-  position: relative;
-  color: #dc3545;
-  top: -25px;
-  left: -30px;
-  font-size: 20px;
-  background: white;
-  padding: 2px 9px; 
-}
 #questionnaire-block{
   border: 1px solid lightgray;
   border-radius: 8px;
   padding: 10px 20px;
   margin-top: 50px;
+}
+.questionnaire-show-block{
+  font-size: 30px;
+}
+.qestnre-hdr{
+  font-weight: bold;
+  text-align: right;
+}
+.delete_questionnaire{
+  color: red;
+}
+.edit_questionnaire:hover, .back_to_index:hover{
+  text-decoration: none;
+}
+.delete_questionnaire:hover{
+  color: red;
+  text-decoration: none;
 }
