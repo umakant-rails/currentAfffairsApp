@@ -5,7 +5,7 @@
   font-size: 22px;
   font-weight: bold;
   text-decoration: underline;
-  text-align: center !important ;
+  //text-align: center !important ;
   color: #dc3545;
 }
 .form-title-divider{
@@ -38,9 +38,22 @@
   }
 }
 .set-answer{
-  color: green;
+  color: #00cc00;
 }
-
+.facts-div{
+  border: 1px solid lightgray;
+  height: 60px;
+  border-radius: 4px;
+  padding-left: 20px;
+  overflow-y: auto;
+}
+.get-facts-icon{
+  cursor: pointer;
+  color: #00cc00;
+}
+.grn-status{
+  color: #00cc00;
+}
 .ca-header{
   color: #dc3545;
   font-weight: bold;
@@ -48,11 +61,35 @@
   display: inline-block !important;
 }
 .ca-header>.read-status{
-    padding: 2px 5px;
-    border: 1px solid green;
-    border-radius: 5px;
-    color: green;
-    background-color: lightgreen;
-    text-decoration: none !important;
-    margin-left: 8px;
-  }
+  padding: 2px 5px;
+  border: 1px solid green;
+  border-radius: 5px;
+  color: green;
+  background-color: lightgreen;
+  text-decoration: none !important;
+  margin-left: 8px;
+}
+.question-show-block{
+  font-size: 20px;
+}
+.qestn-hdr{
+  font-weight: bold;
+  text-align: right;
+}  
+.delete_question{
+  color: red;
+}
+.edit_question:hover, .back_to_index:hover{
+  text-decoration: none;
+}
+.delete_question:hover{
+  color: red;
+  text-decoration: none;
+}
+.edit-fact{cursor: pointer;}
+.right-ok-sign{
+  padding-top: 8px;
+  color: #0069d9;
+  font-size: 30px;
+  cursor: pointer;
+}

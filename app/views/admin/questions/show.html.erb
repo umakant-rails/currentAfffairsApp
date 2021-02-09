@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="question-form-title"><center>Question</center></div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<div class="clear form-title-divider"></div>
+<br/>
+<div class="question-show-block">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2 qestn-hdr">
+      Question :
+    </div>
+    <div class="col-md-8">
+      <%= @question.question %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="offset-md-3 col-md-8">
+      <div class="clear form-title-divider"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2 qestn-hdr">
+      Options :
+    </div>
+    <div class="col-md-8">
+      Option1 : <%= @question.option1 %> &nbsp;
+      Option2 : <%= @question.option2 %> &nbsp;
+      Option3 : <%= @question.option3 %> &nbsp;
+      Option4 : <%= @question.option4 %> &nbsp;
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="offset-md-3 col-md-8">
+      <div class="clear form-title-divider"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2 qestn-hdr">
+      Questionnaire :
+    </div>
+    <div class="col-md-8">
+      <%= @question.questionnaire.name %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="offset-md-3 col-md-8">
+      <div class="clear form-title-divider"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-8">
+      <%= link_to edit_admin_question_path(@question), class: 'edit_question' do %>
+        <i class="fas fa-edit" aria-hidden="true"></i> Edit
+      <% end %>&nbsp;&nbsp;
+      <%= link_to admin_question_path(@question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_question' do %>
+          <i class="fas fa-trash-alt"></i> Delete
+      <% end %>&nbsp;&nbsp;
+      <%= link_to  'Back to Index', admin_questions_path, class: "back_to_index" %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="offset-md-3 col-md-8">
+      <div class="clear form-title-divider"></div>
+    </div>
+  </div>
+</div>

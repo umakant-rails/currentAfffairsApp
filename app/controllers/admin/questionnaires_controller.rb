@@ -1,6 +1,7 @@
 class Admin::QuestionnairesController < ApplicationController
   before_action :authenticate_user!
   layout :set_layout
+  before_action :set_questionnaire, only: [:show, :edit, :update, :questions_of_questionnaire]
 
   def index
     questionnaires_tmp = Questionnaire.order("created_at desc")
@@ -45,16 +46,12 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   def show
-    @questionnaire = Questionnaire.find(params[:id])
   end
 
   def edit
-    @questionnaire = Questionnaire.find(params[:id])
   end
 
   def update
-    @questionnaire = Questionnaire.find(params[:id])
-
     if @questionnaire.update(questionnaire_params)
       respond_to do |format|
         flash[:notice] = 'Questionnaire updated successfully.'
@@ -86,7 +83,22 @@ class Admin::QuestionnairesController < ApplicationController
     end
   end
 
+  def questions_of_questionnaire
+    params[:page] = params[:page].blank? ? 1 : params[:page]
+    questions_tmp = @questionnaire.questions
+    @questions = Kaminari.paginate_array(questions_tmp).page(params[:page]).per(10)
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+  end
+
   private
+
+    def set_questionnaire
+      questionnaire_id = params[:questionnaire_id].present? ?  params[:questionnaire_id] : params[:id]
+      @questionnaire = Questionnaire.find(questionnaire_id) 
+    end
 
     def questionnaire_params
       params.require(:questionnaire).permit(:name, :questionnaire_category_id)

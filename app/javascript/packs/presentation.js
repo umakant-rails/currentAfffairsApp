@@ -33,19 +33,20 @@ var presentationFunctions = (function () {
     if(traverseType == 'right'){
       newDataId = parseInt(dataId) + 1;
       presentationFunctions.setDataIdAndShowQuestion(dataId,newDataId);
-      //if ($("#question"+newDataId).length > 0){
-      if ($("#question"+(newDataId+1)).length > 0){
-        $("#presentation-left-arrow").removeClass("non-active").addClass("active");
-      } else {
+      if ($("#question"+(newDataId+1)).length == 0){
         $(element).removeClass("active").addClass("non-active");
+      }
+      if($("#presentation-left-arrow").hasClass("non-active")){
+        $("#presentation-left-arrow").removeClass("non-active").addClass("active");
       }
     } else if(traverseType == 'left') {
       newDataId = parseInt(dataId) - 1;
       presentationFunctions.setDataIdAndShowQuestion(dataId, newDataId);
-      if(newDataId != 0){
+      if(newDataId == 0){
+        $(element).removeClass("active").addClass("non-active");
+      }
+      if($("#presentation-right-arrow").hasClass("non-active")){
         $("#presentation-right-arrow").removeClass("non-active").addClass("active");
-      }else{
-        $(element).removeClass("active").addClass("non-active"); 
       }
     }
   };

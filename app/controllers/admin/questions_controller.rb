@@ -1,7 +1,14 @@
 class Admin::QuestionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_state_and_quesion_category, only: [:new, :create]
+  before_action :set_state_and_quesion_category, only: [:new, :create, :edit]
   layout 'admin'
+
+  def index
+    @page = params[:page].blank? ? 0 : params[:page]
+    @questionnaires = Questionnaire.order("created_at desc")
+    questions_tmp = Question.order("created_at desc")
+    @questions = Kaminari.paginate_array(questions_tmp).page(params[:page]).per(10)
+  end
 
   def new
     @question = Question.new
@@ -36,6 +43,36 @@ class Admin::QuestionsController < ApplicationController
         format.html { render :new }
         format.js {}
       end
+    end
+  end
+
+  def show
+    @question = Question.find(params[:id])
+  end
+  
+  def edit
+    @question = Question.find(params[:id])
+    @scrapping_datum = @question.scrapping_datum
+  end
+
+  def update
+    @question = Question.find(params[:id])
+
+    if @question.update(question_params)
+      respond_to do |format|
+        flash[:notice] = 'Question updated successfully.'
+        format.html { render 'show'}
+      end
+    else
+      format.html { render :edit }
+    end
+  end
+
+  def questions_for_fact
+    @questions = Question.where(question_category_id: params[:category_id])
+    respond_to do |format|
+      format.html {}
+      format.js {}
     end
   end
 

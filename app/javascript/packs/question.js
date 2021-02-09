@@ -39,10 +39,44 @@ var questionFunctions = (function () {
     }
     return isTrue;
   };
+  var getQuestoinsForFacts = function(categoryID){
+    $.ajax({
+      url: '/admin/questions/questions_for_fact',
+      type:"GET",
+      data: {category_id: categoryID},
+      dataType: 'script',
+      success: function (response) {
+      }
+    });
+  };
+  var editFacts = function(id){
+    var quesTxt = $("#fact"+id).text().trim();
+    $("#fact-input").val(quesTxt);
+    $("#fact-input").attr('data-id', id);
+  };
+  var closeFacts = function(id){
+    var quesTxt = $("#fact"+id).text().trim();
+    $("#row-fact"+id).hide();
+  };
+  var addFacts = function(){
+    var id = $("#fact-input").attr("data-id");
+    var fact = $("#fact-input").val();
+    var factTxt = "<li>"+fact+"</li>";
+    $(".facts-div").append(factTxt);
+    var htmlOfFacts = $(".facts-div").html();
+    console.log(htmlOfFacts);
+    $("#facts").val("<ul>" + htmlOfFacts + "</ul>");
+    $("#fact-input").val("");$("#fact-input").attr("data-id", "");
+    $("#row-fact"+id).remove();
+  };
   return {
     setAnswer: setAnswer,
     setScrappingDataId: setScrappingDataId,
-    validateQuestionForm: validateQuestionForm
+    validateQuestionForm: validateQuestionForm,
+    getQuestoinsForFacts: getQuestoinsForFacts,
+    editFacts: editFacts,
+    closeFacts: closeFacts,
+    addFacts: addFacts
   };
 })();
 
@@ -56,4 +90,30 @@ $(document).ready(function(){
     questionFunctions.setAnswer();
   });
 
+  $("#inputQuestionCategory").on("change", function(){
+    var categoryID = $("#inputQuestionCategory").val();
+    if(categoryID.length != 0){
+      questionFunctions.getQuestoinsForFacts(categoryID);
+    }
+  });
+
+  $(document).on("click", ".edit-fact", function(){
+    var id = $(this).attr('data-id');
+    questionFunctions.editFacts(id);
+  });
+
+  $(document).on("click", ".remove-fact", function(){
+    var id = $(this).attr('data-id');
+    questionFunctions.closeFacts(id);
+  });
+
+  $(document).on("click", ".right-ok-sign", function(){
+    questionFunctions.addFacts();
+  });
+
+  $(".clear-content").on("click", function(){
+    $("#inputQuestionCategory").val("");
+    $("#fact-input").val("");
+    $("#question-facts").html("");
+  })
 });

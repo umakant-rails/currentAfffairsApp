@@ -1,4 +1,36 @@
-<%= form_with(model: [:admin, question], html: {id: "question_form"}, local: false) do |f| %>
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Facts</h4>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-9">
+          <%= select_tag "question_categories", options_from_collection_for_select(@que_categories, "id", "name"), prompt: "Select Category", class:"form-control", id: "inputQuestionCategory" %>
+        </div>
+        <button type="button" class="close clear-content" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-md-11">
+            <input type="text" id="fact-input" class="form-control" data-id="" value=""/>  
+          </div>
+          <div class="col-md-1">
+            <i class="far fa-check-circle right-ok-sign"></i>
+          </div>
+        </div>
+        <div id="question-facts">
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger clear-content" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<%= form_with(model: [:admin, question], html: {id: "question_form"}, local: is_action_edit(question) ) do |f| %>
   <% if question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -65,8 +97,13 @@
     <%= f.text_area :keypoints, class:"form-control textarea-custom", id: "keypoints" %>
   </div>
   <div class="form-group">
-    <label for="facts">Facts</label>
-    <%= f.text_area :facts, class:"form-control textarea-custom", id: "facts" %>
+    <label for="facts">Facts</label> &nbsp;
+    <span data-toggle="modal" data-target="#myModal">
+      <i class="fas fa-file-alt get-facts-icon"></i>
+    </span>
+    <ul class="facts-div">
+    </ul>
+    <%= f.hidden_field :facts, class:"form-control textarea-custom", id: "facts" %>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -78,7 +115,7 @@
     <div class="form-group col-md-6">
       <label for="question_category_id">Category</label>
       <% category_hash = Hash[@que_categories.map{|que_cat| [que_cat.name, que_cat.id]}] %>
-      <%= f.select :state_id, options_for_select(category_hash, f.object.question_category_id),
+      <%= f.select :question_category_id, options_for_select(category_hash, f.object.question_category_id),
         {prompt: "Select Category"}, class:"form-control", id: "question_category_id" %>
     </div>
   </div>

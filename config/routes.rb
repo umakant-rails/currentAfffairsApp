@@ -16,9 +16,11 @@ Rails.application.routes.draw do
       get '/add_questions_page' => "questionnaires#add_questions_page", 
         as: :add_questions_page, on: :collection
       get '/add_questions' => "questionnaires#add_questions_in_questionnaire", as: :add_questions
-      get '/edit_page' => "questionnaires#edit_page", as: :questionnaires_edit_page, on: :collection
+      get '/questions' => "questionnaires#questions_of_questionnaire", as: :questions_of_questionnaire
     end
-    resources :questions
+    resources :questions do
+      get '/questions_for_fact'=> "questions#questions_for_fact", as: :questions_for_fact, on: :collection
+    end
     resources :presentations do
       get '/get_questions' => "presentations#get_questions", as: :get_questions
       get '/generate_pdf' => "presentations#generate_pdf", as: :generate_pdf

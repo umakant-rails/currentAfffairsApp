@@ -1,0 +1,14 @@
+<% questions.each do | question | %>
+  <div class="row" id="row-fact<%= question.id %>">
+    <div class="col-md-11" id="fact<%=question.id%>">
+      <!--<input type="text" class="form-control" value="<%#= question.question + " : " + question.answer %>">-->
+      <%= question.question %>&nbsp;<%= question.answer %>
+    </div>
+    <div class="col-md-1 px-0">
+      <!--<i class="fas fa-plus-square" style="font-size: 48px;"></i> -->
+      <i class="far fa-edit edit-fact" style="color:#0069d9;" data-id="<%=question.id%>"></i>
+      <i class="far fa-times-circle remove-fact" style="color:#c82333;" data-id="<%=question.id%>"></i>
+    </div>
+  </div>
+<% end %>
+    

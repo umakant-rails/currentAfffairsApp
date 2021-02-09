@@ -43,10 +43,10 @@ window.appFunctions = function () {
 
 $(document).ready(function(){
   
-  $("#question").on('click', function(){
+  $("#question-menu").on('click', function(){
     appFunctions.hideAndShowSubmenu(this);
   });
-  $("#questionnaire").on('click', function(){
+  $("#questionnaire-menu").on('click', function(){
     appFunctions.hideAndShowSubmenu(this);
   });
 
