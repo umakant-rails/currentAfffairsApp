@@ -41,6 +41,24 @@ class Admin::ScrappingDataController < ApplicationController
     end
   end
   
+  def unread
+    @scrapping_data = ScrappingDatum.where("is_read=false and is_hold=false")
+  end
+
+  def mark_as_hold_or_read
+    is_updated = false
+    @scrapping_datum = ScrappingDatum.find(params[:id])
+
+    if(params[:action_type].downcase == "mark as hold")
+      is_updated = @scrapping_datum.update(is_hold: true)
+    else
+      is_updated = @scrapping_datum.update(is_read: true)
+    end
+    respond_to do |format|
+      format.json {render json: {status: is_updated}}
+    end
+  end
+
   # GET /scrapping_data/1
   # GET /scrapping_data/1.json
   def show

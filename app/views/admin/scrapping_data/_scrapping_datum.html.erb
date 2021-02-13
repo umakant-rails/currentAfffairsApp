@@ -1,0 +1,18 @@
+<% scrapping_data.each do | scrapping_datum | %>
+  <div class="scrapping-datum" id="scrap-data-<%= scrapping_datum.id %>">
+    <div class="row">
+      <div class='data-title'> <%= raw scrapping_datum[:title] %> </div>
+      <div class='data-point'> <%= raw scrapping_datum[:description] %> </div>
+      <% if(scrapping_datum[:keypoints].present? && scrapping_datum[:keypoints].length > 0)%>
+        <div class='data-title'>Keypoints : </div>
+        <div class='data-point'> <%= raw scrapping_datum[:keypoints] %> </div>
+      <% end %>
+    </div>
+    <% if action_name == "unread" %>
+      <div class="row">
+        <input type="button" data-id= "<%= scrapping_datum.id %>" value="Mark As Hold" class="btn btn-primary mark-as-hold"> &nbsp;
+        <input type="button" data-id= "<%= scrapping_datum.id %>" value="Mark As Read" class="btn btn-primary mark-as-hold">
+      </div>
+    <% end %>
+  </div>
+<% end %>

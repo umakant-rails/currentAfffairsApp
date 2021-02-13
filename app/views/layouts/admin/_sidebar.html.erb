@@ -1,10 +1,18 @@
 <div class="sidebar-sticky">
   <ul class="nav flex-column">
-    <a id="scrapping-home" href="<%= admin_scrapping_data_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
+    <a id="scrapping-menu" href="#scrappingList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Scrapping Home</span>
+        <span class="menu-collapsed">Scrappings</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
       </div>
     </a>
+    <div id='scrappingList' class="collapse sidebar-submenu">
+      <a href="<%= admin_scrapping_data_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Scrap To Data</span>
+      </a>
+      <a href="<%= unread_admin_scrapping_data_path %>" class="list-group-item list-group-item-action">
+        <span class="menu-collapsed">Unread Scrapping Data</span>
+      </a>
+    </div>
     <a id="question-menu" href="#questionList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
         <span class="menu-collapsed">Questions</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>

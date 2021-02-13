@@ -49,5 +49,7 @@ $(document).ready(function(){
   $("#questionnaire-menu").on('click', function(){
     appFunctions.hideAndShowSubmenu(this);
   });
-
+  $("#scrapping-menu").on('click', function(){
+    appFunctions.hideAndShowSubmenu(this);
+  });
 });

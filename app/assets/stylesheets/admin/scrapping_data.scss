@@ -27,8 +27,16 @@
   font-color: lightgray !important;
   padding-top: 80px;
 }
-.scrapping-data{
-  padding-left: 15px;
+#scrapping-data{
+
+}
+.scrapping-datum{
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 5px 30px 10px 30px;
+  margin-bottom: 10px;
 }
 .data-title{
   font-size: 20px;
@@ -36,4 +44,11 @@
   text-decoration: underline;
   margin-bottom: 5px;
   color: brown;
+}
+.unread-scrap-hdr{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  color: #dc3545;
+  text-decoration: underline;
 }
