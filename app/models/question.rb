@@ -3,4 +3,10 @@ class Question < ApplicationRecord
   belongs_to :scrapping_datum
   belongs_to :questionnaire, optional: true
   belongs_to :question_category, optional: true
+
+  #has_many  :question_category_questions
+  #has_many  :question_category, through: :question_category_questions
+
+  #has_many :questionnaire_questions
+  #has_many :questionnaires, through: :questionnaire_questions
 end

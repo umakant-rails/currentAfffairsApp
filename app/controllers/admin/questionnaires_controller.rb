@@ -5,7 +5,7 @@ class Admin::QuestionnairesController < ApplicationController
 
   def index
     questionnaires_tmp = Questionnaire.order("created_at desc")
-    @questionnaires = Kaminari.paginate_array(questionnaires_tmp).page(params[:page]).per(1)
+    @questionnaires = Kaminari.paginate_array(questionnaires_tmp).page(params[:page]).per(10)
   end
 
   def new
@@ -65,6 +65,7 @@ class Admin::QuestionnairesController < ApplicationController
   def add_questions_page
     @questionnaires = Questionnaire.all.order("created_at DESC").last(8)
     @questions = Question.where(questionnaires: nil)
+    @que_categories = QuestionCategory.all
   end
 
   def add_questions_in_questionnaire

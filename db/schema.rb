@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_20_044548) do
+ActiveRecord::Schema.define(version: 2021_02_14_133024) do
 
   create_table "question_categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 2021_01_20_044548) do
 
   create_table "questionnaire_categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "questionnaire_questions", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "questionnaire_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -115,4 +115,8 @@ $(document).ready(function(){
     }
   });
 
+  $("#questionCategory").on("change", function(){
+
+  });
+  
 });
