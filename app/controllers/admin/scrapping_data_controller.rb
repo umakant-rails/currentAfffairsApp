@@ -59,6 +59,22 @@ class Admin::ScrappingDataController < ApplicationController
     end
   end
 
+  def hold
+    @scrapping_data = ScrappingDatum.where("is_hold=true")
+    respond_to do |format|
+      format.html {}
+    end
+  end
+
+  def unhold
+    is_updated = false
+    @scrapping_datum = ScrappingDatum.find(params[:id])
+    is_updated = @scrapping_datum.update(is_hold: false)
+    respond_to do |format|
+      format.json {render json: {status: is_updated}}
+    end
+  end
+
   # GET /scrapping_data/1
   # GET /scrapping_data/1.json
   def show

@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     resources :scrapping_data do
       get '/scrap_data/:data_source' => "scrapping_data#scrap_data", as: :scrap_data, on: :collection
       get '/unread' => "scrapping_data#unread", as: :unread, on: :collection
+      get '/hold' => "scrapping_data#hold", as: :hold, on: :collection
       get '/mark_as_hold_or_read' => "scrapping_data#mark_as_hold_or_read", as: :mark_as_hold_or_read, on: :member
+      get '/unhold' => "scrapping_data#unhold", as: :unhold, on: :member
     end
     resources :questionnaires do
       get '/add_questions_page' => "questionnaires#add_questions_page", 

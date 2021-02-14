@@ -1,3 +1,39 @@
-// Place all the styles related to the admin::dashboards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.db-tp-mrgn{
+  margin-top: 15px;
+}
+.db-widget{
+  border: 1px solid lightgray;
+  height: 280px;
+  border-radius: 5px;
+}
+.db-widget:first-child{
+  margin-left: -3px;
+  margin-right: 3px;
+}
+.db-widget:last-child{
+  margin-right: -3px;
+  margin-left: 3px;
+}
+.db-hdr{
+  font-size: 25px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-radius: 3px 3px 0 0;
+  background-color: #ff661a;
+  color: white;
+  font-weight: bold;
+  padding: 3px 0 3px 8px;
+}
+.db-list{
+  height: 234px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-radius: 0 0 3px 3px;
+  overflow-y: auto;
+}
+.db-li{
+  padding-left: 10px;
+  border: 1px solid lightgray;
+  height: 39px;
+  padding-top: 8px;
+}
