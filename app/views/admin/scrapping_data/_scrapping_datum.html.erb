@@ -1,5 +1,9 @@
 <% scrapping_data.each do | scrapping_datum | %>
-  <div class="scrapping-datum" id="scrap-data-<%= scrapping_datum.id %>">
+  <% if action_name == "unread" || action_name == "hold" %>
+    <div class="scrapping-datum" id="scrap-data-<%= scrapping_datum.id %>">
+   <% else %>
+    <div class="scrapping-datum">
+  <% end %>
     <div class="row">
       <div class='data-title'> <%= raw scrapping_datum[:title] %> </div>
       <div class='data-point'> <%= raw scrapping_datum[:description] %> </div>
@@ -15,6 +19,7 @@
       </div>
     <% elsif action_name == "hold" %>
       <input type="button" data-id= "<%= scrapping_datum.id %>" value="Mark As Un-Hold" class="btn btn-primary mark-as-unhold">
+      <input type="button" data-id= "<%= scrapping_datum.id %>" value="Mark As Read" class="btn btn-primary mark-as-read">
     <% end %>
   </div>
 <% end %>

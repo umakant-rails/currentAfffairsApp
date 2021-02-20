@@ -5,6 +5,7 @@
   $("#question_form").trigger("reset");
   $("#scrapping_datum_id").val("");
   $("#answer").val("");
+  $(".facts-div").html("");
   appFunctions.setAlertMessage("<%= flash[:notice] %>", "alert-success");
   $(".set-answer").removeClass("set-answer");
 <% end %>
