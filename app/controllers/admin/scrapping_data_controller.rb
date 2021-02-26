@@ -13,25 +13,32 @@ class Admin::ScrappingDataController < ApplicationController
   def scrap_data
     scrapper = ScrappingDatum.new
     @scrapping_notice = ''
-
+    @scrapping_data = []
+    @scrapping_data_links_arry = []
     if (params[:data_source] == "banker_adda")
-      @scrapping_data = scrapper.ca_from_banker_adda
-      scrapper.save_scrap_data(@scrapping_data, "banker_adda")
+      @scrapping_data = scrapper.ca_from_banker_adda(params[:date], params[:data_source], params[:link_txt])
+      #scrapper.save_scrap_data(@scrapping_data, "banker_adda")
       @scrapping_notice = "Successfully fetch data from Banker adda."
     elsif (params[:data_source] == "adda_247")
-      @scrapping_data = scrapper.ca_from_adda_247
-      scrapper.save_scrap_data(@scrapping_data, "adda_247")
+      @scrapping_data = scrapper.ca_from_adda_247(params[:date], params[:data_source], params[:link_txt])
+      #scrapper.save_scrap_data(@scrapping_data, "adda_247")
       @scrapping_notice = "Successfully fetch data from 247 adda."
     elsif (params[:data_source] == "byscoop")
-      @scrapping_data = scrapper.ca_from_byscoop
-      scrapper.save_scrap_data(@scrapping_data, "byscoop")
+      @scrapping_data = scrapper.ca_from_byscoop(params[:date], params[:data_source], params[:link_txt])
+      #scrapper.save_scrap_data(@scrapping_data, "byscoop")
       @scrapping_notice = "Successfully fetch data from byscoop."
     elsif (params[:data_source] == "pendulum_edu")
-      @scrapping_data = scrapper.ca_from_pendulum
-      scrapper.save_scrap_data(@scrapping_data, "pendulum_edu")
+      @scrapping_data = scrapper.ca_from_pendulum(params[:date], params[:data_source], params[:link_txt])
+      #scrapper.save_scrap_data(@scrapping_data, "pendulum_edu")
       @scrapping_notice = "Successfully fetch data from Pendulum Education."
     else
       @scrapping_data = []
+    end
+
+    if @scrapping_data.present?
+      scrapper.save_scrap_data(@scrapping_data, "pendulum_edu")
+    else
+      @scrapping_data_links_arry = scrapper.get_links_array(params[:data_source], params[:date])
     end
 
     respond_to do |format|
@@ -40,7 +47,7 @@ class Admin::ScrappingDataController < ApplicationController
       format.json {render json: @scrapping_data}
     end
   end
-  
+
   def unread
     @scrapping_data = ScrappingDatum.where("is_read=false and is_hold=false")
   end

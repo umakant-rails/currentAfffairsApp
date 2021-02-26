@@ -21,6 +21,7 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def create
+=begin
     @question = Question.where(scrapping_datum_id: params[:question][:scrapping_datum_id])
 
     if @question.present?
@@ -30,6 +31,7 @@ class Admin::QuestionsController < ApplicationController
         format.js {}
       end
     elsif @question.blank?
+=end
       @question = Question.new(question_params)
       @question.scrapping_datum.update(is_read: true) if @question.save
       get_scrapping_data
@@ -38,12 +40,14 @@ class Admin::QuestionsController < ApplicationController
         format.html { redirect_to new_admin_question_path}
         format.js {}
       end
+=begin
     else
       respond_to do |format|
         format.html { render :new }
         format.js {}
       end
     end
+=end
   end
 
   def show

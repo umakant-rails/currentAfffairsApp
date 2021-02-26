@@ -1,2 +1,2 @@
-$("#scrapping-data").html("<%= escape_javascript(render 'scrapping_datum', scrapping_data: @scrapping_data, action_name: params[:action]) %>");
+$("#scrapping-data").html("<%= escape_javascript(render 'scrapping_datum', scrapping_data: @scrapping_data, links_arry: @scrapping_data_links_arry, action_name: params[:action]) %>");
 

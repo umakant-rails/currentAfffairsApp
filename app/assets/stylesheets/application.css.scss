@@ -20,4 +20,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import 'bootstrap/scss/bootstrap';
-@import 'devise/signup'
+@import 'devise/signup';
+@import "bootstrap/scss/bootstrap";
+@import "tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4";

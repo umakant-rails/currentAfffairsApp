@@ -6,67 +6,102 @@ class ScrappingDatum < ApplicationRecord
 
   has_one :question
 
-  def ca_from_banker_adda
+  def ca_from_banker_adda(date_txt, data_source, link_txt)
     ca_array = []
-    url_banker_adda = "https://www.bankersadda.com/current-affairs-"+(Date.today.strftime("%B"))+"-2021/"
-    adda_ca_url = get_adda_ca_lnk(url_banker_adda)
+    adda_ca_url = ''
+    if date_txt.blank?
+      url_banker_adda = "https://www.bankersadda.com/current-affairs-"+(Date.today.strftime("%B"))+"-2021/"
+      adda_ca_url_arry = get_link_array(url_banker_adda, data_source)
+      adda_ca_url = adda_ca_url_arry[0]
+    elsif link_txt.length > 0
+      adda_ca_url = link_txt
+    else
+      adda_ca_url = "https://www.bankersadda.com/" +
+        Time.parse(date_txt).strftime("%0d").to_i.ordinalize + 
+        Time.parse(date_txt).strftime("-%B-%Y") + "-daily-gk-update/"
+    end
 
-    doc_adda = get_data(adda_ca_url)
-    element_collection = doc_adda.css(".entry-content").children
-    ca_array = traverse_to_element(element_collection, ca_array, false)
+    doc_adda = get_data(adda_ca_url) rescue ''
+    if doc_adda.present?
+      element_collection = doc_adda.css(".entry-content").children
+      ca_array = traverse_to_element(element_collection, ca_array, false)
+    end
     return ca_array
   end
 
-  def ca_from_pendulum
+  def ca_from_pendulum(date_txt, data_source, link_txt)
     ca_array = []
-    url_pendulum_page = "https://pendulumedu.com/current-affairs"
-    pendulum_ca_url = get_pendulum_ca_lnk(url_pendulum_page)
+    pendulum_ca_url = ''
 
-    doc_pendulum = get_data(pendulum_ca_url)
-    collection = doc_pendulum.css("#discriptionca")
-    collection.children.each do | child |
-      if (child.name == "h2") && (child.children[0].name == "strong")
-        ca_array[ca_array.length] = {title: child.text}
-      end
-      if child.name == "ul"
-        hs = ca_array[ca_array.length-1]
-        hs[:description] = child.to_xml
+    if date_txt.blank?
+      url_pendulum_page = "https://pendulumedu.com/current-affairs"
+      pendulum_ca_url_arry = get_link_array(url_pendulum_page, data_source)
+      pendulum_ca_url = pendulum_ca_url_arry[0]
+    elsif link_txt.length > 0
+      pendulum_ca_url = link_txt
+    else
+      pendulum_ca_url = "https://pendulumedu.com/current-affairs/daily-current-affairs-" + Time.parse(date_txt).strftime("%0d-%B-%Y")
+    end
+
+    doc_pendulum = get_data(pendulum_ca_url) rescue ''
+    collection = doc_pendulum.present? ? doc_pendulum.css("#discriptionca") : []
+    if collection.length > 0
+      collection.children.each do | child |
+        if (child.name == "h2") && (child.children[0].name == "strong")
+          ca_array[ca_array.length] = {title: child.text}
+        end
+        if child.name == "ul"
+          hs = ca_array[ca_array.length-1]
+          hs[:description] = child.to_xml
+        end
       end
     end
     return ca_array
   end
 
-  def ca_from_byscoop
+  def ca_from_byscoop(date_txt, data_source, link_txt)
     # update on evening
     ca_array = []
     is_only_header = false
-    url_byscoop_page = "https://www.byscoop.com/daily-current-affairs/"
-    byscoop_ca_url = get_byscoop_ca_lnk(url_byscoop_page)
-    doc_byscoop = get_data(byscoop_ca_url)
-    collection = doc_byscoop.css(".entry-content")
+    byscoop_ca_url = ''
 
-    collection.children.each do | child |
-      if (child.name == "h3") && (child.at("span").attributes["class"].value == "ez-toc-section")
-        #ch.at("span").attributes["class"].value 
-        if (ca_array.length > 0) && (ca_array[ca_array.length - 1]["description"].blank?)
-          ca_array[ca_array.length - 1] = {title: child.text}
-        else
+    if date_txt.blank?
+      url_byscoop_page = "https://www.byscoop.com/daily-current-affairs/"
+      byscoop_ca_url_arry = get_link_array(url_byscoop_page, data_source)
+      byscoop_ca_url = byscoop_ca_url_arry[0]
+    elsif link_txt.length > 0
+      byscoop_ca_url = link_txt
+    else
+      byscoop_ca_url = 'https://www.byscoop.com/top-current-affairs-' +
+        Time.parse(date_txt).strftime("%0d-%B-%Y") + "/"
+    end
+    doc_byscoop = get_data(byscoop_ca_url) rescue ''
+    collection = doc_byscoop.present? ? doc_byscoop.css(".entry-content") : []
+
+    if collection.length > 0
+      collection.children.each do | child |
+        if (child.name == "h3") && (child.at("span").attributes["class"].value == "ez-toc-section")
+          #ch.at("span").attributes["class"].value 
+          if (ca_array.length > 0) && (ca_array[ca_array.length - 1]["description"].blank?)
+            ca_array[ca_array.length - 1] = {title: child.text}
+          else
+            ca_array[ca_array.length] = {title: child.text}
+          end
+        elsif child.name == "p" && child.children[0].name=="span" && child.children[0].children[0].name == "strong"
           ca_array[ca_array.length] = {title: child.text}
+          is_only_header = true;
         end
-      elsif child.name == "p" && child.children[0].name=="span" && child.children[0].children[0].name == "strong"
-        ca_array[ca_array.length] = {title: child.text}
-        is_only_header = true;
-      end
-      if child.name == "ul"
-        hs = ca_array[ca_array.length-1]
-        hs[:description] = child.to_xml
-        is_only_header = false;
+        if child.name == "ul"
+          hs = ca_array[ca_array.length-1]
+          hs[:description] = child.to_xml
+          is_only_header = false;
+        end
       end
     end
     return ca_array
   end
-    
-  def ca_from_adda_247
+
+  def ca_from_adda_247(date_txt, data_source, link_txt)
     # update on evening
     ca_array = []
     url_247 = "https://currentaffairs.adda247.com/"
@@ -93,6 +128,24 @@ class ScrappingDatum < ApplicationRecord
       scrapping_datum = ScrappingDatum.where(title: datum[:title])
       ScrappingDatum.create(title: datum[:title], description: datum[:description], keypoints: datum[:keypoints], source: data_source, ca_date: Time.now) if scrapping_datum.blank?
     end
+  end
+
+  def get_links_array(data_source, date_txt)
+    link_arry = []
+    link_collection = [];
+
+    if (data_source == "banker_adda")
+      doc_page = get_data("https://www.bankersadda.com/current-affairs-"+(Date.parse(date_txt).strftime("%B"))+"-2021/")
+      link_collection = doc_page.css("#lcp_instance_0>li")
+    elsif (data_source == "byscoop")
+      doc_page = get_data("https://www.byscoop.com/daily-current-affairs/")
+      link_collection = doc_page.css("#pt-cv-view-33db1a14je").children[0].css(".pt-cv-content-item")
+    elsif (data_source == "pendulum_edu")
+      doc_page = get_data("https://pendulumedu.com/current-affairs")
+      link_collection = doc_page.css(".item-box-blog")
+    end
+    link_collection.each{|l| link_arry.push(l.at("a").values[0])}
+    return link_arry
   end
 
   private
@@ -160,28 +213,37 @@ class ScrappingDatum < ApplicationRecord
     return date_obj
   end
 
+=begin
   def get_byscoop_ca_lnk(url_byscoop_page)
+    link_arry = []
     doc_byscoop_page = get_data(url_byscoop_page)
     link_collection = doc_byscoop_page.css("#pt-cv-view-33db1a14je").children[0].css(".pt-cv-content-item")
-    return link_collection.at("a").values[0]
+    link_collection.each{|l| link_arry.push(l.at("a").values[0])}
+    #return link_collection.at("a").values[0]
+    return link_arry
   end
 
   def get_pendulum_ca_lnk(url_pendulum_page)
-    doc_byscoop_page = get_data(url_pendulum_page)
-    link_collection = doc_byscoop_page.css(".item-box-blog")
-    return link_collection[0].at("a").values[0]
+    link_arry = []
+    doc_pendulum_page = get_data(url_pendulum_page)
+    link_collection = doc_pendulum_page.css(".item-box-blog")
+    link_collection.each{|l| link_arry.push(l.at("a").values[0])}
+    #return link_collection[0].at("a").values[0]
+    return link_arry
   end
 
   def get_adda_ca_lnk(url_banker_adda)
+    link_arry = []
     doc_adda_page = get_data(url_banker_adda)
     #~ link_collection = doc_adda_page.css("#lcp_instance_0>li>a")[0].values[0]
     link_collection = doc_adda_page.css("#lcp_instance_0>li")
-    return link_collection[0].at("a").values[0]
+    link_collection.each{|l| link_arry.push(l.at("a").values[0])}
+    #return link_collection[0].at("a").values[0]
+    return link_arry
   end
-
+=end
   def get_data(url)
-    html_data = open(url)
-    return Nokogiri::HTML(html_data)
+    return Nokogiri::HTML(open(url))
   end
 
 end

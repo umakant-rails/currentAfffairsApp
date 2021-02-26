@@ -15,6 +15,8 @@ require("packs/question")
 require("packs/questionnaire")
 require("packs/transliteration.I")
 require("packs/presentation")
+require("moment/locale/ja")
+require("tempusdominus-bootstrap-4")
 
 Rails.start()
 //Turbolinks.start()

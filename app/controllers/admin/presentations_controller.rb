@@ -3,7 +3,7 @@ class Admin::PresentationsController < ApplicationController
   layout :set_layout
 
   def index
-    @questionnaires = Questionnaire.all.order("created_at DESC").last(5)
+    @questionnaires = Questionnaire.all.order("created_at DESC").first(5)
   end
 
   def get_questions

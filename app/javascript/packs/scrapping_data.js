@@ -1,8 +1,5 @@
-var functionsBlock = (function () {
+var scrappingDataFunctions = (function () {
   var selectDataSource = function(element){
-    /*$(".scrapping-widget").find("input").each(function(){
-      $(this).prop("checked", false);
-    });*/
     var checkedRadio = $(".scrapping-widget input:checked")
     if(checkedRadio != undefined){
       $(".scrapping-widget input:checked").parent().removeClass('selelcted-data-source');
@@ -11,13 +8,13 @@ var functionsBlock = (function () {
     $(element).find("input:radio").prop("checked", true);
     $(element).find("input:radio").parent().addClass('selelcted-data-source');
   },
-  fetchDataFromScrappingSource = function(dataSource) {
+  fetchDataFromScrappingSource = function(dataSource, date_txt, linkTxt) {
     $.ajax({
       url: '/admin/scrapping_data/scrap_data/' + dataSource,
       type:"GET",
       //dataType: 'json',
       dataType: 'script',
-      data: {},
+      data: {date: date_txt, link_txt: linkTxt},
       success: function () {
       }
     });
@@ -69,18 +66,26 @@ var functionsBlock = (function () {
 //$(document).on("turbolinks:load", function(){
 $(document).ready(function(){
   $(".scrapping-widget").on("click", function(){
-    functionsBlock.selectDataSource(this);
+    scrappingDataFunctions.selectDataSource(this);
   });
 
   $("#fetch_data").on("click", function(){
-    //var data_source = $("input[name='scrapping_input']:checked").parent().text().trim();
-    var dataSource = $(".scrapping-widget input:checked").val();
+    var dataSource = $("#scrapping_source").val().trim();
+    var date_txt = $("#datetimepicker").val();
+    var linkTxt = '';
+
     if(dataSource == undefined || dataSource.length == 0) {
-      //alert("Please select the data source");
       appFunctions.setAlertMessage("Please select the data source.", "alert-danger");
     } else {
-      functionsBlock.fetchDataFromScrappingSource(dataSource);
+      scrappingDataFunctions.fetchDataFromScrappingSource(dataSource, date_txt, linkTxt);
     }
+  });
+  $(document).on("click", "#link-fetch-btn", function(){
+    var dataId = $(this).attr("data-id");
+    var linkTxt = $("#label"+dataId).text().trim();
+    var dataSource = $("#scrapping_source").val().trim();
+    var date_txt = $("#datetimepicker").val();
+    scrappingDataFunctions.fetchDataFromScrappingSource(dataSource, date_txt, linkTxt); 
   });
   
   $(".mark-as-hold, .mark-as-read").on("click", function(){
@@ -89,10 +94,10 @@ $(document).ready(function(){
   
     if((action_type.toLowerCase() == "mark as read") && scrappingDatumId.length > 0) {
       if(confirm("Are you sure to mark as read")){
-        functionsBlock.markAsHoldOrRead(scrappingDatumId, action_type);
+        scrappingDataFunctions.markAsHoldOrRead(scrappingDatumId, action_type);
       }
     }else if(action_type.toLowerCase() == "mark as hold" && scrappingDatumId.length > 0) {
-      functionsBlock.markAsHoldOrRead(scrappingDatumId, action_type);
+      scrappingDataFunctions.markAsHoldOrRead(scrappingDatumId, action_type);
     } else {
       appFunctions.setAlertMessage("A Error has ocurred regarding this action.", "alert-danger");
     }
@@ -101,7 +106,7 @@ $(document).ready(function(){
     var scrappingDatumId = $(this).attr("data-id");
     var action_type = $(this).val();
     if(scrappingDatumId.length > 0) {
-      functionsBlock.markAsUnHold(scrappingDatumId, action_type);
+      scrappingDataFunctions.markAsUnHold(scrappingDatumId, action_type);
     } else {
       appFunctions.setAlertMessage("A Error has ocurred regarding this action.", "alert-danger");
     }

@@ -1,4 +1,4 @@
-<% scrapping_data.each do | scrapping_datum | %>
+<% scrapping_data.present? && scrapping_data.each do | scrapping_datum | %>
   <% if action_name == "unread" || action_name == "hold" %>
     <div class="scrapping-datum" id="scrap-data-<%= scrapping_datum.id %>">
    <% else %>
@@ -20,6 +20,28 @@
     <% elsif action_name == "hold" %>
       <input type="button" data-id= "<%= scrapping_datum.id %>" value="Mark As Un-Hold" class="btn btn-primary mark-as-unhold">
       <input type="button" data-id= "<%= scrapping_datum.id %>" value="Mark As Read" class="btn btn-primary mark-as-read">
+    <% end %>
+  </div>
+<% end %>
+
+<%if links_arry.present? %>
+  <div class="scrapping-datum">
+    <div class="row data-title">
+      There is data not available for selected date, That's Why please select any one link and Fetch data.
+    </div>
+    <div class="row clear form-title-divider"></div>
+    <% links_arry[0..10].each_with_index do | link, index |%>
+      <div class="row data-point">
+        <div class="col-md-10" id="label<%=index%>">
+          <%= link %>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary" id="link-fetch-btn" data-id="<%= index %>">
+            CA Fetch
+          </button>
+        </div>
+      </div>
+      <div class="row clear form-title-divider"></div>
     <% end %>
   </div>
 <% end %>
