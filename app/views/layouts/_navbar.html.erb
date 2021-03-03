@@ -1,15 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="<%= root_path %>">Current Affairs</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a href="#" class="navbar-brand"><b>Xpress Current Affairs</b></a>     
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <!-- Collection of nav links, forms, and other content for toggling -->
+  <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
     <% if current_user.blank? %>
-      <div class="float-right">
-        <ul class="nav navbar-nav float-right">
-          <li><a class="nav-link" href="<%= new_user_registration_path %>">Register</a></li>&nbsp;&nbsp;&nbsp;&nbsp;
-          <li><a class="nav-link" href="<%= new_user_session_path %>">Log in</a></li>
-        </ul>
+      <div class="navbar-nav ml-auto action-buttons">
+        <div class="nav-item">
+          <a href="<%= new_user_session_path %>" class="nav-link mr-4">Login</a>
+        </div>
+        <div class="nav-item">
+          <a href="<%= new_user_registration_path %>" class="btn btn-primary sign-up-btn">Sign up</a>
+        </div>
       </div>
     <% else %>
       <ul class="navbar-nav mr-auto">

@@ -7,3 +7,19 @@
   -webkit-box-shadow: 0 0 25px #ccc;
   box-shadow: 0 0 25px #ccc;
 }
+.btn-facebook{
+  border: 1px solid lightgray;
+  border-radius: 5px !important;
+  background-color: #007bff !important;
+  color: white;
+  padding: 5px 15px;
+  font-weight: bold;
+}
+.btn-twitter{
+  border: 1px solid lightgray;
+  border-radius: 5px !important;
+  background-color: #007bff !important;
+  color: white;
+  padding: 5px 15px;
+  font-weight: bold;
+}

@@ -36,9 +36,9 @@ class Admin::ScrappingDataController < ApplicationController
     end
 
     if @scrapping_data.present?
-      scrapper.save_scrap_data(@scrapping_data, "pendulum_edu")
+      scrapper.save_scrap_data(@scrapping_data, params[:data_source])
     else
-      @scrapping_data_links_arry = scrapper.get_links_array(params[:data_source], params[:date])
+      @scrapping_data_links_arry = scrapper.get_links_array(params[:data_source])
     end
 
     respond_to do |format|

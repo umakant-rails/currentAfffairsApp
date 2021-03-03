@@ -20,6 +20,7 @@ window.appFunctions = function () {
         if(!isPresentation){
           $("#added-question-count").attr('data-count', JSON.parse(response).length);
           $("#added-question-count").html(JSON.parse(response).length);
+          $("#selected-question-count").html('0');
         }
       }
     });

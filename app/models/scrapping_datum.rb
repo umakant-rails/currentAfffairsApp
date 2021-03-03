@@ -10,8 +10,8 @@ class ScrappingDatum < ApplicationRecord
     ca_array = []
     adda_ca_url = ''
     if date_txt.blank?
-      url_banker_adda = "https://www.bankersadda.com/current-affairs-"+(Date.today.strftime("%B"))+"-2021/"
-      adda_ca_url_arry = get_link_array(url_banker_adda, data_source)
+      #url_banker_adda = "https://www.bankersadda.com/current-affairs-"+(Date.today.strftime("%B"))+"-2021/"
+      adda_ca_url_arry = get_links_array(data_source)
       adda_ca_url = adda_ca_url_arry[0]
     elsif link_txt.length > 0
       adda_ca_url = link_txt
@@ -34,8 +34,8 @@ class ScrappingDatum < ApplicationRecord
     pendulum_ca_url = ''
 
     if date_txt.blank?
-      url_pendulum_page = "https://pendulumedu.com/current-affairs"
-      pendulum_ca_url_arry = get_link_array(url_pendulum_page, data_source)
+      #url_pendulum_page = "https://pendulumedu.com/current-affairs"
+      pendulum_ca_url_arry = get_links_array(data_source)
       pendulum_ca_url = pendulum_ca_url_arry[0]
     elsif link_txt.length > 0
       pendulum_ca_url = link_txt
@@ -66,8 +66,8 @@ class ScrappingDatum < ApplicationRecord
     byscoop_ca_url = ''
 
     if date_txt.blank?
-      url_byscoop_page = "https://www.byscoop.com/daily-current-affairs/"
-      byscoop_ca_url_arry = get_link_array(url_byscoop_page, data_source)
+      #url_byscoop_page = "https://www.byscoop.com/daily-current-affairs/"
+      byscoop_ca_url_arry = get_links_array(data_source)
       byscoop_ca_url = byscoop_ca_url_arry[0]
     elsif link_txt.length > 0
       byscoop_ca_url = link_txt
@@ -130,12 +130,12 @@ class ScrappingDatum < ApplicationRecord
     end
   end
 
-  def get_links_array(data_source, date_txt)
+  def get_links_array(data_source)
     link_arry = []
     link_collection = [];
 
     if (data_source == "banker_adda")
-      doc_page = get_data("https://www.bankersadda.com/current-affairs-"+(Date.parse(date_txt).strftime("%B"))+"-2021/")
+      doc_page = get_data("https://www.bankersadda.com/current-affairs-"+(Date.today.strftime("%B"))+"-2021/")
       link_collection = doc_page.css("#lcp_instance_0>li")
     elsif (data_source == "byscoop")
       doc_page = get_data("https://www.byscoop.com/daily-current-affairs/")
