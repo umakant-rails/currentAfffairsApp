@@ -94,6 +94,16 @@ class Admin::QuestionnairesController < ApplicationController
     end
   end
 
+  def destroy
+    @questionnaire = Questionnaire.find(params[:id])
+    if @questionnaire.destroy!
+       respond_to do |format|
+        flash[:notice] = 'Questionnaire deleted successfully.'
+        format.html { redirect_to admin_questionnaires_path}
+      end
+    end
+  end
+
   private
 
     def set_questionnaire

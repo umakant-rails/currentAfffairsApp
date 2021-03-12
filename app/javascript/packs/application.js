@@ -7,6 +7,7 @@ import Rails from "@rails/ujs"
 //import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import { tinyMce } from "../packs/tinymce"
 require("bootstrap");
 require("@fortawesome/fontawesome-free/js/all");
 require("packs/layout.js")
@@ -15,9 +16,13 @@ require("packs/question")
 require("packs/questionnaire")
 require("packs/transliteration.I")
 require("packs/presentation")
+require("packs/factsheet")
+
 require("moment/locale/ja")
 require("tempusdominus-bootstrap-4")
-
 Rails.start()
 //Turbolinks.start()
 ActiveStorage.start()
+$(document).ready(function(){
+  tinyMce();
+});

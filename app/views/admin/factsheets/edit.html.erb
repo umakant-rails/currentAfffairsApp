@@ -1,0 +1,38 @@
+<%= render 'form', factsheet: @factsheet %>
+<script type="text/javascript">
+  /*function ajaxLoad() {
+    $.ajax({
+      url: '/admin/factsheets/'+<%= params[:id] %>+'/edit',
+      type:"GET",
+      data: {},
+      dataType: 'json',
+      success: function (response) {
+        $("#factsheet-input").val(response.title);
+        tinymce.get("factsheet-box").setContent(response.description);
+      }
+    });
+  }
+  $(document).ready(function(){ajaxLoad();});*/
+  $(document).ready(function(){
+    var txt = $("#description").val();
+    tinymce.get("factsheet-box").setContent(txt);
+  });
+  
+  google.load("elements", "1", {
+    packages: "transliteration"
+  });
+  function onLoad() {
+    var options = {
+        sourceLanguage:
+            google.elements.transliteration.LanguageCode.ENGLISH,
+        destinationLanguage:
+            [google.elements.transliteration.LanguageCode.HINDI],
+        shortcutKey: 'ctrl+g',
+        transliterationEnabled: true
+    };
+    var control =
+        new google.elements.transliteration.TransliterationControl(options);
+    control.makeTransliteratable(["factsheet-input"]);
+  }
+  google.setOnLoadCallback(onLoad);
+</script>

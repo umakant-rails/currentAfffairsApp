@@ -1,0 +1,2 @@
+module Admin::FactsheetsHelper
+end

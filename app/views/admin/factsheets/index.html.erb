@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-md-7">
     <div class="question-form-title">
-      <a href="<%= admin_questions_path %>" style="text-decoration: none;">Questions List</a>
+      <a href="<%= admin_questions_path %>" style="text-decoration: none;">Factsheet List</a>
     </div>
   </div>
   <div class="col-md-5">
@@ -11,5 +11,5 @@
 </div>
 <br/>
 <div id="questions-list">
-  <%= render "question_list", questions: @questions, page: 1 %>
+  <%= render "factsheet_list", factsheets: @factsheets, page: 1 %>
 </div>

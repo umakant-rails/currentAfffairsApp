@@ -1,0 +1,22 @@
+<%= render 'form', factsheet: @factsheet %>
+<script type="text/javascript">
+  //tinymce.get("factsheet-box").getContent();
+  //tinymce.get("factsheet-box").setContent("<p>Hello world! Radheshyam</p>");
+  google.load("elements", "1", {
+    packages: "transliteration"
+  });
+  function onLoad() {
+    var options = {
+        sourceLanguage:
+            google.elements.transliteration.LanguageCode.ENGLISH,
+        destinationLanguage:
+            [google.elements.transliteration.LanguageCode.HINDI],
+        shortcutKey: 'ctrl+g',
+        transliterationEnabled: true
+    };
+    var control =
+        new google.elements.transliteration.TransliterationControl(options);
+    control.makeTransliteratable(["title"]);
+  }
+  google.setOnLoadCallback(onLoad);
+</script>

@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       get '/get_questions' => "presentations#get_questions", as: :get_questions
       get '/generate_pdf' => "presentations#generate_pdf", as: :generate_pdf
     end
+
+    resources :factsheets
   end
   
 end

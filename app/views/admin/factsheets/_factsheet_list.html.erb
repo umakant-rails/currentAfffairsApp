@@ -2,26 +2,26 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Question</th>
+      <th scope="col">Factsheet</th>
       <th scope="col">Questionnaire</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-    <% if questions.present? %>
-      <% questions.each_with_index do | question, index | %>
+    <% if factsheets.present? %>
+      <% factsheets.each_with_index do | factsheet, index | %>
         <tr>
           <th scope="row"><%= get_question_index(page, index) %></th>
-          <td><%= question.question %></td>
-          <td><%= question.questionnaire.present? ? question.questionnaire.name : '' %></td>
+          <td><%= factsheet.title %></td>
+          <td><%= factsheet.factsheet_folder.present? ? factsheet.factsheet_folder.name : '' %></td>
           <td>
-            <%= link_to admin_question_path(question) do %>
+            <%= link_to admin_factsheet_path(factsheet) do %>
               <i class="fas fa-eye" aria-hidden="true"></i>
             <% end %>
-            <%= link_to edit_admin_question_path(question), class: 'edit_questionnaire' do %>
+            <%= link_to edit_admin_factsheet_path(factsheet), class: 'edit_questionnaire' do %>
               <i class="fas fa-edit" aria-hidden="true"></i>
             <% end %>
-            <%= link_to admin_question_path(question), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_questionnaire' do %>
+            <%= link_to admin_factsheet_path(factsheet), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_questionnaire' do %>
                 <i class="fas fa-trash-alt"></i>
             <% end %>
           </td>
@@ -36,4 +36,4 @@
     <%end%>    
   </tbody>
 </table>
-<%= paginate questions,  window:1,  remote: true %>
+<%= paginate factsheets,  window:1,  remote: true %>

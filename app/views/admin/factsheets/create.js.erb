@@ -1,0 +1,8 @@
+<% if @factsheet.errors && @factsheet.errors.present? %>
+  var error_msgs = "<%= @question.errors.full_messages.join('\n') %>";
+  appFunctions.setAlertMessage(error_msgs.replaceAll("\n", "<br/>"), "alert-danger");
+<% else %>
+  $("#factsheet-input").val("");
+  tinymce.get("factsheet-box").setContent("");
+  appFunctions.setAlertMessage("<%= flash[:notice] %>", "alert-success");
+<% end %>

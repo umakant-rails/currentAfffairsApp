@@ -5,8 +5,8 @@
   font-size: 22px;
   font-weight: bold;
   text-decoration: underline;
-  //text-align: center !important ;
-  color: #dc3545;
+  a{color:#dc3545;}
+  a:hover{color:#dc3545;}
 }
 .form-title-divider{
   border-bottom: 1px solid lightgray;

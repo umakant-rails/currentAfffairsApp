@@ -1,1 +1,2 @@
-$("#questions-list").html("<%= escape_javascript(render 'admin/questions/question_list', questions: @questions, page: params[:page].to_i) %>")
+<% page = params[:page].blank? ? 1 : params[:page].to_i %>
+$("#questions-list").html("<%= escape_javascript(render 'admin/questions/question_list', questions: @questions, page: page) %>")

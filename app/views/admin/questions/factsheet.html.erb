@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="row">
+      <input type="text" placeholder="Type in hindi" id="factsheet-input" class="form-control" style="margin: 5px 0px;"/>
+    </div>
+    <div class="row">
+      <textarea id="factsheet-box" value="" class="form-control tinymce"></textarea>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    tinyMce();
+  });
+  //tinymce.get("factsheet-box").getContent();
+  //tinymce.get("factsheet-box").setContent("<p>Hello world! Radheshyam</p>");
+  google.load("elements", "1", {
+    packages: "transliteration"
+  });
+  function onLoad() {
+    var options = {
+        sourceLanguage:
+            google.elements.transliteration.LanguageCode.ENGLISH,
+        destinationLanguage:
+            [google.elements.transliteration.LanguageCode.HINDI],
+        shortcutKey: 'ctrl+g',
+        transliterationEnabled: true
+    };
+    var control =
+        new google.elements.transliteration.TransliterationControl(options);
+    control.makeTransliteratable(["factsheet-input"]);
+  }
+  google.setOnLoadCallback(onLoad);
+</script>

@@ -1,0 +1,56 @@
+<%= form_with(model: [:admin, factsheet], html: {id: "factsheet_form"}) do |f| %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-1" style="margin-top: 12px;">Title</div>
+        <div class="col-md-11">
+          <%= f.text_field :title, placeholder: "Type in hindi", class:"form-control", id: "title", style: "margin: 5px 0px;" %>
+        </div>
+      </div>
+      <div class="row">
+        <textarea id="factsheet-box" value="" class="form-control tinymce"></textarea>
+        <%= f.hidden_field :description,class:"form-control", id: "description" %>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <%= f.submit id: "factsheet_submit", class: "btn btn-primary form-control", onClick: "return validateFactsheetForm();" %>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script type="text/javascript">
+  function ajaxLoad() {
+    $.ajax({
+      url: '/admin/factsheets/'+<%= params[:id] %>+'/edit',
+      type:"GET",
+      data: {},
+      dataType: 'json',
+      success: function (response) {
+        $("#factsheet-input").val(response.title);
+        tinymce.get("factsheet-box").setContent(response.description);
+      }
+    });
+  }
+  $(document).ready(function(){ajaxLoad();});
+  
+  google.load("elements", "1", {
+    packages: "transliteration"
+  });
+  function onLoad() {
+    var options = {
+        sourceLanguage:
+            google.elements.transliteration.LanguageCode.ENGLISH,
+        destinationLanguage:
+            [google.elements.transliteration.LanguageCode.HINDI],
+        shortcutKey: 'ctrl+g',
+        transliterationEnabled: true
+    };
+    var control =
+        new google.elements.transliteration.TransliterationControl(options);
+    control.makeTransliteratable(["factsheet-input"]);
+  }
+  google.setOnLoadCallback(onLoad);
+</script>

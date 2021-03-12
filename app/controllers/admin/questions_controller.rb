@@ -80,6 +80,16 @@ class Admin::QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    @question = Question.find(params[:id])
+    if @question.destroy!
+       respond_to do |format|
+        flash[:notice] = 'Question deleted successfully.'
+        format.html { redirect_to admin_questions_path}
+      end
+    end
+  end
+
   private
 
     def get_scrapping_data
