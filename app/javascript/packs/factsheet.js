@@ -1,25 +1,7 @@
 var factsheetFunctions = function () {
   var createFactsheet = function(title, description){
-    $.ajax({
-      url: '/admin/factsheets',
-      type:"post",
-      data: {factsheet: {title: title, description:
-        description}},
-      dataType: 'script',
-      success: function (response) {
-      }
-    });
   };
   var editFactsheet = function(id, title, description){
-    $.ajax({
-      url: '/admin/factsheets/'+id,
-      type:"put",
-      data: {factsheet: {title: title, description:
-        description}},
-      dataType: 'script',
-      success: function (response) {
-      }
-    });
   };
   validateFactsheetForm = function(){
     var description = tinymce.get("factsheet-box").getContent();
@@ -41,5 +23,4 @@ $(document).ready(function(){
       factsheetFunctions.createFactsheet(title, description);
     }
   });
-  $
 });

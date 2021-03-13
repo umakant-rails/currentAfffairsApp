@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="fs-folder-form-title"><center>Factsheet Folder</center></div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<div class="clear form-title-divider"></div>
+<br/>
+<div class="fs-folder-show-block">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3 qestnre-hdr">
+      Name :
+    </div>
+    <div class="col-md-7">
+      <%= @factsheet_folder.name %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="offset-md-4 col-md-8">
+      <div class="clear form-title-divider"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3 qestnre-hdr">
+      Category :
+    </div>
+    <div class="col-md-7">
+      <%= @factsheet_folder.questionnaire_category.name %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="offset-md-4 col-md-8">
+      <div class="clear form-title-divider"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-7">
+      <%= link_to edit_admin_factsheet_folder_path(@factsheet_folder), class: 'edit_questionnaire' do %>
+        <i class="fas fa-edit" aria-hidden="true"></i> Edit
+      <% end %>&nbsp;&nbsp;
+      <%= link_to admin_factsheet_folders_path(@factsheet_folder), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_questionnaire' do %>
+          <i class="fas fa-trash-alt"></i> Delete
+      <% end %>&nbsp;&nbsp;
+      <%= link_to  'Back to Index', admin_factsheet_folders_path, class: "back_to_index" %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="offset-md-4 col-md-8">
+      <div class="clear form-title-divider"></div>
+    </div>
+  </div>
+</div>

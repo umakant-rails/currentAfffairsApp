@@ -1,0 +1,57 @@
+<div class="col-lg-6 px-0" id="factsheet-block">
+  <div class="block-lbl">
+    Factsheet List
+    <span id="show-all">Show All</span>
+  </div>
+  <% factsheets && factsheets.each do | factsheet |%>
+    <div class="factsheet-div" id="factsheet<%= factsheet.id %>" 
+      data-factsheetId="<%= factsheet.id %>">
+      <div class="factsheet-label">
+        <%= factsheet.title %>
+        <div class="cross-div" data-id="factsheet<%= factsheet.id %>" data-factsheetId="<%= factsheet.id %>">
+          <i class="fa fa-times"></i>
+        </div>
+        <div class="add-arr-div" data-id="factsheet<%= factsheet.id %>" data-factsheetId="<%= factsheet.id %>">
+          <i class="fa fa-arrow-right"></i>
+        </div>
+      </div>
+      <div class="factsheet-date">
+        <%= factsheet.created_at.strftime("%B %d, %Y")%>
+      </div>
+    </div>
+  <% end %>
+  <% if factsheets.blank? %>
+    <div class="col-lg-12 factsheet-block">
+      <center>There is no factsheet available now.</center>
+    </div>
+  <% end %>
+</div>
+<div class="col-lg-6 px-0" id="folder-factsheet-block">
+  <div class="block-lbl">
+    Added Factsheet List
+    <span class="add-factsheets add-fs-btn"/>
+      Add Factsheets
+    </span>
+  </div>
+  <div id="add-factsheet-div">
+    <% added_factsheets.present? && added_factsheets.each do | factsheet |%>
+      <div class="factsheet-div" id="factsheet<%= factsheet.id %>" 
+        data-factsheetId="<%= factsheet.id %>">
+        <div class="factsheet-label">
+          <%= factsheet.title %>
+          <div class="cross-div" data-id="factsheet<%= factsheet.id %>" data-factsheetId="<%= factsheet.id %>">
+            <i class="fa fa-times"></i>
+          </div>
+          <div class="add-arr-div" data-id="factsheet<%= factsheet.id %>" data-factsheetId="<%= factsheet.id %>" style="display:none;">
+            <i class="fa fa-arrow-right"></i>
+          </div>
+        </div>
+        <div class="factsheet-date">
+          <%= factsheet.created_at.strftime("%B %d, %Y")%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+

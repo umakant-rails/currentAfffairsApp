@@ -4,7 +4,7 @@ class Admin::FactsheetsController < ApplicationController
 
   def index
     @page = params[:page].blank? ? 0 : params[:page]
-    @questionnaires = Questionnaire.order("created_at desc")
+    @factsheet_folders = FactsheetFolder.order("created_at desc")
     factsheets_tmp = Factsheet.order("created_at desc")
     @factsheets = Kaminari.paginate_array(factsheets_tmp).page(params[:page]).per(10)
   end
@@ -59,9 +59,20 @@ class Admin::FactsheetsController < ApplicationController
     end
   end
 
-  def add_factsheet_page
+  def factsheet_folder
   end
+
+  def create_factsheet_folder
+  end
+
+  def add_factsheet_page
+    @factsheets = FactsheetFolder.all
+  end
+
+  def add_factsheet_in_folder
   
+  end
+
   private
 
   def factsheet_params

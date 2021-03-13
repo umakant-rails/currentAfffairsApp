@@ -1,0 +1,21 @@
+         <div class="row">
+  <div class="question-form-title col-md-12"><center> Add Factsheet In Folder</center></div>
+  <div class="clear form-title-divider col-md-12"></div>
+</div>
+<div class="row">
+  <div class="col-lg-4">
+    <%= select_tag 'fs_folder_id', options_from_collection_for_select(@factsheet_folders, "id", "name"), :prompt => "Select Factsheet Folder", class:"form-control" %>
+  </div>
+  <div class="col-lg-4">
+    <% arr = [["Blank Folder", "blank folder"],["Last 10 Folder", "last 10 Folder"]]%>
+    <%= select_tag 'fs_folder_id', options_for_select(arr), :prompt => "Select Folder filter", class:"form-control" %>
+  </div>
+  <div class="col-lg-4">
+    <input type="button" id="add_factsheets" value="Add Factsheets" class="btn btn-primary form-control add-factsheets"/>
+  </div>
+  <div class="clear form-title-divider col-md-12"></div>
+</div>
+<div class="row" id="questionnaire-question-list">
+  <%= render "folders_factsheet_list", factsheets: @factsheets, 
+    added_factsheets: @added_factsheets %>
+</div>

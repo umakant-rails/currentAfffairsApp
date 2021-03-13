@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="fs-folder-form-title"><center>Factsheet Folder List</center></div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<br/><br/>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @factsheet_folders.present? %>
+      <% @factsheet_folders.each_with_index do | fs_folder, index | %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= fs_folder.name %></td>
+          <td><%= fs_folder.questionnaire_category.name %></td>
+          <td>
+            <%= link_to admin_factsheet_folder_path(fs_folder) do %>
+              <i class="fas fa-eye" aria-hidden="true"></i>
+            <% end %>
+            <%= link_to edit_admin_factsheet_folder_path(fs_folder), class: 'edit_fs_folder' do %>
+              <i class="fas fa-edit" aria-hidden="true"></i>
+            <% end %>
+            <%= link_to admin_factsheet_folder_path(fs_folder), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_fs_folder' do %>
+                <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </td>
+        </tr>
+      <%end%> 
+    <% else %>
+      <tr>
+        <td colspan="4">
+          <center>There is no data available now.</center>
+        </td>
+      </tr>
+    <% end %>   
+  </tbody>
+</table>
+<%= paginate @factsheet_folders,  window:1 %>

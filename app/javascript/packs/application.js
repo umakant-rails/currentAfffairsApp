@@ -17,6 +17,7 @@ require("packs/questionnaire")
 require("packs/transliteration.I")
 require("packs/presentation")
 require("packs/factsheet")
+require("packs/factsheet_folder")
 
 require("moment/locale/ja")
 require("tempusdominus-bootstrap-4")

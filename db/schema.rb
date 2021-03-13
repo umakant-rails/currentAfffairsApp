@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
 
   create_table "factsheet_folders", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
+    t.integer "questionnaire_category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -29,8 +29,12 @@ Rails.application.routes.draw do
       get '/get_questions' => "presentations#get_questions", as: :get_questions
       get '/generate_pdf' => "presentations#generate_pdf", as: :generate_pdf
     end
-
     resources :factsheets
+    resources :factsheet_folders do
+      get '/factsheet_page' => "factsheet_folders#factsheet_page", 
+        as: :factsheet_page, on: :collection
+      post '/add_factsheets' => "factsheet_folders#add_factsheets_in_folder", as: :add_factsheets, on: :member
+    end
   end
   
 end

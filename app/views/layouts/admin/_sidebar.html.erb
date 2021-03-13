@@ -51,7 +51,7 @@
         <span class="menu-collapsed">Add Questions In Questionnaire</span>
       </a>
     </div>
-    <a id="factsheets-menu" href="#factsheetList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+    <a id="factsheet-menu" href="#factsheetList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
         <span class="menu-collapsed">Factsheets</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
       </div>
@@ -72,13 +72,13 @@
     </a>
     <!-- Submenu content -->
     <div id='folderList' class="collapse sidebar-submenu">
-      <a href="<%= admin_factsheets_path %>" class="list-group-item list-group-item-action ">
+      <a href="<%= admin_factsheet_folders_path %>" class="list-group-item list-group-item-action ">
         <span class="menu-collapsed">Folder List</span>
       </a>
-      <a href="<%= new_admin_factsheet_path %>" class="list-group-item list-group-item-action ">
+      <a href="<%= new_admin_factsheet_folder_path %>" class="list-group-item list-group-item-action ">
         <span class="menu-collapsed">Create Folder</span>
       </a>
-      <a href="<%= add_questions_page_admin_questionnaires_path %>" class="list-group-item list-group-item-action">
+      <a href="<%= factsheet_page_admin_factsheet_folders_path %>" class="list-group-item list-group-item-action">
         <span class="menu-collapsed">Add Factsheet In Folder</span>
       </a>
     </div>

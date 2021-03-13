@@ -40,6 +40,8 @@
   border-radius: 20px;
 }
 #question-menu, #questionnaire-menu, #questionnaire-presentation, 
-#scrapping-menu, #dashboard-menu{
+#scrapping-menu, #dashboard-menu, #folder-menu, #factsheet-menu{
   background-color: #edf0ef ;
 }
+.fRight{float:right;}
+.fLeft{float:left;}
