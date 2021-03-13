@@ -1,7 +1,6 @@
 var factsheetFolderFunctions = function () {
   var addFactsheet = function(elementId){
     var htmlTxt = $("#"+elementId)[0].outerHTML;
-    //console.log(htmlTxt);
     hideElement(elementId);
     $("#add-factsheet-div").append(htmlTxt);
   };
@@ -75,6 +74,21 @@ var factsheetFolderFunctions = function () {
       }
     });
   };
+  var folderFilter = function(filterText){
+    $.ajax({
+      url: '/admin/factsheet_folders/add_factsheet_page',
+      type:"get",
+      data: {filter: filterText},
+      dataType: 'json',
+      success: function (response) {
+        $("#fs_folder_id").children('option:not(:first)').remove()
+        $.each(response, function(ind, obj){
+          $('#fs_folder_id').append($("<option></option>")
+          .attr("value",obj['id']).text(obj['name']));
+        });
+      }
+    });
+  };
   validateFactsheetForm = function(){
     var description = tinymce.get("factsheet-box").getContent();
     $("#description").val(description);
@@ -85,7 +99,8 @@ var factsheetFolderFunctions = function () {
     hideElement: hideElement,
     showAllHideElement: showAllHideElement,
     submitFactsheets: submitFactsheets,
-    getFolderFactsheets: getFolderFactsheets
+    getFolderFactsheets: getFolderFactsheets,
+    folderFilter: folderFilter
   };
 }();
 
@@ -113,5 +128,9 @@ $(document).ready(function(){
   });
   $("#fs_folder_id").on('change', function(){
     factsheetFolderFunctions.getFolderFactsheets(this);
+  });
+  $("#fs_folder_filter").on("change", function(){
+    var filterText = $(this).val();
+    factsheetFolderFunctions.folderFilter(filterText);
   });
 });

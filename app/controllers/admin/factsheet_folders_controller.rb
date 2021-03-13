@@ -66,12 +66,27 @@ class Admin::FactsheetFoldersController < ApplicationController
     end
   end
 
-  def factsheet_page
+  def add_factsheet_page
     @added_factsheets = nil
-    @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(8)
+    @factsheet_folders = nil;
+    if params[:filter].present?
+      if params[:filter] == "blank folder"
+        @factsheet_folders = FactsheetFolder.without_factsheet
+      else
+        @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(20)
+      end
+    else
+      @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(10)
+    end
     @factsheets = Factsheet.where(factsheet_folder_id: nil)
-  end
 
+    respond_to do |format|
+      format.html {}
+      format.js{}
+      format.json{render json: @factsheet_folders}
+    end
+  end
+  
   def add_factsheets_in_folder
     factsheet_updation if params[:updation_allowed] == "true"
     @factsheet_folder = FactsheetFolder.find(params[:id])

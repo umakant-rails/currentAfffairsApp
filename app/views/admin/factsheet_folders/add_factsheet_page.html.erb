@@ -7,7 +7,7 @@
     <%= select_tag 'fs_folder_id', options_from_collection_for_select(@factsheet_folders, "id", "name"), :prompt => "Select Factsheet Folder", class:"form-control" %>
   </div>
   <div class="col-lg-4" id="folder_filter">
-    <% arr = [["Blank Folder", "blank folder"],["Last 10 Folder", "last 10 Folder"]]%>
+    <% arr = [["Blank Folder", "blank folder"],["Last 20 Folder", "last 20 Folder"]]%>
     <%= select_tag 'fs_folder_filter', options_for_select(arr), :prompt => "Select Folder filter", class:"form-control" %>
   </div>
   <div class="col-lg-4">

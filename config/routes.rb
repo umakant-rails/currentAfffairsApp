@@ -31,8 +31,8 @@ Rails.application.routes.draw do
     end
     resources :factsheets
     resources :factsheet_folders do
-      get '/factsheet_page' => "factsheet_folders#factsheet_page", 
-        as: :factsheet_page, on: :collection
+      get '/add_factsheet_page' => "factsheet_folders#add_factsheet_page", 
+        as: :add_factsheet_page, on: :collection
       post '/add_factsheets' => "factsheet_folders#add_factsheets_in_folder", as: :add_factsheets, on: :member
     end
   end
