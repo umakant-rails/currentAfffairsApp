@@ -1,22 +1,51 @@
 .questionnaire-title{
   text-align: center;  
 }
-.question-block{
+#question-block, #questionnaire-question-block{
+  height: 500px;
   border: 1px solid lightgray;
   border-radius: 5px;
-  padding: 5px !important;
-  margin: 3px 0px;
-  .question-div {
+  overflow-y: auto;
+}
+.question-div{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 5px 5px 5px 10px !important;
+  margin: 3px 5px;
+  position: relative;
+  .question-label {
     font-weight: bold;  
-    color: #dc3545;
+    color: #0069d9;
   }
   .question-date{
     font-size: 12px !important;
-    margin-left: 20px;
     color: gray;
     font-weight: bold;
+    margin-left: 20px;
   }
 }
+.ques-sign{
+  position: absolute;
+  top: -4px;right: -4px;
+  font-size: 11px;
+  border: 1px solid;
+  padding: 0px 4px;
+  border-radius: 20px
+}
+.ques-plus{color: #0069d9;}
+.ques-cross{color: #dc3545;}
+.add-questions, .remove-questions{
+  float: right;
+  border: 1px solid #0069d9;
+  border-radius: 5px;
+  padding: 2px 5px;
+  background-color: #0069d9;
+  cursor: pointer;
+}
+#question-status{
+  cursor: pointer;
+}
+
 .txt-question-count{
   padding-top: 6px;
 }

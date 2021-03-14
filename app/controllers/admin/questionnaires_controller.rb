@@ -66,16 +66,20 @@ class Admin::QuestionnairesController < ApplicationController
     @questionnaires = Questionnaire.all.order("created_at DESC").last(8)
     @questions = Question.where(questionnaires: nil)
     @que_categories = QuestionCategory.all
+    @added_questions = nil;
+    if params[:questionnaire_id].present?
+      @questionnaire = Questionnaire.find(params[:questionnaire_id])
+      @added_questions = @questionnaire.questions
+    end
   end
 
   def add_questions_in_questionnaire
-    params[:question_array].each do | question_id |
-      @questionnaire = Questionnaire.find(params[:questionnaire_id])
-      Question.find(question_id).update_columns({
-        questionnaire_id: @questionnaire.id,
-        questionnaire_category_id: @questionnaire.questionnaire_category.id
-      })
+    if(params[:action_type] == "addition")
+      add_questions
+    elsif(params[:action_type] == "removal")
+      remove_questions
     end
+    @added_questions = Questionnaire.find(params[:id]).questions
     @questions = Question.where(questionnaires: nil)
     respond_to do |format|
       flash[:notice] = 'Question added successfully in Questionnaire.'
@@ -105,6 +109,22 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   private
+ 
+    def add_questions
+      @questionnaire = Questionnaire.find(params[:id])
+      params[:question_array].each do | question_id |
+        Question.find(question_id).update_columns({
+          questionnaire_id: @questionnaire.id,
+          questionnaire_category_id: @questionnaire.questionnaire_category.id
+        })
+      end
+    end
+
+    def remove_questions
+      params[:question_array].each do | question_id |
+        Question.find(question_id).update_columns({questionnaire_id: nil})
+      end
+    end
 
     def set_questionnaire
       questionnaire_id = params[:questionnaire_id].present? ?  params[:questionnaire_id] : params[:id]
