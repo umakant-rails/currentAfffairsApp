@@ -35,7 +35,7 @@ var questionnaireFunctions = (function () {
     } else if( (questionnaireId.length > 0) && (questionArray.length > 0) ){
       $.ajax({
         url: '/admin/questionnaires/'+questionnaireId+'/add_questions',
-        type:"GET",
+        type:"POST",
         data: {question_array: questionArray},
         dataType: 'script',
         success: function (response) {
@@ -68,7 +68,7 @@ var questionnaireFunctions = (function () {
 
 $(document).ready(function(){
 
-  $("#questionnaire_questionnaire_category_id").on("change", function(){
+  $("#questionnaire_category_id").on("change", function(){
     questionnaireFunctions.setCurrentAffairName(this);
     $("#questionnaire_submit").prop("disabled", false);
   });

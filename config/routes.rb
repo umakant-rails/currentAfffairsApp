@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :questionnaires do
       get '/add_questions_page' => "questionnaires#add_questions_page", 
         as: :add_questions_page, on: :collection
-      get '/add_questions' => "questionnaires#add_questions_in_questionnaire", as: :add_questions
+      post '/add_questions' => "questionnaires#add_questions_in_questionnaire", as: :add_questions, on: :member
       get '/questions' => "questionnaires#questions_of_questionnaire", as: :questions_of_questionnaire
     end
     resources :questions do

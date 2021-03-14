@@ -1,7 +1,7 @@
 var factsheetFolderFunctions = function () {
   var addFactsheet = function(elementId){
     var htmlTxt = $("#"+elementId)[0].outerHTML;
-    hideElement(elementId);
+    removeElement(elementId); 
     $("#add-factsheet-div").append(htmlTxt);
   };
   var removeFactsheet = function(self){
@@ -19,12 +19,19 @@ var factsheetFolderFunctions = function () {
       }
     });
     if(!isElementAdded){
-      $("#factsheet-block .factsheet-div").last().after(htmlTxt);
+      if($("#factsheet-block .factsheet-div").length == 0 ){
+        $("#factsheet-block .block-lbl").after(htmlTxt);
+      } else {
+        $("#factsheet-block .factsheet-div").last().after(htmlTxt);
+      }
     }
     $(self).closest(".factsheet-div").remove();
   };
   var hideElement = function(elementId){
     $("#"+elementId).hide();
+  };
+  var removeElement = function(elementId){
+    $("#"+elementId).remove();
   };
   var showAllHideElement = function(){
     var arry = []
