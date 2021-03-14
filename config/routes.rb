@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       get '/add_factsheet_page' => "factsheet_folders#add_factsheet_page", 
         as: :add_factsheet_page, on: :collection
       post '/add_factsheets' => "factsheet_folders#add_factsheets_in_folder", as: :add_factsheets, on: :member
+      get '/folder_filter' => "factsheet_folders#folder_filter", 
+        as: :folder_filter, on: :collection
     end
   end
   

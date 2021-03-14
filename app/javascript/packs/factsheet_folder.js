@@ -1,89 +1,39 @@
 var factsheetFolderFunctions = function () {
-  var addFactsheet = function(elementId){
-    var htmlTxt = $("#"+elementId)[0].outerHTML;
-    removeElement(elementId); 
-    $("#add-factsheet-div").append(htmlTxt);
-  };
-  var removeFactsheet = function(self){
-    var isElementAdded = false;
-    var parentDivId = $(self).attr('data-id');
-    $(self).siblings(".add-arr-div").show();
-    var htmlTxt = $("#"+parentDivId)[0].outerHTML;
-    var factsheetId = $(self).attr("data-factsheetId");
-
-    $("#factsheet-block").find(".factsheet-div").each(function(){
-      var fsId = $(this).attr("data-factsheetId");
-      if(fsId>factsheetId && !isElementAdded){
-        $(this).before(htmlTxt);
-        isElementAdded = true;
-      }
-    });
-    if(!isElementAdded){
-      if($("#factsheet-block .factsheet-div").length == 0 ){
-        $("#factsheet-block .block-lbl").after(htmlTxt);
-      } else {
-        $("#factsheet-block .factsheet-div").last().after(htmlTxt);
-      }
-    }
-    $(self).closest(".factsheet-div").remove();
-  };
-  var hideElement = function(elementId){
-    $("#"+elementId).hide();
-  };
-  var removeElement = function(elementId){
-    $("#"+elementId).remove();
-  };
-  var showAllHideElement = function(){
-    var arry = []
-    $("#folder-factsheet-block").find(".factsheet-div").each(function(){
-      var txtId = $(this).attr("id");
-      arry.push(txtId);
-    });
-    $("#factsheet-block").find(".factsheet-div").each(function(){
-      var txtId = $(this).attr("id");
-      if(!$(this).is(":visible") && arry.indexOf(txtId)<0){
-        $(this).show();
-      }
-    });
-  };
-  var submitFactsheets = function(){
-    var arry = []
+  var submitFactsheets = function(factsheetArray, actionType){
     var folderId = $("#fs_folder_id").val();
-
-    $("#folder-factsheet-block").find(".factsheet-div").each(function(){
-      var txtId = $(this).attr("data-factsheetId");
-      arry.push(txtId);
-    });
-
-    if(arry.length > 0 && folderId != ""){
+    if(factsheetArray.length > 0 && folderId.length > 0){
       $.ajax({
         url: '/admin/factsheet_folders/'+folderId+'/add_factsheets',
         type:"POST",
-        data: {factsheet_arry: arry, updation_allowed: true},
+        data: {factsheet_arry: factsheetArray, action_type: actionType},
         dataType: 'script',
         success: function (response) {
         }
       });
-    } else if (folderId == ""){
+    } else if (folderId.length == 0){
       appFunctions.setAlertMessage("Please select Factsheet Folder first.", "alert-danger");
-    }else {
+    }else if(factsheetArray.length == 0){
       appFunctions.setAlertMessage("Please add some Factsheet first.", "alert-danger");
     }
   };
-  var getFolderFactsheets = function(self){
+  var addFactsheetPageOfFolder = function(self){
     var folderId = $(self).val();
-    $.ajax({
-      url: '/admin/factsheet_folders/'+folderId+'/add_factsheets',
-      type:"POST",
-      data: {updation_allowed: false},
-      dataType: 'script',
-      success: function (response) {
-      }
-    });
+    if(folderId != ""){
+      $.ajax({
+        url: '/admin/factsheet_folders/add_factsheet_page',
+        type:"GET",
+        data: {factsheet_folder_id: folderId},
+        dataType: 'script',
+        success: function (response) {
+        }
+      });
+    } else {
+      widnow.location = widnow.location.href;
+    }
   };
-  var folderFilter = function(filterText){
+  var applyFolderFilter = function(filterText){
     $.ajax({
-      url: '/admin/factsheet_folders/add_factsheet_page',
+      url: '/admin/factsheet_folders/folder_filter',
       type:"get",
       data: {filter: filterText},
       dataType: 'json',
@@ -96,48 +46,69 @@ var factsheetFolderFunctions = function () {
       }
     });
   };
+  var setSelectedQuestions = function(){
+    var setSelectedQuestionCount = $(".factsheet-checkbox:checkbox:checked").length;
+    $("#selected-factsheet-count").html(setSelectedQuestionCount);
+  };
   validateFactsheetForm = function(){
     var description = tinymce.get("factsheet-box").getContent();
     $("#description").val(description);
   };
   return {
-    addFactsheet: addFactsheet,
-    removeFactsheet: removeFactsheet,
-    hideElement: hideElement,
-    showAllHideElement: showAllHideElement,
     submitFactsheets: submitFactsheets,
-    getFolderFactsheets: getFolderFactsheets,
-    folderFilter: folderFilter
+    //getFolderFactsheets: getFolderFactsheets,
+    applyFolderFilter: applyFolderFilter,
+    addFactsheetPageOfFolder: addFactsheetPageOfFolder,
+    setSelectedQuestions: setSelectedQuestions
   };
 }();
 
 $(document).ready(function(){
-  $("#questionnaire-question-list").on('click',"#factsheet-block .cross-div", function(){
-      var factsheetId = $(this).attr('data-id');
-      factsheetFolderFunctions.hideElement(factsheetId);
-  });
-  $("#questionnaire-question-list").on('click',"#factsheet-block .add-arr-div", function(){
-      var factsheetId = $(this).attr('data-id');
-      $(this).hide();
-      factsheetFolderFunctions.addFactsheet(factsheetId);
-  });
-  $("#questionnaire-question-list").on('click',"#factsheet-block #show-all", function(){
-      factsheetFolderFunctions.showAllHideElement();
-  });
-  $("#questionnaire-question-list").on('click',"#folder-factsheet-block .cross-div", function(){
-      factsheetFolderFunctions.removeFactsheet(this);
-  });
-  $("#questionnaire-question-list").on('click',"#folder-factsheet-block .add-factsheets", function(){
-    factsheetFolderFunctions.submitFactsheets();
-  });
-  $("#add_factsheets").on('click', function(){
-    factsheetFolderFunctions.submitFactsheets();
-  });
   $("#fs_folder_id").on('change', function(){
-    factsheetFolderFunctions.getFolderFactsheets(this);
+    factsheetFolderFunctions.addFactsheetPageOfFolder(this);
   });
   $("#fs_folder_filter").on("change", function(){
     var filterText = $(this).val();
-    factsheetFolderFunctions.folderFilter(filterText);
+    factsheetFolderFunctions.applyFolderFilter(filterText);
   });
+
+  $("#folder-factsheet-list").on("click", "#factsheet-status", function(){
+    if($(this).find("input").prop('checked')) {
+      $(this).find("input").prop('checked', false);
+    } else {
+      $(this).find("input").prop('checked', true);
+    }
+    factsheetFolderFunctions.setSelectedQuestions();
+  });
+
+  $("#folder-factsheet-list").on("click", "#factsheet-block .add-factsheets", function(){
+    var factsheetArray = [];
+    $(".factsheet-checkbox:checkbox:checked").each(function(){
+      var factsheetId = $(this).val();
+      factsheetArray.push(factsheetId);
+    });
+    factsheetFolderFunctions.submitFactsheets(factsheetArray, 'addition');
+  });
+  $("#folder-factsheet-list").on("click", "#factsheet-block .fs-plus", function(){
+    var factsheetArray = [];
+    var factsheetId = $(this).siblings(".factsheet-checkbox").val();
+    factsheetArray.push(factsheetId);
+    factsheetFolderFunctions.submitFactsheets(factsheetArray, 'addition');
+  });
+  $("#folder-factsheet-list").on("click", "#folder-factsheet-block .remove-factsheets", function(){
+    var factsheetArray = [];
+    $(".added-factsheet-checkbox:checkbox:checked").each(function(){
+      var factsheetId = $(this).val();
+      factsheetArray.push(factsheetId);
+    });
+    factsheetFolderFunctions.submitFactsheets(factsheetArray, 'removal');
+  });
+  $("#folder-factsheet-list").on("click", "#folder-factsheet-block .fs-cross", function(){
+    var factsheetArray = [];
+    var factsheetId = $(this).siblings(".added-factsheet-checkbox").val();
+    factsheetArray.push(factsheetId);
+    factsheetFolderFunctions.submitFactsheets(factsheetArray, 'removal');
+  });
+  
+
 });

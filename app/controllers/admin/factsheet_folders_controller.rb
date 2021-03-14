@@ -68,30 +68,47 @@ class Admin::FactsheetFoldersController < ApplicationController
 
   def add_factsheet_page
     @added_factsheets = nil
-    @factsheet_folders = nil;
-    if params[:filter].present?
-      if params[:filter] == "blank folder"
-        @factsheet_folders = FactsheetFolder.without_factsheet
-      else
-        @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(20)
-      end
+    @factsheets = Factsheet.where(factsheet_folder_id: nil)
+    @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(10)
+
+    if params[:factsheet_folder_id].present?
+      @folder = FactsheetFolder.find(params[:factsheet_folder_id])
+      @added_factsheets = @folder.factsheets
+    end
+
+    respond_to do |format|
+      format.html {}
+      format.js{}
+    end
+  end
+  
+  def folder_filter
+    @factsheet_folders = nil
+    if params[:filter] == "blank folder"
+      @factsheet_folders = FactsheetFolder.without_factsheet
+    elsif params[:filter] == "last 20 Folder"
+      @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(20)
     else
-      @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(10)
+      @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(5)
     end
     @factsheets = Factsheet.where(factsheet_folder_id: nil)
-
     respond_to do |format|
       format.html {}
       format.js{}
       format.json{render json: @factsheet_folders}
     end
   end
-  
+
   def add_factsheets_in_folder
-    factsheet_updation if params[:updation_allowed] == "true"
-    @factsheet_folder = FactsheetFolder.find(params[:id])
+    if(params[:action_type] == "addition")
+      add_factsheets
+    elsif(params[:action_type] == "removal")
+      remove_factsheets
+    end
+
+    @added_factsheets = FactsheetFolder.find(params[:id]).factsheets
     @factsheets = Factsheet.where(factsheet_folder_id: nil)
-    @added_factsheets = @factsheet_folder.factsheets
+
     respond_to do |format|
       flash[:notice] = 'Factsheet added successfully in Factsheet Folder.'
       format.html {}
@@ -101,17 +118,21 @@ class Admin::FactsheetFoldersController < ApplicationController
 
   private
 
-    def factsheet_updation
+    def add_factsheets
       @factsheet_folder = FactsheetFolder.find(params[:id])
-      @factsheet_folder.factsheets.each do | fs |
-        fs.update_columns({factsheet_folder_id: nil})
-      end
       params[:factsheet_arry].each do | factsheet_id |
         Factsheet.find(factsheet_id).update_columns({
           factsheet_folder_id: @factsheet_folder.id
         })
       end
     end
+
+    def remove_factsheets
+      params[:factsheet_arry].each do | factsheet_id |
+        Factsheet.find(factsheet_id).update_columns({factsheet_folder_id: nil})
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_factsheet_folder
       @factsheet_folder = FactsheetFolder.find(params[:id])

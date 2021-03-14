@@ -71,6 +71,10 @@ class Admin::QuestionnairesController < ApplicationController
       @questionnaire = Questionnaire.find(params[:questionnaire_id])
       @added_questions = @questionnaire.questions
     end
+    respond_to do |format|
+      format.html {}
+      format.js{}
+    end
   end
 
   def add_questions_in_questionnaire
@@ -109,7 +113,7 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   private
- 
+
     def add_questions
       @questionnaire = Questionnaire.find(params[:id])
       params[:question_array].each do | question_id |

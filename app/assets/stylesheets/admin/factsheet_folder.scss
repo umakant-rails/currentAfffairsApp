@@ -24,7 +24,7 @@
   padding: 5px 5px 5px 10px !important;
   margin: 3px 5px;
   position: relative;
-  .factsheet-label {
+  #factsheet-status {
     font-weight: bold;  
     color: #0069d9;
   }
@@ -32,6 +32,7 @@
     font-size: 12px !important;
     color: gray;
     font-weight: bold;
+    margin-left: 20px;
   }
 }
 #factsheet-block, #folder-factsheet-block{
@@ -62,16 +63,14 @@
   font-size: 11px;border: 1px solid;
   padding: 0px 5px;border-radius: 20px;
 }
-.add-arr-div{
+.fs-sign{
   position: absolute;
-  top: 22px;right: 1px;
-  color: #0069d9;
-
-  font-size: 11px;
-  border: 1px solid;
-  padding: 0px 4px;
-  border-radius: 20px;
+  top: -4px;right: -4px;
+  font-size: 11px;border: 1px solid;
+  padding: 0px 4px;border-radius: 20px;
 }
+.fs-plus{color: #0069d9;}
+.fs-cross{color: #dc3545;}
 .add-fs-btn{
   float: right;cursor: pointer;
   border: 1px solid #0069d9;border-radius: 5px;

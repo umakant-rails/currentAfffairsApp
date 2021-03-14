@@ -1,4 +1,2 @@
-<% if params[:updation_allowed] == "true" %>
-  appFunctions.setAlertMessage("<%= flash[:notice] %>", "alert-success");
-<% end %>
 $("#folder-factsheet-list").html("<%= escape_javascript(render "folders_factsheet_list", factsheets: @factsheets, added_factsheets: @added_factsheets) %>")
+
