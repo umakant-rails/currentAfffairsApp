@@ -3,6 +3,10 @@ class Admin::PresentationsController < ApplicationController
   layout :set_layout
 
   def index
+    
+  end
+
+  def questionniares
     @questionnaires = Questionnaire.all.order("created_at DESC").first(5)
   end
 
@@ -33,6 +37,14 @@ class Admin::PresentationsController < ApplicationController
     end
   end
 
+  def folder_factsheets
+    @factsheet_folders = FactsheetFolder.order("created_at DESC").first(5)
+  end
+
+  def get_factsheets
+    @fs_folder = FactsheetFolder.find(params[:id])
+    @factsheets = @fs_folder.factsheets
+  end
 
   private
 

@@ -16,6 +16,8 @@ require("packs/question")
 require("packs/questionnaire")
 require("packs/transliteration.I")
 require("packs/presentation")
+require("packs/presentation_questionnaire")
+require("packs/presentation_factsheet")
 require("packs/factsheet")
 require("packs/factsheet_folder")
 

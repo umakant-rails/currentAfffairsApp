@@ -1,0 +1,56 @@
+<div class="row float-right">
+  <a title="Home" href="<%= admin_dashboards_path %>" class="presentation-node">
+    <i class="fas fa-home"></i>
+  </a>
+  <a title="Presentation Home" href="<%= admin_presentations_path %>" class="presentation-node">
+    <i class="fas fa-laptop-house presentation-home"></i>
+  </a>
+  <!--<a title="Download PDF" href="<%= admin_presentation_generate_pdf_path(1, {:format => 'pdf'})%>" class="presentation-node" id="download-pdf">-->
+  <a title="Download PDF" href="javascript:void(0);" class="presentation-node" id="download-pdf">
+    <i class="far fa-file-pdf pdf-sign"></i>
+  </a>
+  <a title="Help" href="javascript:void(0);" id="help-node" 
+    class="presentation-node">
+    <i class="far fa-question-circle help-sign"></i>
+  </a>
+</div>
+<div class="help-block" style="display:none">
+  <i class="fas fa-arrow-left"></i> /
+  <i class="fas fa-arrow-right"></i>
+  <strong> : </strong> Move Questions Forward/Backward.<br/>
+  <i class="fas fa-arrow-up"></i> /
+  <i class="fas fa-arrow-down"></i>
+  <strong> : </strong> Show/Hide answer.<br/>
+  <strong>ALT Key : </strong> Show/Hide Keypoints
+</div>
+<div class="clearfix"></div>
+<div class="row" id="select-questionnaire-block">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+  <%= select_tag 'presentation_id', options_from_collection_for_select(@questionnaires, "id", "name"), :prompt => "Select Questionnaire", class:"form-control" %>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+<div class="row current-affair-block" style="display: none;">
+  <div class="col-md-1 non-active" id="presentation-left-arrow" data-pr-type="question" data-id="0" >
+    <i class="fa fa-angle-left left-icon" aria-hidden="true"></i>
+  </div>
+  <div class="col-md-10 margin-top-200" id="questions-block">
+    <div class="" id="question0">
+      <span id="x" class="questionnaire-close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </span>
+      <div id="current-affair-title"> 
+      </div>
+      <div class="crt-afr-subtitle">  
+        Important Questions Of Current Affairs
+      </div>
+      <div class="crt-afr-writer">  
+        By Umakant Rajpoot
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1 active" id="presentation-right-arrow" data-pr-type="question" data-id="0" >
+    <i class="fa fa-angle-right right-icon" aria-hidden="true"></i>
+  </div>
+</div>

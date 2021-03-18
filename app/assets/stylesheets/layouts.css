@@ -35,12 +35,13 @@
   display: none;  
 }
 .crt-afr-icon{
-  padding: 2px;
+  padding: 1px;
   border: 2px solid gray;
-  border-radius: 20px;
+  border-radius: 8px;
 }
 #question-menu, #questionnaire-menu, #questionnaire-presentation, 
-#scrapping-menu, #dashboard-menu, #folder-menu, #factsheet-menu{
+#scrapping-menu, #dashboard-menu, #folder-menu, #factsheet-menu,
+#presentation-menu{
   background-color: #edf0ef ;
 }
 .fRight{float:right;}

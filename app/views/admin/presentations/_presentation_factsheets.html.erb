@@ -1,0 +1,24 @@
+<div class="" id="factsheet0">
+  <div class="channel-name">
+    <span class="channel-widget">Xpress News</span>
+  </div>
+  <span id="x" class="questionnaire-close">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </span>
+  <div id="current-affair-title">
+    <%= fs_folder.name %> 
+  </div>
+  <div class="crt-afr-subtitle">  
+    Important facts
+  </div>
+  <div class="crt-afr-writer">  
+    By Umakant Rajpoot
+  </div>
+</div>
+<% factsheets.each_with_index do | factsheet, index | %>
+  <div id="factsheet<%= index + 1%>" data-id="<%= index+1 %>" style="display:none;">
+    <div class="row">
+      <%= factsheet.description %>
+    </div>
+  </div>
+<% end %>

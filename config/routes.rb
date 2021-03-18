@@ -26,7 +26,10 @@ Rails.application.routes.draw do
       get '/questions_for_fact'=> "questions#questions_for_fact", as: :questions_for_fact, on: :collection
     end
     resources :presentations do
+      get '/questionniares' => "presentations#questionniares", as: :questionniares, on: :collection
+      get '/folder_factsheets' => "presentations#folder_factsheets", as: :folder_factsheets, on: :collection
       get '/get_questions' => "presentations#get_questions", as: :get_questions
+      get '/get_factsheets' => "presentations#get_factsheets", as: :get_factsheets, on: :member
       get '/generate_pdf' => "presentations#generate_pdf", as: :generate_pdf
     end
     resources :factsheets

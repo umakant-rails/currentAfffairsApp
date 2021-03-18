@@ -67,7 +67,7 @@
     </div>
     <a id="folder-menu" href="#folderList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Factsheet Folder</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
+        <span class="menu-collapsed">Factsheet Folders</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
       </div>
     </a>
     <!-- Submenu content -->
@@ -82,11 +82,19 @@
         <span class="menu-collapsed">Add Factsheet In Folder</span>
       </a>
     </div>
-    <a id="questionnaire-presentation" href="<%= admin_presentations_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
+    <a id="presentation-menu" href="#presentationList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Questionnaire Presentation</span>
+        <span class="menu-collapsed">Presentations</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
       </div>
     </a>
+    <div id='presentationList' class="collapse sidebar-submenu">
+      <a href="<%= questionniares_admin_presentations_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Questionnaire</span>
+      </a>
+      <a href="<%= folder_factsheets_admin_presentations_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Factsheet/Folder</span>
+      </a>
+    </div>
     <a id="questionnaire-presentation" href="<%= admin_presentations_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-start align-items-center">
         <span class="menu-collapsed">Reports</span>
