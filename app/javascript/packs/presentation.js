@@ -15,7 +15,7 @@ var presentationFunctions = (function () {
 
 //$(document).on("turbolinks:load", function(){
 $(document).ready(function(){
-  $(".presentation-node").on("click", function(){
+  $(".hlp-node").on("click", function(){
     presentationFunctions.showHideHelpBox();
   });
 
