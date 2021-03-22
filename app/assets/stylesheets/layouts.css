@@ -35,9 +35,8 @@
   display: none;  
 }
 .crt-afr-icon{
-  padding: 1px;
-  border: 2px solid gray;
-  border-radius: 8px;
+  float: right;
+  margin-top: 5px;
 }
 #question-menu, #questionnaire-menu, #questionnaire-presentation, 
 #scrapping-menu, #dashboard-menu, #folder-menu, #factsheet-menu,

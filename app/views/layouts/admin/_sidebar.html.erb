@@ -1,14 +1,11 @@
 <div class="sidebar-sticky">
   <ul class="nav flex-column">
     <a id="dashboard-menu" href="<%= admin_dashboards_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Dashboard</span>
-      </div>
+      <span class="menu-collapsed">Dashboard</span>
     </a>
     <a id="scrapping-menu" href="#scrappingList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Scrappings</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
-      </div>
+      <span class="menu-collapsed">Scrappings</span>&nbsp;&nbsp;
+      <i class="crt-afr-icon fas fa-angle-left"></i>
     </a>
     <div id='scrappingList' class="collapse sidebar-submenu">
       <a href="<%= admin_scrapping_data_path %>" class="list-group-item list-group-item-action ">
@@ -22,9 +19,8 @@
       </a>
     </div>
     <a id="question-menu" href="#questionList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Questions</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
-      </div>
+      <span class="menu-collapsed">Questions</span>&nbsp;&nbsp;
+      <i class="crt-afr-icon fas fa-angle-left"></i>
     </a>
     <div id='questionList' class="collapse sidebar-submenu">
       <a href="<%= admin_questions_path %>" class="list-group-item list-group-item-action ">
@@ -35,9 +31,8 @@
       </a>
     </div>
     <a id="questionnaire-menu" href="#questionnaireList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Questionnaires</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
-      </div>
+      <span class="menu-collapsed">Questionnaires</span>&nbsp;&nbsp;
+      <i class="crt-afr-icon fas fa-angle-left"></i>
     </a>
     <!-- Submenu content -->
     <div id='questionnaireList' class="collapse sidebar-submenu">
@@ -52,9 +47,8 @@
       </a>
     </div>
     <a id="factsheet-menu" href="#factsheetList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Factsheets</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
-      </div>
+      <span class="menu-collapsed">Factsheets</span>&nbsp;&nbsp;
+      <i class="crt-afr-icon fas fa-angle-left"></i>
     </a>
     <!-- Submenu content -->
     <div id='factsheetList' class="collapse sidebar-submenu">
@@ -66,9 +60,8 @@
       </a>
     </div>
     <a id="folder-menu" href="#folderList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Factsheet Folders</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
-      </div>
+      <span class="menu-collapsed">Factsheet Folders</span>&nbsp;&nbsp;
+      <i class="crt-afr-icon fas fa-angle-left"></i>
     </a>
     <!-- Submenu content -->
     <div id='folderList' class="collapse sidebar-submenu">
@@ -83,9 +76,8 @@
       </a>
     </div>
     <a id="presentation-menu" href="#presentationList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Presentations</span>&nbsp;&nbsp;<i class="crt-afr-icon fa fa-plus"></i>
-      </div>
+      <span class="menu-collapsed">Presentations</span>&nbsp;&nbsp;
+      <i class="crt-afr-icon fas fa-angle-left"></i>
     </a>
     <div id='presentationList' class="collapse sidebar-submenu">
       <a href="<%= questionniares_admin_presentations_path %>" class="list-group-item list-group-item-action ">

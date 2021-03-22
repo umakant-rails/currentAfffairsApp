@@ -26,13 +26,12 @@ window.appFunctions = function () {
     });
   };
   var hideAndShowSubmenu = function(element){
-    console.log($(element).find(".crt-afr-icon").hasClass("fa-plus"));
-    if($(element).find(".crt-afr-icon").hasClass("fa-plus")){
-      $(element).find(".crt-afr-icon").removeClass("fa-plus").addClass("fa-minus");
-      //$(".crt-afr-icon").addClass("fa-minus");
+    if($(element).find(".crt-afr-icon").hasClass("fa-angle-left")){
+      //$(element).find(".crt-afr-icon").removeClass("fa-plus").addClass("fa-minus");
+      $(element).find(".crt-afr-icon").removeClass("fa-angle-left").addClass("fa-angle-down");
     } else {
-      $(element).find(".crt-afr-icon").removeClass("fa-minus").addClass("fa-plus");
-      //$(".crt-afr-icon").addClass("fa-plus");
+      //$(element).find(".crt-afr-icon").removeClass("fa-minus").addClass("fa-plus");
+      $(element).find(".crt-afr-icon").removeClass("fa-angle-down").addClass("fa-angle-left");
     }
   };
   return {
@@ -43,14 +42,7 @@ window.appFunctions = function () {
 }();
 
 $(document).ready(function(){
-  
-  $("#question-menu").on('click', function(){
-    appFunctions.hideAndShowSubmenu(this);
-  });
-  $("#questionnaire-menu").on('click', function(){
-    appFunctions.hideAndShowSubmenu(this);
-  });
-  $("#scrapping-menu").on('click', function(){
+  $("#question-menu, #questionnaire-menu, #scrapping-menu, #factsheet-menu, #folder-menu, #presentation-menu").on('click', function(){
     appFunctions.hideAndShowSubmenu(this);
   });
 });
