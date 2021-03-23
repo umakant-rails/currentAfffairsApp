@@ -151,5 +151,19 @@ $(document).ready(function(){
     }
   });
 
-  /* start- add question in questionnaire funtions */  
+  $("#questionnaire-question-list").on("click", "#questions-checkbox", function(){
+    $("#question-block input").each(function(index){
+      if($(this).hasClass("question-checkbox")){
+        $(this).is(":checked") ? $(this).prop('checked', false) : $(this).prop('checked', true);
+      }
+    });
+  });
+  $("#questionnaire-question-list").on("click", "#added-questions-checkbox", function(){
+    $("#added-question-div input").each(function(index){
+      if($(this).hasClass("added-question-checkbox")){
+        $(this).is(":checked") ? $(this).prop('checked', false) : $(this).prop('checked', true);
+      }
+    });
+  });
+  /* end- add question in questionnaire funtions */  
 });

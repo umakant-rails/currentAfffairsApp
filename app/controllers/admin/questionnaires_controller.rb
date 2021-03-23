@@ -64,7 +64,8 @@ class Admin::QuestionnairesController < ApplicationController
 
   def add_questions_page
     @questionnaires = Questionnaire.all.order("created_at DESC").last(8)
-    @questions = Question.where(questionnaires: nil)
+    #@questions = Question.where(questionnaires: nil)
+    @questions =  Question.includes(:questionnaires).where(questionnaires: {id: nil})
     @que_categories = QuestionCategory.all
     @added_questions = nil;
     if params[:questionnaire_id].present?
@@ -84,7 +85,8 @@ class Admin::QuestionnairesController < ApplicationController
       remove_questions
     end
     @added_questions = Questionnaire.find(params[:id]).questions
-    @questions = Question.where(questionnaires: nil)
+    #@questions = Question.where(questionnaires: nil)
+    @questions =  Question.includes(:questionnaires).where(questionnaires: {id: nil})
     respond_to do |format|
       flash[:notice] = 'Question added successfully in Questionnaire.'
       format.html {}
@@ -116,17 +118,32 @@ class Admin::QuestionnairesController < ApplicationController
 
     def add_questions
       @questionnaire = Questionnaire.find(params[:id])
-      params[:question_array].each do | question_id |
-        Question.find(question_id).update_columns({
-          questionnaire_id: @questionnaire.id,
-          questionnaire_category_id: @questionnaire.questionnaire_category.id
-        })
+      params[:question_array].each do | ques_id |
+        is_blank = @questionnaire.questionnaire_questions.where(question_id: ques_id).blank?
+        if is_blank
+          blnk_questnre_question = @questionnaire.questionnaire_questions.where(question_id: nil)
+          if blnk_questnre_question.present?
+            blnk_questnre_question[0].update_columns({question_id: ques_id})
+          else
+            @questionnaire.questionnaire_questions.create({question_id: ques_id})
+          end
+        end
+        #Question.find(question_id).update_columns({
+        #  questionnaire_id: @questionnaire.id,
+        #  questionnaire_category_id: @questionnaire.questionnaire_category.id
+        #})
       end
     end
 
     def remove_questions
+      @questionnaire = Questionnaire.find(params[:id])
       params[:question_array].each do | question_id |
-        Question.find(question_id).update_columns({questionnaire_id: nil})
+        questnre_question = @questionnaire.questionnaire_questions.where(question_id: question_id)
+        if questnre_question.present?
+          questnre_question[0].update_columns({question_id: nil})
+        end
+        #QuestionnaireQuestion.where(question_id)
+        #Question.find(question_id).update_columns({questionnaire_id: nil})
       end
     end
 

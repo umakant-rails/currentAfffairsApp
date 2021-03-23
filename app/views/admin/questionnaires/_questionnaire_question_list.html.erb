@@ -1,10 +1,11 @@
 <div class="col-lg-6 px-0" id="question-block">
   <div class="block-lbl">
+    <input class="ques-checkbox" type="checkbox" value="" id="questions-checkbox">
     Question List&nbsp;(<span id="selected-ques-count">0</span>)
     <div class="add-questions">Add Questions</div>
   </div>
   <% questions && questions.each do | question |%>
-    <div class="question-div" id="question<%= question.id %>" data-questionId="<%= question.id %>">
+    <div class="question-div" id="div-question<%= question.id %>" data-questionId="<%= question.id %>">
       <div id="question-status" class="form-check">
         <input class="form-check-input question-checkbox" type="checkbox" value="<%= question.id %>" id="question<%= question.id %>">
         <div class="question-label" for="question<%= question.id %>">
@@ -27,13 +28,14 @@
 </div>
 <div class="col-lg-6 px-0" id="questionnaire-question-block">
   <div class="block-lbl">
+    <input class="added-ques-checkbox" type="checkbox" value="" id="added-questions-checkbox">
     Added Question List
     (<span id="questions-count"><%= added_questions.present? ? added_questions.length : 0%></span>)
     <div class="remove-questions">Remove Questions</div>
   </div>
-  <div id="add-question-div">
+  <div id="added-question-div">
     <% added_questions.present? && added_questions.each do | question |%>
-      <div class="question-div" id="question<%= question.id %>" data-questionId="<%= question.id %>">
+      <div class="question-div" id="div-added-question<%= question.id %>" data-questionId="<%= question.id %>">
         <div id="question-status" class="form-check">
           <input class="form-check-input added-question-checkbox" type="checkbox" value="<%= question.id %>" id="question<%= question.id %>">
           <div class="question-label" for="question<%= question.id %>">
