@@ -63,15 +63,24 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   def add_questions_page
+    @questions=nil, @added_questions=nil
     @questionnaires = Questionnaire.all.order("created_at DESC").last(8)
-    #@questions = Question.where(questionnaires: nil)
-    @questions =  Question.includes(:questionnaires).where(questionnaires: {id: nil})
     @que_categories = QuestionCategory.all
-    @added_questions = nil;
+    from_date = params[:from_date].present? ? params[:from_date].to_date : nil 
+    to_date = params[:to_date].present? ? params[:to_date].to_date : nil
+
+    if from_date.present? && to_date.present? && params[:question_category_id].present?
+      @questions =  Question.where("question_category_id = ? and created_at between ? and ?", params[:question_category_id], from_date, to_date)
+    elsif from_date.present? && to_date.present?
+      @questions =  Question.where("created_at between ? and ?", from_date, to_date)
+    else 
+      @questions =  Question.includes(:questionnaires).where(questionnaires: {id: nil})
+    end
     if params[:questionnaire_id].present?
       @questionnaire = Questionnaire.find(params[:questionnaire_id])
       @added_questions = @questionnaire.questions
     end
+
     respond_to do |format|
       format.html {}
       format.js{}

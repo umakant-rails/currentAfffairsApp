@@ -72,3 +72,26 @@
   color: red;
   text-decoration: none;
 }
+
+.qustnr-row {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+.filter-block{
+  border-left: 4px solid #0069d9;
+  border-right: 4px solid #0069d9;
+  border-radius: 10px;
+}
+.filter-sb-block{
+  border-left: 4px solid #0069d9;
+  border-right: 4px solid #0069d9;
+  border-radius: 10px;
+  margin: 0 -12px !important;
+  div{color: #0069d9;}
+  .lbl{font-weight: bold;}
+  input, select{color: #0069d9;}
+}

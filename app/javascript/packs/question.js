@@ -69,6 +69,16 @@ var questionFunctions = (function () {
     $("#fact-input").val("");$("#fact-input").attr("data-id", "");
     $("#row-fact"+id).remove();
   };
+  var questionsOfQuestionnaire = function(questionnaireId){
+    $.ajax({
+      url: '/admin/questionnaires/'+questionnaireId+'/questions',
+      type:"GET",
+      data: {},
+      dataType: 'script',
+      success: function (response) {
+      }
+    });
+  };
   return {
     setAnswer: setAnswer,
     setScrappingDataId: setScrappingDataId,
@@ -76,7 +86,8 @@ var questionFunctions = (function () {
     getQuestoinsForFacts: getQuestoinsForFacts,
     editFacts: editFacts,
     closeFacts: closeFacts,
-    addFacts: addFacts
+    addFacts: addFacts,
+    questionsOfQuestionnaire: questionsOfQuestionnaire
   };
 })();
 
@@ -115,5 +126,15 @@ $(document).ready(function(){
     $("#inputQuestionCategory").val("");
     $("#fact-input").val("");
     $("#question-facts").html("");
-  })
+  });
+
+  $("#inputQuestionnaires").on('change', function(){
+    var questionnaireId = $(this).val();
+    if(questionnaireId.length > 0){
+      questionFunctions.questionsOfQuestionnaire(questionnaireId);
+    } else {
+      window.location = window.location.href;
+    }
+  });
+
 });

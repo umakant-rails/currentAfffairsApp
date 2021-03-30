@@ -46,16 +46,6 @@ var questionnaireFunctions = (function () {
       });
     }
   };
-  var questionsOfQuestionnaire = function(questionnaireId){
-    $.ajax({
-      url: '/admin/questionnaires/'+questionnaireId+'/questions',
-      type:"GET",
-      data: {},
-      dataType: 'script',
-      success: function (response) {
-      }
-    });
-  };
   var setSelectedQuestions = function(){
     var setSelectedQuestionCount = $(".question-checkbox:checkbox:checked").length;
     $("#selected-ques-count").html(setSelectedQuestionCount);
@@ -69,14 +59,27 @@ var questionnaireFunctions = (function () {
       success: function (response) {
       }
     });
-  }
+  };
+  var getFilteredQuestions = function(questionnaireId, fromDate, toDate, questionCategory){
+    $.ajax({
+      url: '/admin/questionnaires/add_questions_page',
+      type:"GET",
+      data: {questionnaire_id: questionnaireId,
+        from_date: fromDate, to_date: toDate,
+        question_category_id: questionCategory
+      },
+      dataType: 'script',
+      success: function (response) {
+      }
+    });
+  };
   return {
     setCurrentAffairName: setCurrentAffairName,
     validateQuestionnaireForm: validateQuestionnaireForm,
     submitQuestions: submitQuestions,
     setSelectedQuestions: setSelectedQuestions,
-    questionsOfQuestionnaire: questionsOfQuestionnaire,
-    addQuestionsPageOfQuestionnaire: addQuestionsPageOfQuestionnaire
+    addQuestionsPageOfQuestionnaire: addQuestionsPageOfQuestionnaire,
+    getFilteredQuestions: getFilteredQuestions
   };
 })();
 
@@ -84,7 +87,7 @@ $(document).ready(function(){
 
   $("#questionnaire_category_id").on("change", function(){
     questionnaireFunctions.setCurrentAffairName(this);
-    $("#questionnaire_submit").prop("disabled", false);
+    $("#questionnaire_submit").prop("disabled", false); 
   });
 
   $("#name").on("focusout", function(){
@@ -141,22 +144,17 @@ $(document).ready(function(){
     questionArray.push(questionId);
     questionnaireFunctions.submitQuestions(questionArray, 'removal');
   });
-  
-  $("#inputQuestionnaires").on('change', function(){
-    var questionnaireId = $(this).val();
-    if(questionnaireId.length > 0){
-      questionnaireFunctions.questionsOfQuestionnaire(questionnaireId);
-    } else {
-      window.location = window.location.href;
-    }
-  });
-
   $("#questionnaire-question-list").on("click", "#questions-checkbox", function(){
     $("#question-block input").each(function(index){
       if($(this).hasClass("question-checkbox")){
         $(this).is(":checked") ? $(this).prop('checked', false) : $(this).prop('checked', true);
       }
     });
+    if($("#questions-checkbox").is(":checked")){
+      $("#selected-ques-count").html($("#question-block input").length-1);
+    }else{
+      $("#selected-ques-count").html(0);
+    }
   });
   $("#questionnaire-question-list").on("click", "#added-questions-checkbox", function(){
     $("#added-question-div input").each(function(index){
@@ -164,6 +162,25 @@ $(document).ready(function(){
         $(this).is(":checked") ? $(this).prop('checked', false) : $(this).prop('checked', true);
       }
     });
+    if($("#added-questions-checkbox").is(":checked")){
+      $("#added-ques-count").html($("#added-question-div input").length);
+    }else{
+      $("#added-ques-count").html(0);
+    }
+  });
+  $(".qustnr-row").on("click", "#filterQuestion", function(){
+    var questionnaireId = $("#questionnaire_id").val();
+    var fromDate = $("#fromdatetimepicker").val();
+    var toDate = $("#todatetimepicker").val();
+    var quesCategory = $("#ques_category_id").val();
+    if(fromDate == toDate){
+      appFunctions.setAlertMessage("Both Date cann't be equal.", "alert-danger");
+    } else if (fromDate == ""){
+      appFunctions.setAlertMessage("From Date cann't be blank.", "alert-danger");
+    } else if (toDate == ""){
+      appFunctions.setAlertMessage("To Date cann't be blank.", "alert-danger");
+    }
+    questionnaireFunctions.getFilteredQuestions(questionnaireId, fromDate, toDate, quesCategory);
   });
   /* end- add question in questionnaire funtions */  
 });

@@ -1,13 +1,49 @@
 <div class="row">
   <div class="question-form-title col-md-12"><center> Add  Questions In Questionnaire</center></div>
-  <div class="clear form-title-divider col-md-12"></div>
+  <!--<div class="clear form-title-divider col-md-12"></div> -->
 </div>
-<div class="row">
-  <div class="col-lg-6">
+<div class="row qustnr-row">
+  <div class="col-lg-3">
     <%= select_tag 'questionnaire_id', options_from_collection_for_select(@questionnaires, "id", "name"), :prompt => "Select Questionnaire", class:"form-control" %>
   </div>
-  <div class="clear form-title-divider col-md-12"></div>
+  <div class="col-md-9 filter-block">
+    <div class="row filter-sb-block">
+      <div class="col-lg-3">
+        <div class="row">
+          <div class="col-md-3 px-0 lbl" style="padding-top: 5px;">From</div>
+          <div class="col-md-9 px-0">
+            <input type="text" placeholder="Select Date" class="datetimepicker-input form-control" id="fromdatetimepicker" data-toggle="datetimepicker" data-target="#fromdatetimepicker"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="row">
+          <div class="col-md-2 px-0 lbl" style="padding-top: 5px;">To</div>
+          <div class="col-md-10 px-0">
+            <input type="text" placeholder="Select Date" class="datetimepicker-input form-control" id="todatetimepicker" data-toggle="datetimepicker" data-target="#todatetimepicker"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <%= select_tag 'ques_category_id', options_from_collection_for_select(@que_categories, "id", "name"), :prompt => "Select Category", class:"form-control" %>
+      </div>
+      <div class="col-lg-3">
+        <button type="button" id="filterQuestion" class="btn btn-primary form-control">Filter</button>
+      </div>
+    </div>
+  </div>
+  <!--<div class="clear form-title-divider col-md-12"></div> -->
 </div>
 <div class="row" id="questionnaire-question-list">
   <%= render "questionnaire_question_list", questions: @questions, added_questions: @added_questions %>
 </div>
+<script type="text/javascript">
+  $(function () {
+    $('#fromdatetimepicker').datetimepicker({
+      locale: 'EN', format: 'DD/MM/YYYY'
+    });
+    $('#todatetimepicker').datetimepicker({
+      locale: 'EN', format: 'DD/MM/YYYY'
+    });
+  });
+</script>
