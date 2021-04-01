@@ -1,5 +1,22 @@
+.scrapping-data-fr-ques{
+  height: 560px;
+  overflow-y: auto;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-top: 3px;
+  padding: 4px 5px;
+}
+#current-affairs-block{
+  height: 600px;
+  overflow-y: auto;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-top: 3px;
+  padding: 4px 5px;
+}
 .textarea-custom{
    height: 60px !important;
+   font-size: 16px !important;
  }
 .question-form-title{
   font-size: 22px;
@@ -46,6 +63,7 @@
   border-radius: 4px;
   padding-left: 20px;
   overflow-y: auto;
+  margin-bottom: 0px;
 }
 .get-facts-icon{
   cursor: pointer;
@@ -92,4 +110,53 @@
   color: #0069d9;
   font-size: 30px;
   cursor: pointer;
+}
+
+.mrgn-top{margin-top: 18px;}
+.form-row{margin-bottom: 10px !important;}
+.option1-lbl, .option2-lbl, .option3-lbl, .option4-lbl, 
+.state-lbl, .category-lbl{
+  position: absolute;
+  left: 12px;
+  top: -18px;
+  font-size: 12px;
+  font-weight: bold;
+  background: white;
+  color: #0069d9;
+  border: 1px solid #0069d9;
+  border-radius: 12px;
+  padding: 0px 4px 0px 4px;
+}
+.question-lbl, .keypoints-lbl, .facts-lbl{
+  position: absolute;
+  left: 12px;
+  top: -16px;
+  font-size: 12px;
+  font-weight: bold;
+  background: white;
+  color: #0069d9;
+  border: 1px solid #0069d9;
+  border-radius: 12px;
+  padding: 0px 4px 0px 4px;
+}
+
+#selected-categories{
+  position: relative;
+  left: 0px;
+  top: 0px;
+  font-size: 12px;
+  color: #0069d9;
+  span{
+    font-size: 10px;
+    font-weight: bold;
+    color: green;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 0 2px 2px 0;
+    .catg-cls-icon{
+      position: absolute;
+      color: red;font-size:12px;
+    }
+  }
 }

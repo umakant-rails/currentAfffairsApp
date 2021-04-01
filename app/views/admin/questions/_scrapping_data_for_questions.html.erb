@@ -1,12 +1,12 @@
 <% scrapping_data.each do |datum|%>
-  <div class="scrapping-data" data-scrap_data_id="<%= datum.id %>">
-    <div class="row ca-header">
+  <div class="scrapping-data-fr-ques row" data-scrap_data_id="<%= datum.id %>">
+    <div class="ca-header">
       <%= raw datum.title %><span class="read-status <%= 'hide' unless datum.is_read %>">READ</span>
     </div>
-    <div class="row ca-description">
+    <div class="ca-description">
       <%= raw datum.description %>
     </div>
-    <div class="row ca-keypoints">
+    <div class="ca-keypoints">
       <%= raw datum.keypoints %>
     </div>
   </div>

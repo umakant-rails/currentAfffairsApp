@@ -14,12 +14,15 @@ var questionFunctions = (function () {
   var setScrappingDataId = function(element) {
     var question = $(element).val();
     if(question.length > 8){
-      var scrappingDataId = $(".scrapping-data").data("scrap_data_id");
+      var scrappingDataId = $(".scrapping-data-fr-ques").data("scrap_data_id");
       $("#scrapping_datum_id").val(scrappingDataId);
     }
   };
   validateQuestionForm = function(){
     var isTrue = true;
+    $("#question_form input").each(function(){
+      $(this).val($(this).val().trim());
+    });
     var question = $("#question").val().trim();
     var option1 = $("#option1").val().trim();
     var option2 = $("#option2").val().trim();
@@ -79,6 +82,31 @@ var questionFunctions = (function () {
       }
     });
   };
+  var closeCategory = function(self){
+    var categoryId = $(self).attr('data-category-id');
+    var categories = $("#question_category_id").val();
+    var tmpCatStr = "";
+    console.log(categoryId);
+    $.each(categories.split(","), function(index, catg_id){
+      if(catg_id != categoryId && catg_id.length > 0){
+        tmpCatStr = tmpCatStr + catg_id + ",";
+        console.log(tmpCatStr);
+      }
+    });
+    $("#question_category_id").val(tmpCatStr);
+    $(self).parent().remove();
+  };
+  var addCategories = function(categoryId, category){
+    var categories = $("#question_category_id").val();
+    if(categories == "" || categories.split(",").indexOf(categoryId+"") == -1){
+      categories = categories + categoryId + ",";
+      $("#question_category_id").val(categories);
+      var htmlTxt = "<span>"+category +"<i class='far fa-times-circle catg-cls-icon' data-category-id ='"+categoryId+"'></i></span>";
+      $("#selected-categories").append(htmlTxt);
+    }else{
+      appFunctions.setAlertMessage("This category is already added.", "alert-success");
+    }
+  };
   return {
     setAnswer: setAnswer,
     setScrappingDataId: setScrappingDataId,
@@ -87,7 +115,9 @@ var questionFunctions = (function () {
     editFacts: editFacts,
     closeFacts: closeFacts,
     addFacts: addFacts,
-    questionsOfQuestionnaire: questionsOfQuestionnaire
+    questionsOfQuestionnaire: questionsOfQuestionnaire,
+    addCategories: addCategories,
+    closeCategory: closeCategory
   };
 })();
 
@@ -137,4 +167,14 @@ $(document).ready(function(){
     }
   });
 
+  $(".question-form-block").on("change", "#select_question_category", function(){
+    var categoryId = $(this).val();
+    var category = $(this).find("option:selected").text();
+    if(category.length > 0){
+      questionFunctions.addCategories(categoryId, category);
+    }
+  });
+  $(".question-form-block").on("click", ".catg-cls-icon", function(){
+    questionFunctions.closeCategory(this);
+  });
 });
