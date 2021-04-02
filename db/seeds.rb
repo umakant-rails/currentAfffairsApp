@@ -32,7 +32,9 @@ State.create!(name: "Udisa") if State.where(name: "Udisa").blank?
 State.create!(name: "Asam") if State.where(name: "Asam").blank?
 State.create!(name: "Goa") if State.where(name: "Goa").blank?
 
-QuestionCategory.create(name: 'Appointments, Resigns & Deaths') if QuestionCategory.where(name: 'Appointments, Resigns & Deaths').blank?
+QuestionCategory.create(name: 'Appointments') if QuestionCategory.where(name: 'Appointments').blank?
+QuestionCategory.create(name: 'Resigns') if QuestionCategory.where(name: 'Resigns').blank?
+QuestionCategory.create(name: 'Deaths') if QuestionCategory.where(name: 'Deaths').blank?
 QuestionCategory.create(name: 'International affairs') if QuestionCategory.where(name: 'International affairs').blank?
 QuestionCategory.create(name: 'Awards & Honours') if QuestionCategory.where(name: 'Awards & Honours').blank?
 QuestionCategory.create(name: 'Books') if QuestionCategory.where(name: 'Books').blank?

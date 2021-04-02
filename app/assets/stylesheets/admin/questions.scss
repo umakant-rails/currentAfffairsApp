@@ -139,24 +139,3 @@
   border-radius: 12px;
   padding: 0px 4px 0px 4px;
 }
-
-#selected-categories{
-  position: relative;
-  left: 0px;
-  top: 0px;
-  font-size: 12px;
-  color: #0069d9;
-  span{
-    font-size: 10px;
-    font-weight: bold;
-    color: green;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    padding: 3px;
-    margin: 0 2px 2px 0;
-    .catg-cls-icon{
-      position: absolute;
-      color: red;font-size:12px;
-    }
-  }
-}

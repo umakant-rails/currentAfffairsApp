@@ -1,0 +1,7 @@
+<div class="col-md-6 fieldset">
+  <% category_hash = Hash[@que_categories.map{|que_cat| [que_cat.name, que_cat.id]}] %>
+  <%= f.select :question_category_id, options_for_select(category_hash, f.object.question_category_id), 
+    {prompt: "Select Category"}, class:"form-control", id: "question_category_id" %>
+  <%= f.hidden_field :_destroy%>
+  <%= link_to "remove", '#', class: "remove_fields" %>
+</div>

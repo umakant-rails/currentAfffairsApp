@@ -12,6 +12,8 @@ class Admin::QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @question.question_category_questions.build
+
     get_scrapping_data
     respond_to do |format|
       format.html {}
@@ -73,7 +75,8 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def questions_for_fact
-    @questions = Question.where(question_category_id: params[:category_id])
+    #@questions = Question.where(question_category_id: params[:category_id])
+    @questions = Question.joins(:question_category_questions).where(question_category_questions: {question_category_id:  params[:category_id]})
     respond_to do |format|
       format.html {}
       format.js {}
@@ -103,7 +106,7 @@ class Admin::QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:question, :option1, :option2, :option3, :option4, :answer, :keypoints, :facts, :state_id, :question_category_id, :questionnaire_category_id, :questionnaire_id, :scrapping_datum_id)
+      params.require(:question).permit(:question, :option1, :option2, :option3, :option4, :answer, :keypoints, :facts, :state_id, :scrapping_datum_id,question_category_questions_attributes: [:id, :question_category_id, :question_id, :_destroy])
     end
 end
 

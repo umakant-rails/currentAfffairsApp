@@ -42,11 +42,11 @@ var questionFunctions = (function () {
     }
     return isTrue;
   };
-  var getQuestoinsForFacts = function(categoryID){
+  var getQuestoinsForFacts = function(categoryId){
     $.ajax({
       url: '/admin/questions/questions_for_fact',
       type:"GET",
-      data: {category_id: categoryID},
+      data: {category_id: categoryId},
       dataType: 'script',
       success: function (response) {
       }
@@ -82,31 +82,6 @@ var questionFunctions = (function () {
       }
     });
   };
-  var closeCategory = function(self){
-    var categoryId = $(self).attr('data-category-id');
-    var categories = $("#question_category_id").val();
-    var tmpCatStr = "";
-    console.log(categoryId);
-    $.each(categories.split(","), function(index, catg_id){
-      if(catg_id != categoryId && catg_id.length > 0){
-        tmpCatStr = tmpCatStr + catg_id + ",";
-        console.log(tmpCatStr);
-      }
-    });
-    $("#question_category_id").val(tmpCatStr);
-    $(self).parent().remove();
-  };
-  var addCategories = function(categoryId, category){
-    var categories = $("#question_category_id").val();
-    if(categories == "" || categories.split(",").indexOf(categoryId+"") == -1){
-      categories = categories + categoryId + ",";
-      $("#question_category_id").val(categories);
-      var htmlTxt = "<span>"+category +"<i class='far fa-times-circle catg-cls-icon' data-category-id ='"+categoryId+"'></i></span>";
-      $("#selected-categories").append(htmlTxt);
-    }else{
-      appFunctions.setAlertMessage("This category is already added.", "alert-success");
-    }
-  };
   return {
     setAnswer: setAnswer,
     setScrappingDataId: setScrappingDataId,
@@ -115,9 +90,7 @@ var questionFunctions = (function () {
     editFacts: editFacts,
     closeFacts: closeFacts,
     addFacts: addFacts,
-    questionsOfQuestionnaire: questionsOfQuestionnaire,
-    addCategories: addCategories,
-    closeCategory: closeCategory
+    questionsOfQuestionnaire: questionsOfQuestionnaire
   };
 })();
 
@@ -132,9 +105,9 @@ $(document).ready(function(){
   });
 
   $("#inputQuestionCategory").on("change", function(){
-    var categoryID = $("#inputQuestionCategory").val();
-    if(categoryID.length != 0){
-      questionFunctions.getQuestoinsForFacts(categoryID);
+    var categoryId = $("#inputQuestionCategory").val();
+    if(categoryId.length != 0){
+      questionFunctions.getQuestoinsForFacts(categoryId);
     }
   });
 
@@ -166,15 +139,17 @@ $(document).ready(function(){
       window.location = window.location.href;
     }
   });
+  $('.question-form-block').on('click', '.remove_fields', function(event) {
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('.fieldset').hide();
+    return event.preventDefault();
+  });
+  $('.question-form-block').on('click', '.add_fields', function(event) {
+    var regexp, time;
+    time = new Date().getTime();
+    regexp = new RegExp($(this).data('id'), 'g');
+    $(this).before($(this).data('fields').replace(regexp, time));
+    return event.preventDefault;
+  });
 
-  $(".question-form-block").on("change", "#select_question_category", function(){
-    var categoryId = $(this).val();
-    var category = $(this).find("option:selected").text();
-    if(category.length > 0){
-      questionFunctions.addCategories(categoryId, category);
-    }
-  });
-  $(".question-form-block").on("click", ".catg-cls-icon", function(){
-    questionFunctions.closeCategory(this);
-  });
 });

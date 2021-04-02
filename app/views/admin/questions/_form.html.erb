@@ -119,13 +119,14 @@
         {prompt: "Select State"}, class:"form-control", id: "state_id" %>
     </div>
     <div class="form-group col-md-8">
-      <label for="question_category_id" class="category-lbl">Category </label>
-      <% category_hash = Hash[@que_categories.map{|que_cat| [que_cat.name, que_cat.id]}] %>
-      <%#= f.select :question_category_id, options_for_select(category_hash, f.object.question_category_id), {prompt: "Select Category"}, 
-      class:"form-control", id: "question_category_id" %>
-      <%= select_tag "question_categories", options_from_collection_for_select(@que_categories, "id", "name"), prompt: "Select Category", class:"form-control", id: "select_question_category" %>
-      <%= hidden_field_tag :question_category_id, "", class:"form-control" %>
-      <div id="selected-categories"></div>
+      <div class="form-row">
+        <label for="question_category_id" class="category-lbl">Category </label>
+        <% category_hash = Hash[@que_categories.map{|que_cat| [que_cat.name, que_cat.id]}] %>
+        <%= f.fields_for :question_category_questions do | builder |%>
+          <%= render "question_category_question_fields", f: builder, category_hash: category_hash %>
+        <% end %>
+        <%= link_to_add_fields "Add Category", f, :question_category_questions %>
+      </div>
     </div>
   </div>
   <div class="form-group">
