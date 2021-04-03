@@ -50,6 +50,6 @@ QuestionCategory.create(name: 'New Program/Scheme') if QuestionCategory.where(na
 QuestionCategory.create(name: 'National Affairs') if QuestionCategory.where(name: 'National Affairs').blank?
 QuestionCategory.create(name: 'Others') if QuestionCategory.where(name: 'Others').blank?
 
-QuestionnaireCategory.create(name: 'Daily Current Affairs') if QuestionCategory.where(name: 'Daily Current Affairs').blank?
-QuestionnaireCategory.create(name: 'Computer Awareness') if QuestionCategory.where(name: 'Computer Awareness').blank?
-QuestionnaireCategory.create(name: 'Banking') if QuestionCategory.where(name: 'Banking').blank?
+QuestionnaireCategory.create(name: 'Daily Current Affairs') if QuestionnaireCategory.where(name: 'Daily Current Affairs').blank?
+QuestionnaireCategory.create(name: 'Computer Awareness') if QuestionnaireCategory.where(name: 'Computer Awareness').blank?
+QuestionnaireCategory.create(name: 'Banking') if QuestionnaireCategory.where(name: 'Banking').blank?

@@ -45,3 +45,16 @@
 }
 .fRight{float:right;}
 .fLeft{float:left;}
+
+#error_explanation{
+  border: 1px solid red;
+  border-radius: 5px;
+}
+.error-cls-icon{
+  float: right;
+  color: red;
+  font-size: 18px;
+  top: -14px;
+  right: -10px;
+  position: relative;
+}

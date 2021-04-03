@@ -20,29 +20,20 @@ class Admin::QuestionnairesController < ApplicationController
     if @questionnaire.blank?
       @questionnaire = Questionnaire.new(questionnaire_params)
       is_true = @questionnaire.save
+      flash[:notice] = 'Questionnaire is created successfully.'
     else
       is_exist = true
+      flash[:notice] = 'Questionnaire is already created.'
     end
-
-    if is_true
-      respond_to do |format|
-        flash[:notice] = 'Questionnaire is created successfully.'
-        format.html { render :show}
-        format.js {}
+    respond_to do |format|
+      if is_true || is_exist
+        format.html {render :show}
+      else
+        format.html{render :new}
       end
-    elsif is_exist
-      respond_to do |format|
-        flash[:notice] = 'Questionnaire is already created.'
-        format.html { render :show}
-        format.js {}
-      end
-    else
-      respond_to do |format|
-        format.html { render :new }
-        format.js {}
-      end
+      #format.html { render (is_true || is_exist ) ? :show : :new }
+      format.js {}
     end
-
   end
 
   def show

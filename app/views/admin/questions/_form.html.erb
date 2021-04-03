@@ -32,9 +32,9 @@
 </div>
 <%= form_with(model: [:admin, question], html: {id: "question_form"}, local: is_action_edit(question) ) do |f| %>
   <% if question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
-      <ul>
+    <div id="error_explanation" class="alert-danger">
+      <div class="error-cls-icon"><i class="far fa-times-circle"></i></div>
+	  <ul>
         <% question.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>

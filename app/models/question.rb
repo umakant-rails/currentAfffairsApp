@@ -4,7 +4,7 @@ class Question < ApplicationRecord
   #belongs_to :questionnaire, optional: true
   belongs_to :question_category, optional: true
 
-  has_many  :question_category_questions
+  has_many  :question_category_questions, :dependent => :destroy
   has_many  :question_categories, through: :question_category_questions
   accepts_nested_attributes_for :question_category_questions, allow_destroy: true
   
