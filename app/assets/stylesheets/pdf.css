@@ -126,3 +126,12 @@ div.nobreak{ page-break-inside: avoid; }
   font-weight:bold;
   color: #ffe6f2;
 }
+.factsheet-title{
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 1px 5px;
+  background-color: #0069d9;
+}

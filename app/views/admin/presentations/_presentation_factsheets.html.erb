@@ -18,11 +18,11 @@
 <% factsheets.each_with_index do | factsheet, index | %>
   <div id="factsheet<%= index + 1%>" data-id="<%= index+1 %>" style="display:none;">
     <div class="row">
-      <center><strong>
-        <%= factsheet.title %>
-      </strong></center>
+      <div class="col-md-12 factsheet-title">
+        <center><%= factsheet.title %></center>
+      </div>
     </div>
-    <div class="row">
+    <div class="row factsheet-description">
       <%= raw factsheet.description %>
     </div>
   </div>

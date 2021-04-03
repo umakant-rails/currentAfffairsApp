@@ -1,0 +1,13 @@
+<% @factsheets.each_with_index do | factsheet, index | %>
+  <div class="pdf-page ">
+    <div class="factsheet-title">
+      <center><%= factsheet.title %></center>
+    </div>
+    <div class="pdf-question-block">
+      <%= raw factsheet.description %>
+    </div>
+  </div>
+  <% if factsheet.id == @factsheets.last.id %>
+    <div></div>
+  <% end %>
+<% end %>

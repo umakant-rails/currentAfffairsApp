@@ -1,6 +1,6 @@
 class Admin::QuestionnairesController < ApplicationController
   before_action :authenticate_user!
-  layout :set_layout
+  layout :admin
   before_action :set_questionnaire, only: [:show, :edit, :update, :questions_of_questionnaire]
 
   def index
@@ -155,15 +155,4 @@ class Admin::QuestionnairesController < ApplicationController
     def questionnaire_params
       params.require(:questionnaire).permit(:name, :questionnaire_category_id)
     end
-
-    def set_layout
-      if params[:action] == "questionnaire_presentation"
-        return 'presentation'
-      elsif params[:action] == "generate_pdf"
-        return "pdf"
-      else
-        return 'admin'
-      end
-    end
-
 end

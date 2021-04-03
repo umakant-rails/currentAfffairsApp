@@ -28,9 +28,11 @@ Rails.application.routes.draw do
     resources :presentations do
       get '/questionniares' => "presentations#questionniares", as: :questionniares, on: :collection
       get '/folder_factsheets' => "presentations#folder_factsheets", as: :folder_factsheets, on: :collection
-      get '/get_questions' => "presentations#get_questions", as: :get_questions
+      get '/get_questions' => "presentations#get_questions", as: :get_questions, 
+        on: :member
       get '/get_factsheets' => "presentations#get_factsheets", as: :get_factsheets, on: :member
-      get '/generate_pdf' => "presentations#generate_pdf", as: :generate_pdf
+      get '/questionnaire_pdf' => "presentations#questionnaire_pdf", as: :questionnaire_pdf, on: :member
+      get '/factsheet_folder_pdf' => "presentations#factsheet_folder_pdf", as: :factsheet_folder_pdf, on: :member
     end
     resources :factsheets
     resources :factsheet_folders do

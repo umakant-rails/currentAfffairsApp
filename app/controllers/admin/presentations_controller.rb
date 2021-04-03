@@ -10,7 +10,7 @@ class Admin::PresentationsController < ApplicationController
   end
 
   def get_questions
-    @questionnaire = Questionnaire.find(params[:presentation_id])
+    @questionnaire = Questionnaire.find(params[:id])
     @questions = @questionnaire.questions
     respond_to do |format|
       format.html {}
@@ -22,15 +22,15 @@ class Admin::PresentationsController < ApplicationController
     end
   end
 
-  def generate_pdf
-    @questionnaire = Questionnaire.find(params[:presentation_id])
+  def questionnaire_pdf
+    @questionnaire = Questionnaire.find(params[:id])
     @questions = @questionnaire.questions
     respond_to do |format|
       format.html
       format.pdf do
         render  pdf: "file_name",   # Excluding ".pdf" extension.
-          template: "admin/presentations/generate_pdf.html.erb",
-          layout:   "pdf.html.erb",
+          template: "admin/presentations/questionnaire_pdf.html.erb",
+          layout:   "questionnaire_pdf_layout.html.erb",
           :page_size => "A4"
       end
     end
@@ -45,11 +45,27 @@ class Admin::PresentationsController < ApplicationController
     @factsheets = @fs_folder.factsheets
   end
 
+  def factsheet_folder_pdf
+    @factsheet_folder = FactsheetFolder.find(params[:id])
+    @factsheets = @factsheet_folder.factsheets
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render  pdf: "file_name",   # Excluding ".pdf" extension.
+          template: "admin/presentations/factsheet_folder_pdf.html.erb",
+          layout:   "factsheet_folder_pdf_layout.html.erb",
+          :page_size => "A4"
+      end
+    end
+  end
+
   private
 
     def set_layout
-      if params[:action] == "generate_pdf"
-        return "pdf"
+      if params[:action] == "questionnaire_pdf"
+        return "questionnaire_pdf_layout"
+      elsif params[:action] == "factsheet_folder_pdf"
+        return "factsheet_folder_pdf_layout"
       else
         return 'presentation'
       end

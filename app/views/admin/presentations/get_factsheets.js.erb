@@ -1,3 +1,4 @@
-$("#pr-factsheets-block").html("<%= escape_javascript(render 'presentation_factsheets', fs_folder: @fs_folder, factsheets: @factsheets) %>");
-
-
+<% if params[:is_presentation] == "true" %>
+  $("#pr-factsheets-block").html("<%= escape_javascript(render 'presentation_factsheets', fs_folder: @fs_folder, factsheets: @factsheets) %>");
+  $("#download-pdf").attr("href", "/admin/presentations/<%= params[:id] %>/factsheet_folder_pdf.pdf");
+<% end %>
