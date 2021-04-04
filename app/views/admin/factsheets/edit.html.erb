@@ -1,6 +1,6 @@
 <%= render 'form', factsheet: @factsheet %>
 <script type="text/javascript">
-  /*function ajaxLoad() {
+  function ajaxLoad() {
     $.ajax({
       url: '/admin/factsheets/'+<%= params[:id] %>+'/edit',
       type:"GET",
@@ -12,8 +12,8 @@
       }
     });
   }
-  $(document).ready(function(){ajaxLoad();});*/
   $(document).ready(function(){
+    ajaxLoad();
     var txt = $("#description").val();
     tinymce.get("factsheet-box").setContent(txt);
   });
@@ -32,7 +32,7 @@
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["factsheet-input"]);
+    control.makeTransliteratable(["title"]);
   }
   google.setOnLoadCallback(onLoad);
 </script>
