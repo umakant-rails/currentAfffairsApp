@@ -87,10 +87,17 @@
         <span class="menu-collapsed">Factsheet/Folder</span>
       </a>
     </div>
-    <a id="questionnaire-presentation" href="<%= admin_presentations_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-start align-items-center">
-        <span class="menu-collapsed">Reports</span>
-      </div>
+    <a id="report-menu" href="#reportList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+      <span class="menu-collapsed">Reports</span>&nbsp;&nbsp;
+      <i class="crt-afr-icon fas fa-angle-left"></i>
     </a>
+    <div id='reportList' class="collapse sidebar-submenu">
+      <a href="<%= question_reports_admin_reports_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Question Reports</span>
+      </a>
+      <a href="<%= factsheet_reports_admin_reports_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Factsheet Reports</span>
+      </a>
+    </div>
   </ul>      
 </div>

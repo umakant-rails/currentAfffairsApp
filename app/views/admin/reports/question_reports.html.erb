@@ -1,0 +1,51 @@
+<div class="row form-title-divider">
+  <div class="col-md-12">
+    <div class="question-rpt-title">
+      Question Reports
+    </div>
+  </div>
+</div>
+<div class="row question-rpt-filter">
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="row">
+          <div class="col-md-3 lbl" style="padding-top: 5px;">From</div>
+          <div class="col-md-9">
+            <input type="text" placeholder="Select Date" class="datetimepicker-input form-control" id="fromdatetimepicker" data-toggle="datetimepicker" data-target="#fromdatetimepicker"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="row">
+          <div class="col-md-2 px-0 lbl" style="padding-top: 5px;">To</div>
+          <div class="col-md-10 px-0">
+            <input type="text" placeholder="Select Date" class="datetimepicker-input form-control" id="todatetimepicker" data-toggle="datetimepicker" data-target="#todatetimepicker"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <%= select_tag 'ques_category_id', options_from_collection_for_select(@que_categories, "id", "name"), :prompt => "Select Category", class:"form-control" %>
+      </div>
+      <div class="col-lg-3">
+        <button type="button" id="filteredQuestionRpt" class="btn btn-primary form-control">Filter</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <i class="fa fa-file-pdf export-pdf"></i>
+  </div>
+</div>
+<div id="report-data-block">
+  <%= render 'admin/reports/report_question_list', questions: @questions_tmp, page: params[:page] %>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('#fromdatetimepicker').datetimepicker({
+      locale: 'EN', format: 'DD/MM/YYYY'
+    });
+    $('#todatetimepicker').datetimepicker({
+      locale: 'EN', format: 'DD/MM/YYYY'
+    });
+  });
+</script>

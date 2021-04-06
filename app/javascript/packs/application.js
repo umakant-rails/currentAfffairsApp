@@ -20,6 +20,7 @@ require("packs/presentation_questionnaire")
 require("packs/presentation_factsheet")
 require("packs/factsheet")
 require("packs/factsheet_folder")
+require("packs/report")
 
 require("moment/locale/ja")
 require("tempusdominus-bootstrap-4")

@@ -1,0 +1,24 @@
+<% basic_index = page.blank? ? 1 : (10*params[:page].to_i)-9 %>
+<div class="row-fluid" id="report-data"  style="margin: 0px -15px;">
+  <% questions.each_with_index do | question, ind | %>
+    <div class="col-md-12 px-0">
+      <div class="rpt-question-block">
+        <div class="row">
+          <div class="col-md-10 rpt-question-status">
+            <%= format('%02d', basic_index + ind) %>. <%= question.question %>
+          </div>
+          <div class="col-md-2 rpt-question-date">
+            <%= question.created_at.strftime("%B %d, %Y") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <center><%= paginate questions, remote: true, window:1 %></center>
+  </div>
+  <div class="col-md-3"></div>
+</div>

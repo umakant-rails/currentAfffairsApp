@@ -42,7 +42,7 @@ window.appFunctions = function () {
 }();
 
 $(document).ready(function(){
-  $("#question-menu, #questionnaire-menu, #scrapping-menu, #factsheet-menu, #folder-menu, #presentation-menu").on('click', function(){
+  $("#question-menu, #questionnaire-menu, #scrapping-menu, #factsheet-menu, #folder-menu, #presentation-menu, #report-menu").on('click', function(){
     appFunctions.hideAndShowSubmenu(this);
   });
   $(".error-cls-icon").on('click', function(){

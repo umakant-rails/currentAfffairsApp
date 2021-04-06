@@ -1,6 +1,6 @@
 class Admin::QuestionnairesController < ApplicationController
   before_action :authenticate_user!
-  layout :admin
+  layout 'admin'
   before_action :set_questionnaire, only: [:show, :edit, :update, :questions_of_questionnaire]
 
   def index
@@ -67,11 +67,6 @@ class Admin::QuestionnairesController < ApplicationController
     else 
       @questions =  Question.includes(:questionnaires).where(questionnaires: {id: nil})
     end
-    if params[:questionnaire_id].present?
-      @questionnaire = Questionnaire.find(params[:questionnaire_id])
-      @added_questions = @questionnaire.questions
-    end
-
     respond_to do |format|
       format.html {}
       format.js{}

@@ -40,7 +40,7 @@
 }
 #question-menu, #questionnaire-menu, #questionnaire-presentation, 
 #scrapping-menu, #dashboard-menu, #folder-menu, #factsheet-menu,
-#presentation-menu{
+#presentation-menu, #report-menu{
   background-color: #edf0ef ;
 }
 .fRight{float:right;}

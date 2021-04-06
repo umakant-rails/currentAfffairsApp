@@ -42,6 +42,12 @@ Rails.application.routes.draw do
       get '/folder_filter' => "factsheet_folders#folder_filter", 
         as: :folder_filter, on: :collection
     end
+    resources :reports do
+      get '/question_reports' => "reports#question_reports", 
+        as: :question_reports, on: :collection
+      get '/factsheet_reports' => "reports#factsheet_reports", 
+        as: :factsheet_reports, on: :collection
+    end
   end
   
 end
