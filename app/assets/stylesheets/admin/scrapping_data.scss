@@ -43,7 +43,8 @@
   font-weight: bold;
   text-decoration: underline;
   margin-bottom: 5px;
-  color: brown;
+  color: #dc3545;
+  margin-left: 10px;
 }
 .unread-scrap-hdr{
   font-size: 25px;
@@ -51,4 +52,18 @@
   text-align: center;
   color: #dc3545;
   text-decoration: underline;
+}
+
+.index-label{ 
+  position: absolute;
+  margin-left: -30px;
+  margin-top: -6px;
+  border-radius: 5px 0px 15px 0px;
+  border: 1px solid gray;
+  width: 28px;
+  font-size: 12px;
+  padding: 4px 0px 4px 3px;
+  background-color: #0069d9;
+  color: white;
+  font-weight: bold;
 }

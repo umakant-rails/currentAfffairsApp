@@ -1,6 +1,7 @@
-<% scrapping_data.present? && scrapping_data.each do | scrapping_datum | %>
+<% scrapping_data.present? && scrapping_data.each_with_index do | scrapping_datum, index | %>
   <% if action_name == "unread" || action_name == "hold" %>
     <div class="scrapping-datum" id="scrap-data-<%= scrapping_datum.id %>">
+      <div class="index-label"><%= format('%02d', index+1) %></div>
    <% else %>
     <div class="scrapping-datum">
   <% end %>

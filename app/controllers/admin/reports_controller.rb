@@ -19,6 +19,9 @@ class Admin::ReportsController < ApplicationController
     @questions_tmp = Kaminari.paginate_array(@questions).page(params[:page]).per(10)
   end
 
+  def export_question_pdf
+  end
+  
   def factsheet_reports
   end
 
