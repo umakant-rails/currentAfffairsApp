@@ -1,6 +1,6 @@
 class Admin::DashboardsController < ApplicationController
   before_action :authenticate_user!
-  layout 'admin'
+  #layout 'admin'
 
   def index
     @questions = Question.order("created_at desc").first(5)

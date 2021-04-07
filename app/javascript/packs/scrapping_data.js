@@ -10,7 +10,7 @@ var scrappingDataFunctions = (function () {
   },
   fetchDataFromScrappingSource = function(dataSource, date_txt, linkTxt) {
     $.ajax({
-      url: '/admin/scrapping_data/scrap_data/' + dataSource,
+      url: '/super_admin/scrapping_data/scrap_data/' + dataSource,
       type:"GET",
       //dataType: 'json',
       dataType: 'script',
@@ -21,7 +21,7 @@ var scrappingDataFunctions = (function () {
   },
   markAsHoldOrRead = function(scrappingDatumId, action_type){
     $.ajax({
-      url: '/admin/scrapping_data/' + scrappingDatumId + "/mark_as_hold_or_read",
+      url: '/super_admin/scrapping_data/' + scrappingDatumId + "/mark_as_hold_or_read",
       type:"GET",
       dataType: 'json',
       data: {action_type: action_type},
@@ -39,7 +39,7 @@ var scrappingDataFunctions = (function () {
   },
   markAsUnHold = function(scrappingDatumId, action_type){
     $.ajax({
-      url: '/admin/scrapping_data/' + scrappingDatumId + "/unhold",
+      url: '/super_admin/scrapping_data/' + scrappingDatumId + "/unhold",
       type:"GET",
       dataType: 'json',
       data: {action_type: action_type},

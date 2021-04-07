@@ -2,19 +2,17 @@
   <div class="col-md-6 db-widget">
     <div class="db-hdr">Current Affairs</div>
     <div class="db-list">
-      <% if @scrapping_data.present? %>
-        <% @scrapping_data.each do | datum |%>
-          <div class="db-li"><%= datum.title.truncate(65) %></div>
+      <% if @questions.present? %>
+        <% @questions.each do | ques |%>
+          <div class="db-li"><%= ques.question.truncate(65) %></div>
         <% end %>
       <% else %>
-        <div class="db-li">
-          There is no question now.
-        </div>
+        There is no question now.
       <% end %>
-      <% if @scrapping_data.present? %>
+      <% if @questions.present? %>
         <div class="db-li">
-          <a href="<%= unread_admin_scrapping_data_path %>">Show More ...</a>
-        </div>
+          <a href="<%= admin_questions_path %>">Show More ...</a>
+          </div>
       <% end %>
     </div>
   </div>

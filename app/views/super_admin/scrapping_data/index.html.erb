@@ -1,0 +1,24 @@
+<div class="row scrapping-row">
+  <div class="col-md-4">
+    <%= select_tag "scrapping_source", options_for_select(scrapping_data_sources_arry), prompt: "Select Scrapping Source", class:"form-control", id: "scrapping_source" %>
+  </div>
+  <div class="col-md-4">
+    <input type="text" placeholder="<%= Time.now.strftime('%0d/%m/%Y') %>" class="form-control datetimepicker-input" id="datetimepicker" data-toggle="datetimepicker" data-target="#datetimepicker"/>
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-primary fetch-btn" id="fetch_data">
+      CA Fetch
+    </button>
+  </div>
+</div>
+<div class="row clear form-title-divider"></div>
+<div id="scrapping-data">
+  <div class="no-data col-lg-6 offset-lg-3">There is available no data now.</div>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker').datetimepicker({
+      locale: 'EN', format: 'DD/MM/YYYY'
+    });
+  });
+</script>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CurrentAffairsApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application'%>
+    <%= javascript_pack_tag 'application'%>
+  </head>
+  <body>
+    <%= render partial: "layouts/super_admin/navbar" %>
+    <%= render partial: "layouts/alert_message" %>
+    <div class="container-fluid top-margin">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar px-0">
+          <%= render partial: "layouts/super_admin/sidebar" %>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

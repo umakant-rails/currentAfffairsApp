@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  layout :set_layouts
 
   def after_sign_in_path_for(resource)
     if resource.present? && (resource.role_id == 1)
@@ -13,4 +14,12 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  private
+    def set_layouts
+      if current_user.is_super_admin
+        return 'super_admin'
+      elsif current_user.is_admin
+        return 'admin'
+      end
+    end
 end

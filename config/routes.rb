@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
-  namespace :admin do
-    resources :dashboards, only: [:index]
+  namespace :super_admin do
     resources :scrapping_data do
       get '/scrap_data/:data_source' => "scrapping_data#scrap_data", as: :scrap_data, on: :collection
       get '/unread' => "scrapping_data#unread", as: :unread, on: :collection
@@ -16,6 +15,9 @@ Rails.application.routes.draw do
       get '/mark_as_hold_or_read' => "scrapping_data#mark_as_hold_or_read", as: :mark_as_hold_or_read, on: :member
       get '/unhold' => "scrapping_data#unhold", as: :unhold, on: :member
     end
+  end
+  namespace :admin do
+    resources :dashboards, only: [:index]
     resources :questionnaires do
       get '/add_questions_page' => "questionnaires#add_questions_page", 
         as: :add_questions_page, on: :collection

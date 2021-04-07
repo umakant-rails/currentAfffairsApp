@@ -1,7 +1,7 @@
-class Admin::ScrappingDataController < ApplicationController
+class SuperAdmin::ScrappingDataController < ApplicationController
   before_action :authenticate_user!
   before_action :set_scrapping_datum, only: [:show, :edit, :update, :destroy]
-  layout 'admin'
+  #layout 'admin'
   # GET /scrapping_data
   # GET /scrapping_data.json
   def index

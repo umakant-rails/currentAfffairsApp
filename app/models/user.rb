@@ -6,9 +6,14 @@ class User < ApplicationRecord
   has_many :questionnaires
   has_many :questions
   has_many :factsheet_folders
-  has_many :factsheets
+  has_many :factsheets 
 
   def is_super_admin
     self.role_id == 1
   end
+
+  def is_admin
+    self.role_id == 2
+  end
+
 end

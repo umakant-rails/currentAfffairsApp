@@ -1,0 +1,12 @@
+<div class="row unread-scrap-hdr">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <center>Un-Read Scrapping Data</center>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+<div class="row clear form-title-divider"></div>
+<div id="scrapping-data">
+  <%= render 'scrapping_datum', scrapping_data: @scrapping_data, action_name: params[:action], links_arry: [] %>
+</div>
+

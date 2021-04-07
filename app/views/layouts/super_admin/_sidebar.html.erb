@@ -3,6 +3,21 @@
     <a id="dashboard-menu" href="<%= admin_dashboards_path %>" class=" list-group-item list-group-item-action flex-column align-items-start">
       <span class="menu-collapsed">Dashboard</span>
     </a>
+    <a id="scrapping-menu" href="#scrappingList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
+      <span class="menu-collapsed">Scrappings</span>&nbsp;&nbsp;
+      <i class="crt-afr-icon fas fa-angle-left"></i>
+    </a>
+    <div id='scrappingList' class="collapse sidebar-submenu">
+      <a href="<%= super_admin_scrapping_data_path %>" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Scrap To Data</span>
+      </a>
+      <a href="<%= unread_super_admin_scrapping_data_path %>" class="list-group-item list-group-item-action">
+        <span class="menu-collapsed">Unread Scrapping Data</span>
+      </a>
+      <a href="<%= hold_super_admin_scrapping_data_path %>" class="list-group-item list-group-item-action">
+        <span class="menu-collapsed">Hold Scrapping Data</span>
+      </a>
+    </div>
     <a id="question-menu" href="#questionList" data-toggle="collapse" aria-expanded="false" class=" list-group-item list-group-item-action flex-column align-items-start">
       <span class="menu-collapsed">Questions</span>&nbsp;&nbsp;
       <i class="crt-afr-icon fas fa-angle-left"></i>
