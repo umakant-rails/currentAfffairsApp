@@ -5,8 +5,8 @@ class Admin::QuestionsController < ApplicationController
 
   def index
     @page = params[:page].blank? ? 0 : params[:page]
-    @questionnaires = Questionnaire.order("created_at desc")
-    questions_tmp = Question.order("created_at desc")
+    @questionnaires = current_user.questionnaires.order("created_at desc")
+    questions_tmp = current_user.questions.order("created_at desc")
     @questions = Kaminari.paginate_array(questions_tmp).page(params[:page]).per(10)
   end
 
@@ -14,7 +14,7 @@ class Admin::QuestionsController < ApplicationController
     @question = Question.new
     @question.question_category_questions.build
 
-    get_scrapping_data
+    get_scrapping_data if current_user.is_super_admin
     respond_to do |format|
       format.html {}
       format.js {}
@@ -23,47 +23,27 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def create
-=begin
-    @question = Question.where(scrapping_datum_id: params[:question][:scrapping_datum_id])
-
-    if @question.present?
-      respond_to do |format|
-        flash[:notice] = 'Question is craete already for this data.'
-        format.html { redirect_to new_admin_question_path}
-        format.js {}
-      end
-    elsif @question.blank?
-=end
-      @question = Question.new(question_params)
-      @question.scrapping_datum.update(is_read: true) if @question.save
-      get_scrapping_data
-      respond_to do |format|
-        flash[:notice] = 'Question is created successfully.'
-        format.html { redirect_to new_admin_question_path}
-        format.js {}
-      end
-=begin
-    else
-      respond_to do |format|
-        format.html { render :new }
-        format.js {}
-      end
+    @question = current_user.questions.new(question_params)
+    @question.scrapping_datum.update(is_read: true) if @question.save && @question.scrapping_datum.present?
+    get_scrapping_data
+    respond_to do |format|
+      flash[:notice] = 'Question is created successfully.'
+      format.html { redirect_to new_admin_question_path}
+      format.js {}
     end
-=end
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = current_user.questions.find(params[:id])
   end
   
   def edit
-    @question = Question.find(params[:id])
-    @scrapping_datum = @question.scrapping_datum
+    @question = current_user.questions.find(params[:id])
+    @scrapping_datum = current_user.is_super_admin ? @question.scrapping_datum : nil
   end
 
   def update
-    @question = Question.find(params[:id])
-
+    @question = current_user.questions.find(params[:id])
     if @question.update(question_params)
       respond_to do |format|
         flash[:notice] = 'Question updated successfully.'
@@ -76,7 +56,7 @@ class Admin::QuestionsController < ApplicationController
 
   def questions_for_fact
     #@questions = Question.where(question_category_id: params[:category_id])
-    @questions = Question.joins(:question_category_questions).where(question_category_questions: {question_category_id:  params[:category_id]})
+    @questions = current_user.questions.joins(:question_category_questions).where(question_category_questions: {question_category_id:  params[:category_id]})
     respond_to do |format|
       format.html {}
       format.js {}
@@ -84,7 +64,7 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find(params[:id])
+    @question = current_user.questions.find(params[:id])
     if @question.destroy!
        respond_to do |format|
         flash[:notice] = 'Question deleted successfully.'
@@ -106,7 +86,7 @@ class Admin::QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:question, :option1, :option2, :option3, :option4, :answer, :keypoints, :facts, :state_id, :scrapping_datum_id,question_category_questions_attributes: [:id, :question_category_id, :question_id, :_destroy])
+      params.require(:question).permit(:question, :option1, :option2, :option3, :option4, :answer, :keypoints, :facts, :state_id, :scrapping_datum_id, :user_id, question_category_questions_attributes: [:id, :question_category_id, :question_id, :_destroy])
     end
 end
 

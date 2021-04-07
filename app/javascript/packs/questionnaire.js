@@ -73,13 +73,19 @@ var questionnaireFunctions = (function () {
       }
     });
   };
+  var resetFilterParams = function(){
+    $("#fromdatetimepicker").val("");
+    $("#todatetimepicker").val("");
+    $("#ques_category_id").val("");
+  };
   return {
     setCurrentAffairName: setCurrentAffairName,
     validateQuestionnaireForm: validateQuestionnaireForm,
     submitQuestions: submitQuestions,
     setSelectedQuestions: setSelectedQuestions,
     addQuestionsPageOfQuestionnaire: addQuestionsPageOfQuestionnaire,
-    getFilteredQuestions: getFilteredQuestions
+    getFilteredQuestions: getFilteredQuestions,
+    resetFilterParams: resetFilterParams
   };
 })();
 
@@ -110,6 +116,7 @@ $(document).ready(function(){
   $("#questionnaire_id").on("change", function(){
     var questionnaireId = $(this).val();
     if(questionnaireId.length != ""){
+      questionnaireFunctions.resetFilterParams();
       questionnaireFunctions.addQuestionsPageOfQuestionnaire(questionnaireId);
     } else {
       window.location = window.location.href;
@@ -173,11 +180,11 @@ $(document).ready(function(){
     var fromDate = $("#fromdatetimepicker").val();
     var toDate = $("#todatetimepicker").val();
     var quesCategory = $("#ques_category_id").val();
-    if(fromDate == toDate){
-      appFunctions.setAlertMessage("Both Date cann't be equal.", "alert-danger");
-    } else if (fromDate == ""){
+    if(fromDate == "" && toDate ==""){
+      appFunctions.setAlertMessage("Both Date cann't be blank.", "alert-danger");
+    } else if (fromDate == "" && toDate.length > 0 ){
       appFunctions.setAlertMessage("From Date cann't be blank.", "alert-danger");
-    } else if (toDate == ""){
+    } else if (fromDate.length > 0 && toDate == ""){
       appFunctions.setAlertMessage("To Date cann't be blank.", "alert-danger");
     }
     questionnaireFunctions.getFilteredQuestions(questionnaireId, fromDate, toDate, quesCategory);

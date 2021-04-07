@@ -8,7 +8,7 @@ class Admin::FactsheetFoldersController < ApplicationController
   def index
     @page = params[:page].blank? ? 0 : params[:page]
     
-    fs_factsheets_tmp = FactsheetFolder.order("created_at desc")
+    fs_factsheets_tmp = current_user.factsheet_folders.order("created_at desc")
     @factsheet_folders = Kaminari.paginate_array(fs_factsheets_tmp).page(params[:page]).per(10)
   end
 
@@ -19,7 +19,7 @@ class Admin::FactsheetFoldersController < ApplicationController
 
   # GET /admin/factsheet_folders/new
   def new
-    @factsheet_folder = FactsheetFolder.new
+    @factsheet_folder = current_user.factsheet_folders.new
   end
 
   # GET /admin/factsheet_folders/1/edit
@@ -29,7 +29,7 @@ class Admin::FactsheetFoldersController < ApplicationController
   # POST /admin/factsheet_folders
   # POST /admin/factsheet_folders.json
   def create
-    @factsheet_folder = FactsheetFolder.new(factsheet_folder_params)
+    @factsheet_folder = current_user.factsheet_folders.new(factsheet_folder_params)
 
     respond_to do |format|
       if @factsheet_folder.save
@@ -68,11 +68,11 @@ class Admin::FactsheetFoldersController < ApplicationController
 
   def add_factsheet_page
     @added_factsheets = nil
-    @factsheets = Factsheet.where(factsheet_folder_id: nil)
-    @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(10)
+    @factsheets = current_user.factsheets.where(factsheet_folder_id: nil)
+    @factsheet_folders = current_user.factsheet_folders.all.order("created_at DESC").last(10)
 
     if params[:factsheet_folder_id].present?
-      @folder = FactsheetFolder.find(params[:factsheet_folder_id])
+      @folder = current_user.factsheet_folders.find(params[:factsheet_folder_id])
       @added_factsheets = @folder.factsheets
     end
 
@@ -85,13 +85,13 @@ class Admin::FactsheetFoldersController < ApplicationController
   def folder_filter
     @factsheet_folders = nil
     if params[:filter] == "blank folder"
-      @factsheet_folders = FactsheetFolder.without_factsheet
+      @factsheet_folders = current_user.factsheet_folders.without_factsheet
     elsif params[:filter] == "last 20 Folder"
-      @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(20)
+      @factsheet_folders = current_user.factsheet_folders.order("created_at DESC").last(20)
     else
-      @factsheet_folders = FactsheetFolder.all.order("created_at DESC").last(5)
+      @factsheet_folders = current_user.factsheet_folders.order("created_at DESC").last(5)
     end
-    @factsheets = Factsheet.where(factsheet_folder_id: nil)
+    @factsheets = current_user.factsheets.where(factsheet_folder_id: nil)
     respond_to do |format|
       format.html {}
       format.js{}
@@ -106,8 +106,8 @@ class Admin::FactsheetFoldersController < ApplicationController
       remove_factsheets
     end
 
-    @added_factsheets = FactsheetFolder.find(params[:id]).factsheets
-    @factsheets = Factsheet.where(factsheet_folder_id: nil)
+    @added_factsheets = current_user.factsheet_folders.find(params[:id]).factsheets
+    @factsheets = current_user.factsheets.where(factsheet_folder_id: nil)
 
     respond_to do |format|
       flash[:notice] = 'Factsheet added successfully in Factsheet Folder.'
@@ -119,7 +119,7 @@ class Admin::FactsheetFoldersController < ApplicationController
   private
 
     def add_factsheets
-      @factsheet_folder = FactsheetFolder.find(params[:id])
+      @factsheet_folder = current_user.factsheet_folders.find(params[:id])
       params[:factsheet_arry].each do | factsheet_id |
         Factsheet.find(factsheet_id).update_columns({
           factsheet_folder_id: @factsheet_folder.id
@@ -129,13 +129,13 @@ class Admin::FactsheetFoldersController < ApplicationController
 
     def remove_factsheets
       params[:factsheet_arry].each do | factsheet_id |
-        Factsheet.find(factsheet_id).update_columns({factsheet_folder_id: nil})
+        current_user.factsheets.find(factsheet_id).update_columns({factsheet_folder_id: nil})
       end
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_factsheet_folder
-      @factsheet_folder = FactsheetFolder.find(params[:id])
+      @factsheet_folder = current_user.factsheet_folders.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

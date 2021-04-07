@@ -4,17 +4,17 @@ class Admin::FactsheetsController < ApplicationController
 
   def index
     @page = params[:page].blank? ? 0 : params[:page]
-    @factsheet_folders = FactsheetFolder.order("created_at desc")
-    factsheets_tmp = Factsheet.order("created_at desc")
+    @factsheet_folders = current_user.factsheet_folders.order("created_at desc")
+    factsheets_tmp = current_user.factsheets.order("created_at desc")
     @factsheets = Kaminari.paginate_array(factsheets_tmp).page(params[:page]).per(10)
   end
 
   def new
-    @factsheet = Factsheet.new
+    @factsheet = current_user.factsheets.new
   end
 
   def create
-    @factsheet = Factsheet.new(factsheet_params)
+    @factsheet = current_user.factsheets.new(factsheet_params)
     @factsheet.save
     respond_to do |format|
       flash[:notice] = 'Factsheet is created successfully.'
@@ -24,11 +24,11 @@ class Admin::FactsheetsController < ApplicationController
   end
 
   def show
-    @factsheet = Factsheet.find(params[:id])
+    @factsheet = current_user.factsheets.find(params[:id])
   end
 
   def edit
-    @factsheet = Factsheet.find(params[:id])
+    @factsheet = current_user.factsheets.find(params[:id])
     respond_to do |format|
       format.html {}
       format.js {}
@@ -37,7 +37,7 @@ class Admin::FactsheetsController < ApplicationController
   end
 
   def update
-    @factsheet = Factsheet.find(params[:id])
+    @factsheet = current_user.factsheets.find(params[:id])
 
     if @factsheet.update(factsheet_params)
       respond_to do |format|
@@ -50,7 +50,7 @@ class Admin::FactsheetsController < ApplicationController
   end
 
   def destroy
-    @factsheet = Factsheet.find(params[:id])
+    @factsheet = current_user.factsheets.find(params[:id])
     if @factsheet.destroy!
        respond_to do |format|
         flash[:notice] = 'Factsheet deleted successfully.'
@@ -59,24 +59,10 @@ class Admin::FactsheetsController < ApplicationController
     end
   end
 
-  def factsheet_folder
-  end
-
-  def create_factsheet_folder
-  end
-
-  def add_factsheet_page
-    @factsheets = FactsheetFolder.all
-  end
-
-  def add_factsheet_in_folder
-  
-  end
-
   private
 
   def factsheet_params
-    params.require(:factsheet).permit(:title, :description)
+    params.require(:factsheet).permit(:title, :description, :user_id)
   end
 
 end

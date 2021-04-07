@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
     if resource.present? && (resource.role_id == 1)
       admin_dashboards_path
     else
-      home_path
+      admin_dashboards_path
+      #home_path
     end
   end
 

@@ -1,14 +1,24 @@
 <div class="row">
-  <div class="col-lg-6" id ="scrapping-data-block">
-    <%= render 'scrapping_data_for_questions', scrapping_data: @scrapping_data, question: @question, states: @states %>
-  </div>
-  <div class="col-lg-6" id="current-affairs-block">
-    <div class="question-form-title"><center> Create Question Form</center></div>
-    <div class="clear form-title-divider"></div>
-    <div class="question-form-block">
-      <%= render 'form', question: @question, states: @states %>
+  <% if @scrapping_data.present? && current_user.is_super_admin %>
+    <div class="col-lg-6" id ="scrapping-data-block">
+      <%= render 'scrapping_data_for_questions', scrapping_data: @scrapping_data, question: @question, states: @states %>
     </div>
-  </div>
+    <div class="col-lg-6" id="current-affairs-block">
+      <div class="question-form-title"><center> Create Question Form</center></div>
+      <div class="clear form-title-divider"></div>
+      <div class="question-form-block">
+        <%= render 'form', question: @question, states: @states %>
+      </div>
+    </div>
+  <% else %>
+    <div class="col-lg-12" id="current-affairs-block">
+      <div class="question-form-title"><center> Create Question Form</center></div>
+      <div class="clear form-title-divider"></div>
+      <div class="question-form-block">
+        <%= render 'form', question: @question, states: @states %>
+      </div>
+    </div>
+  <% end %>
 </div>
  <script type="text/javascript">
     google.load("elements", "1", {

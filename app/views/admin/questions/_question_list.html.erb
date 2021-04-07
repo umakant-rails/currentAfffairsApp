@@ -10,7 +10,7 @@
   <tbody>
     <% if questions.present? %>
       <% questions.each_with_index do | question, index | %>
-        <tr>
+        <tr style="color:#0056b3;">
           <th scope="row"><%= get_question_index(page, index) %></th>
           <td><%= question.question %></td>
           <td><%= question.questionnaires.present? ? question.questionnaires[0].name : '' %></td>

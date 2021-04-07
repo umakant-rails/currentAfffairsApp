@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
   create_table "factsheet_folders", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.integer "questionnaire_category_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -23,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
     t.string "title"
     t.text "description"
     t.integer "factsheet_folder_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
   create_table "questionnaires", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.integer "questionnaire_category_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -70,8 +73,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
     t.text "keypoints"
     t.text "facts"
     t.string "state_id"
-    t.integer "question_category_id"
-    t.integer "questionnaire_category_id"
+    t.integer "user_id"
     t.integer "questionnaire_id"
     t.integer "scrapping_datum_id"
     t.datetime "created_at", precision: 6, null: false

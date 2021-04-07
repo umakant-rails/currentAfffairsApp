@@ -4,21 +4,21 @@ class Admin::QuestionnairesController < ApplicationController
   before_action :set_questionnaire, only: [:show, :edit, :update, :questions_of_questionnaire]
 
   def index
-    questionnaires_tmp = Questionnaire.order("created_at desc")
+    questionnaires_tmp = current_user.questionnaires.order("created_at desc")
     @questionnaires = Kaminari.paginate_array(questionnaires_tmp).page(params[:page]).per(10)
   end
 
   def new
-    @questionnaire = Questionnaire.new
+    @questionnaire = current_user.questionnaires.new
   end
 
   def create
     is_true = false
     is_exist = false
-    @questionnaire = Questionnaire.where(name: params[:questionnaire][:name])[0]
+    @questionnaire = current_user.questionnaires.where(name: params[:questionnaire][:name])[0]
 
     if @questionnaire.blank?
-      @questionnaire = Questionnaire.new(questionnaire_params)
+      @questionnaire = current_user.questionnaires.new(questionnaire_params)
       is_true = @questionnaire.save
       flash[:notice] = 'Questionnaire is created successfully.'
     else
@@ -54,19 +54,26 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   def add_questions_page
-    @questions=nil, @added_questions=nil
-    @questionnaires = Questionnaire.all.order("created_at DESC").last(8)
+    @questions=[], @added_questions= []
+    @questionnaires = current_user.questionnaires.order("created_at DESC").last(8)
     @que_categories = QuestionCategory.all
     from_date = params[:from_date].present? ? params[:from_date].to_date : nil 
     to_date = params[:to_date].present? ? params[:to_date].to_date : nil
 
-    if from_date.present? && to_date.present? && params[:question_category_id].present?
-      @questions =  Question.where("question_category_id = ? and created_at between ? and ?", params[:question_category_id], from_date, to_date)
-    elsif from_date.present? && to_date.present?
-      @questions =  Question.where("created_at between ? and ?", from_date, to_date)
-    else 
-      @questions =  Question.includes(:questionnaires).where(questionnaires: {id: nil})
+    if params[:questionnaire_id].present?
+      @added_questions = current_user.questionnaires.find(params[:questionnaire_id]).questions
     end
+
+    if from_date.present? && to_date.present? && params[:question_category_id].present?
+      @questions =  current_user.questions.joins(:question_category_questions).where("question_category_questions.question_category_id = ? and questions.created_at between ? and ?", params[:question_category_id], from_date, to_date)
+    elsif from_date.present? && to_date.present?
+      @questions =  current_user.questions.joins(:question_category_questions).where("question_category_questions.created_at between ? and ?", from_date, to_date)
+    else 
+      @questions =  current_user.questions.includes(:questionnaires).where(questionnaires: {id: nil})
+    end
+
+    @questions = @questions - @added_questions
+
     respond_to do |format|
       format.html {}
       format.js{}
@@ -79,9 +86,9 @@ class Admin::QuestionnairesController < ApplicationController
     elsif(params[:action_type] == "removal")
       remove_questions
     end
-    @added_questions = Questionnaire.find(params[:id]).questions
+    @added_questions = current_user.questionnaires.find(params[:id]).questions
     #@questions = Question.where(questionnaires: nil)
-    @questions =  Question.includes(:questionnaires).where(questionnaires: {id: nil})
+    @questions =  current_user.questions.includes(:questionnaires).where(questionnaires: {id: nil})
     respond_to do |format|
       flash[:notice] = 'Question added successfully in Questionnaire.'
       format.html {}
@@ -100,7 +107,7 @@ class Admin::QuestionnairesController < ApplicationController
   end
 
   def destroy
-    @questionnaire = Questionnaire.find(params[:id])
+    @questionnaire = current_user.questionnaires.find(params[:id])
     if @questionnaire.destroy!
        respond_to do |format|
         flash[:notice] = 'Questionnaire deleted successfully.'
@@ -112,7 +119,7 @@ class Admin::QuestionnairesController < ApplicationController
   private
 
     def add_questions
-      @questionnaire = Questionnaire.find(params[:id])
+      @questionnaire = current_user.questionnaires.find(params[:id])
       params[:question_array].each do | ques_id |
         is_blank = @questionnaire.questionnaire_questions.where(question_id: ques_id).blank?
         if is_blank
@@ -131,7 +138,7 @@ class Admin::QuestionnairesController < ApplicationController
     end
 
     def remove_questions
-      @questionnaire = Questionnaire.find(params[:id])
+      @questionnaire = current_user.questionnaires.find(params[:id])
       params[:question_array].each do | question_id |
         questnre_question = @questionnaire.questionnaire_questions.where(question_id: question_id)
         if questnre_question.present?
@@ -144,10 +151,10 @@ class Admin::QuestionnairesController < ApplicationController
 
     def set_questionnaire
       questionnaire_id = params[:questionnaire_id].present? ?  params[:questionnaire_id] : params[:id]
-      @questionnaire = Questionnaire.find(questionnaire_id) 
+      @questionnaire = current_user.questionnaires.find(questionnaire_id) 
     end
 
     def questionnaire_params
-      params.require(:questionnaire).permit(:name, :questionnaire_category_id)
+      params.require(:questionnaire).permit(:name, :questionnaire_category_id, :user_id)
     end
 end

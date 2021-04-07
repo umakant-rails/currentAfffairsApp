@@ -1,8 +1,11 @@
 <div class="col-lg-6 px-0" id="question-block">
   <div class="block-lbl">
     <input class="ques-checkbox" type="checkbox" value="" id="questions-checkbox">
-    Question List&nbsp;(<span id="selected-ques-count">0</span>)
-    <div class="add-questions">Add Questions</div>
+    Questions&nbsp;(<span id="selected-ques-count">0</span>) 
+    <% if !(params[:from_date] && params[:questionnaire_id]) %>
+      Without Questionniare
+    <% end %>
+    <div class="add-questions">Add</div>
   </div>
   <% questions && questions.each do | question |%>
     <div class="question-div" id="div-question<%= question.id %>" data-questionId="<%= question.id %>">
@@ -17,6 +20,10 @@
       </div>
       <div class="question-date">
         <%= question.created_at.strftime("%B %d, %Y")%>
+        <% if question.questionnaires.present? %>
+          &nbsp;&nbsp;
+          Added in : <%= question.questionnaires[0].name %>
+        <% end %>
       </div>
     </div>
   <% end %>
@@ -29,9 +36,9 @@
 <div class="col-lg-6 px-0" id="questionnaire-question-block">
   <div class="block-lbl">
     <input class="added-ques-checkbox" type="checkbox" value="" id="added-questions-checkbox">
-    Added Question List
+    Added Questions
     (<span id="added-ques-count"><%= added_questions.present? ? added_questions.length : 0%></span>)
-    <div class="remove-questions">Remove Questions</div>
+    <div class="remove-questions">Remove</div>
   </div>
   <div id="added-question-div">
     <% added_questions.present? && added_questions.each do | question |%>

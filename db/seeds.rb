@@ -1,7 +1,9 @@
 User.create(username: 'umakant005', email: 'umakantrajpoot@gmail.com', 
   password: '12345678', password_confirmation: '12345678', role_id:1,
   confirmed_at: Date.today) if User.where(email: 'umakantrajpoot@gmail.com').blank?
-
+User.create(username: 'umakant006', email: 'umakant006@gmail.com', 
+  password: '12345678', password_confirmation: '12345678', role_id:2,
+  confirmed_at: Date.today) if User.where(email: 'umakant006@gmail.com').blank?
 State.create!(name: "Arunachal Pradesh") if State.where(name: "Arunachal Pradesh").blank?
 State.create!(name: "Himachal Pradesh") if State.where(name: "Himachal Pradesh").blank?
 State.create!(name: "Jammu & Kashmir") if State.where(name: "Jammu & Kashmir").blank?

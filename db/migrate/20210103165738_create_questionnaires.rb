@@ -3,6 +3,7 @@ class CreateQuestionnaires < ActiveRecord::Migration[6.1]
     create_table :questionnaires do |t|
       t.string :name
       t.integer :questionnaire_category_id
+      t.integer :user_id
 
       t.timestamps
     end
