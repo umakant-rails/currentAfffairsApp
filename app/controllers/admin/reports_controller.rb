@@ -1,5 +1,5 @@
 class Admin::ReportsController < ApplicationController
-  layout 'admin'
+  #layout 'admin'
 
   def question_reports
     @que_categories = QuestionCategory.all
@@ -8,13 +8,13 @@ class Admin::ReportsController < ApplicationController
     @questions = nil 
 
     if from_date.present? && to_date.present? && params[:question_category_id].present?
-      @questions = Question.joins(:question_category_questions).where("question_category_questions.question_category_id = ? and questions.created_at between ? and ?", params[:question_category_id], from_date, to_date)
+      @questions = current_user.questions.joins(:question_category_questions).where("question_category_questions.question_category_id = ? and questions.created_at between ? and ?", params[:question_category_id], from_date, to_date)
     elsif from_date.present? && to_date.present?
-      @questions =  Question.joins(:question_category_questions).where("questions.created_at between ? and ?", from_date, to_date)
+      @questions =  current_user.questions.joins(:question_category_questions).where("questions.created_at between ? and ?", from_date, to_date)
     elsif params[:question_category_id].present?
-      @questions =  Question.joins(:question_category_questions).where(question_category_questions: {question_category_id:  params[:question_category_id]})
+      @questions =  current_user.questions.joins(:question_category_questions).where(question_category_questions: {question_category_id:  params[:question_category_id]})
     else 
-      @questions =  Question.joins(:question_category_questions)
+      @questions =  current_user.questions.joins(:question_category_questions)
     end 
     @questions_tmp = Kaminari.paginate_array(@questions).page(params[:page]).per(10)
   end

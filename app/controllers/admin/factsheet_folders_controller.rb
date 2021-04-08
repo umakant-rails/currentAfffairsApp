@@ -1,6 +1,6 @@
 class Admin::FactsheetFoldersController < ApplicationController
   before_action :authenticate_user!
-  layout 'admin'
+  #layout 'admin'
   before_action :set_factsheet_folder, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/factsheet_folders

@@ -1,7 +1,7 @@
 class Admin::QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_state_and_quesion_category, only: [:new, :create, :edit]
-  layout 'admin'
+  #layout 'admin'
 
   def index
     @page = params[:page].blank? ? 0 : params[:page]

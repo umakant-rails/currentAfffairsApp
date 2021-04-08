@@ -6,11 +6,11 @@ class Admin::PresentationsController < ApplicationController
   end
 
   def questionniares
-    @questionnaires = Questionnaire.all.order("created_at DESC").first(5)
+    @questionnaires = current_user.questionnaires.order("created_at DESC").first(5)
   end
 
   def get_questions
-    @questionnaire = Questionnaire.find(params[:id])
+    @questionnaire = current_user.questionnaires.find(params[:id])
     @questions = @questionnaire.questions
     respond_to do |format|
       format.html {}
@@ -23,7 +23,7 @@ class Admin::PresentationsController < ApplicationController
   end
 
   def questionnaire_pdf
-    @questionnaire = Questionnaire.find(params[:id])
+    @questionnaire = current_user.questionnaires.find(params[:id])
     @questions = @questionnaire.questions
     respond_to do |format|
       format.html
@@ -37,16 +37,16 @@ class Admin::PresentationsController < ApplicationController
   end
 
   def folder_factsheets
-    @factsheet_folders = FactsheetFolder.order("created_at DESC").first(5)
+    @factsheet_folders = current_user.factsheet_folders.order("created_at DESC").first(5)
   end
 
   def get_factsheets
-    @fs_folder = FactsheetFolder.find(params[:id])
+    @fs_folder = current_user.factsheet_folders.find(params[:id])
     @factsheets = @fs_folder.factsheets
   end
 
   def factsheet_folder_pdf
-    @factsheet_folder = FactsheetFolder.find(params[:id])
+    @factsheet_folder = current_user.factsheet_folders.find(params[:id])
     @factsheets = @factsheet_folder.factsheets
     respond_to do |format|
       format.html

@@ -1,6 +1,6 @@
 class Admin::QuestionnairesController < ApplicationController
   before_action :authenticate_user!
-  layout 'admin'
+  #layout 'admin'
   before_action :set_questionnaire, only: [:show, :edit, :update, :questions_of_questionnaire]
 
   def index

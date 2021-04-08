@@ -1,6 +1,6 @@
 class Admin::FactsheetsController < ApplicationController
   before_action :authenticate_user!
-  layout 'admin'
+  #layout 'admin'
 
   def index
     @page = params[:page].blank? ? 0 : params[:page]
