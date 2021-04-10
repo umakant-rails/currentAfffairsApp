@@ -1,24 +1,50 @@
-default: &default
-  adapter: mysql2
-  encoding: utf8mb4
-  pool: 5
-  host: localhost
-  username: rails  
-  password: 
-  socket: /var/run/mysqld/mysqld.sock
-  port: 3306
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8mb4
+#   pool: 5
+#   host: localhost
+#   username: rails  
+#   password: 
+#   socket: /var/run/mysqld/mysqld.sock
+#   port: 3306
 
+# development:
+#   <<: *default
+#   database: ca_app_development
+
+# # Warning: The database defined as "test" will be erased and
+# # re-generated from your development database when you run "rake".
+# # Do not set this db to the same as development or production.
+# test:
+#   <<: *default
+#   database: ca_app_test
+
+# production:
+#   <<: *default
+#   database: ca_app_production
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  database: sample_postgres_development
+  pool: 5
+  username: sample_postgres
+  password:
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: 
+  password: 
 development:
   <<: *default
-  database: ca_app_development
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+  database: ca_app_dev
 test:
   <<: *default
   database: ca_app_test
-
 production:
   <<: *default
-  database: ca_app_production
+  database: ca_app_prd
+  username: rails
+  password: <%= ENV['DATABASE_PASSWORD'] %>

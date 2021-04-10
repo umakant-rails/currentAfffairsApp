@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2021_03_12_070457) do
 
-  create_table "factsheet_folders", charset: "utf8mb4", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "factsheet_folders", force: :cascade do |t|
     t.string "name"
     t.integer "questionnaire_category_id"
     t.integer "user_id"
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "factsheets", charset: "utf8mb4", force: :cascade do |t|
+  create_table "factsheets", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.integer "factsheet_folder_id"
@@ -29,33 +32,33 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "question_categories", charset: "utf8mb4", force: :cascade do |t|
+  create_table "question_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "question_category_questions", charset: "utf8mb4", force: :cascade do |t|
+  create_table "question_category_questions", force: :cascade do |t|
     t.integer "question_id"
     t.integer "question_category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "questionnaire_categories", charset: "utf8mb4", force: :cascade do |t|
+  create_table "questionnaire_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "questionnaire_questions", charset: "utf8mb4", force: :cascade do |t|
+  create_table "questionnaire_questions", force: :cascade do |t|
     t.integer "question_id"
     t.integer "questionnaire_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "questionnaires", charset: "utf8mb4", force: :cascade do |t|
+  create_table "questionnaires", force: :cascade do |t|
     t.string "name"
     t.integer "questionnaire_category_id"
     t.integer "user_id"
@@ -63,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "questions", charset: "utf8mb4", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.text "question"
     t.string "option1"
     t.string "option2"
@@ -80,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "scrapping_data", charset: "utf8mb4", force: :cascade do |t|
+  create_table "scrapping_data", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.string "source"
@@ -94,13 +97,13 @@ ActiveRecord::Schema.define(version: 2021_03_12_070457) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "states", charset: "utf8mb4", force: :cascade do |t|
+  create_table "states", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "first_name"

@@ -127,6 +127,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -244,6 +245,7 @@ DEPENDENCIES
   listen (~> 3.3)
   mysql2
   nokogiri
+  pg
   pry
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

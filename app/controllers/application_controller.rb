@@ -16,10 +16,12 @@ class ApplicationController < ActionController::Base
 
   private
     def set_layouts
-      if current_user.is_super_admin
+      if current_user.present? && current_user.is_super_admin
         return 'super_admin'
-      elsif current_user.is_admin
+      elsif current_user.present? && current_user.is_admin
         return 'admin'
+      else
+        return 'application'
       end
     end
 end

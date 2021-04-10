@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'nokogiri'
 gem "pry"
 gem "mysql2"
+gem 'pg'
 gem 'devise'
 gem 'kaminari'
 gem 'wicked_pdf'
