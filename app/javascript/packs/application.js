@@ -8,9 +8,9 @@ import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import { tinyMce } from "../packs/tinymce"
-import "@fortawesome/fontawesome-free/css/all"
+
 require("bootstrap");
-require("@fortawesome/fontawesome-free/js/all");
+//require("@fortawesome/fontawesome-free/js/all");
 require("packs/layout.js")
 require("packs/scrapping_data")
 require("packs/question")
