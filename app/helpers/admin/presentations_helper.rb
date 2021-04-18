@@ -1,5 +1,5 @@
 module Admin::PresentationsHelper
-
+=begin
   def is_answer(question, option)
     answer_cls = ""
     if (option == 1)
@@ -13,6 +13,10 @@ module Admin::PresentationsHelper
     end 
     return answer_cls 
   end
+=end
+  #def is_answer(option, answer)
+   # return (option == answer) ? "option-is-answer" : ""
+  #end
 
   def is_keypoints_exist(question)
     return question.keypoints.present?

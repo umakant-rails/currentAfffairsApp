@@ -1,3 +1,59 @@
-<center>
-  <h1><%= @welcome_msg %></h1>
-</center>
+<div class="row db-tp-mrgn">
+  <div class="col-md-3">
+    <div class="col-md-12 home-left-block">
+      <div class="row questionnaire-list-title">
+        Questionnaire List
+      </div>
+      <div class="row questionnaire-list">
+        <% @questionnaires.each do | questionnaire | %>
+          <div class="col-md-12 questionnaire-txt">
+            <a href="#"><i class="fas fa-chevron-right" style="font-size: 15px;"></i> 
+            <%= questionnaire.name %></a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 home-middle-block">
+    <div class="row qustnr-title">
+      <%= @questionnaire.name %>
+    </div>
+    <div class="row questions-block">
+      <% questions = @questionnaire.questions %>
+      <% questions && questions.each_with_index do |question, index|%>
+        <div class="col-md-12 question-title">
+          <span class="ques-index">Ques <%= index+1 %>.</span>
+          <span class="ques-text"><%= question.question %></span>
+        </div>
+        <div class="col-md-12 ques-option <%= is_answer(question.option1, question.answer) %>">
+          A. <%= question.option1 %>
+        </div>
+        <div class="col-md-12 ques-option <%= is_answer(question.option2, question.answer) %>">
+          B. <%= question.option2 %>
+        </div>
+        <div class="col-md-12 ques-option <%= is_answer(question.option3, question.answer) %>">
+          C. <%= question.option3 %>
+        </div>
+        <div class="col-md-12 ques-option <%= is_answer(question.option4, question.answer) %>">
+          D. <%= question.option4 %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="col-md-12 home-right-block">
+      <div class="row questionnaire-list-title">
+        Questionnaire List
+      </div>
+      <div class="row questionnaire-list">
+        <% @questionnaires.each do | questionnaire | %>
+          <div class="col-md-12 questionnaire-txt">
+            <a href="#"><i class="fas fa-chevron-right" style="font-size: 15px;"></i> 
+            <%= questionnaire.name %></a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<br/><br/>

@@ -2,7 +2,8 @@ class WelcomeController < ApplicationController
   
   def index 
     if current_user.blank?
-      @welcome_msg = "This is welcome page"
+      @questionnaires = Questionnaire.all
+      @questionnaire = Questionnaire.joins(:questions).where(questionnaire_category: 1).order("questionnaires.created_at").last
     else
       redirect_to home_path
     end

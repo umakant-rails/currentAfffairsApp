@@ -8,6 +8,10 @@ module ApplicationHelper
     return question.id.present?
   end
 
+  def is_answer(option, answer)
+    return (option == answer) ? "option-is-answer" : ""
+  end
+  
   def questionnaire_categories_hash
     arr = []
     questionnaire_categories = QuestionnaireCategory.all
