@@ -14,7 +14,7 @@
   <body>
     <div class="first-page">
       <div class="pdf-channel-name">
-        <span class="pdf-channel-widget">Xpress News</span>
+        <span class="pdf-channel-widget">Xpress Updates</span>
       </div>
       <div class="" id="question0">
         <div id="current-affair-title">
@@ -32,4 +32,7 @@
       <%= yield %>
     </div>
   </body>
+  <style>
+     <%= Rails.application.assets.find_asset('wicked.css').to_s.html_safe %>
+  </style>
 </html>

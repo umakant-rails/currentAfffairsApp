@@ -42,7 +42,12 @@
       <div class="col-md-7 question-keypoints" id="keypoints<%= index +1 %>" 
         data-ispresent="<%= is_keypoints_exist(question) %>" style="display:none">
         <div class="keypoints-label">Keypoints :</div>
-        <%=raw question.keypoints.gsub("\n", "<br/>") %>
+          <ul>
+            <% question.keypoints.split("\n").each do | kp | %>
+              <li><%= kp.strip %></li>
+            <% end %>
+          </ul>
+        <%#=raw question.keypoints.gsub("\n", "<br/>") %>
       </div>
     </div>
   </div>

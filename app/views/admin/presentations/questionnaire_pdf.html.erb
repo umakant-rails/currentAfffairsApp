@@ -13,6 +13,7 @@
     </div>
     <div class="pdf-options-block">
       <div class="pdf-question-option">
+        <br/>
         <div class="option <%= is_answer(question.option1, question.answer) %>">A.&nbsp;<%= question.option1%></div>
         <div class="option <%= is_answer(question.option2, question.answer) %>">B.&nbsp;<%= question.option2%></div>
         <div class="option <%= is_answer(question.option3, question.answer) %>">C.&nbsp;<%= question.option3%></div>
@@ -21,7 +22,14 @@
       <% if question.keypoints.present? %>
         <div class="pdf-question-keypoints">
           <div class="pdf-keypoints-label">Keypoints :</div>
-          <%=raw question.keypoints.gsub("\n", "<br/>") %>
+          <ul style="margin-left: -25px;margin-top: 3px;">
+            <% question.keypoints.split("\n").each do | kp | %>
+              <% if kp.strip.length > 0 %>
+                <li><%= kp.strip %></li>
+              <% end %>
+            <% end %>
+          </ul>
+          <%#=raw question.keypoints.gsub("\n", "<br/>") %>
         </div>
       <% end %>
     </div>

@@ -1,13 +1,13 @@
 <% scrapping_data.each do |datum|%>
   <div class="scrapping-data-fr-ques row" data-scrap_data_id="<%= datum.id %>">
     <div class="ca-header">
-      <%= raw datum.title %><span class="read-status <%= 'hide' unless datum.is_read %>">READ</span>
+      <%= raw (datum.title.present? ? datum.title.strip : '') %>
     </div>
     <div class="ca-description">
-      <%= raw datum.description %>
+      <%= raw (datum.description.present? ? datum.description.strip : '') %>
     </div>
     <div class="ca-keypoints">
-      <%= raw datum.keypoints %>
+      <%= raw (datum.keypoints.present? ? datum.keypoints.strip : '') %>
     </div>
   </div>
   <%= paginate scrapping_data,  window:1,  remote: true %>
