@@ -94,7 +94,7 @@ div.nobreak{ page-break-inside: avoid; }
   font-size: 15px;
   font-weight: bold;
   color: #3377ff;
-  border: 1px solid #ff661a; //#f73;
+  border: 1px solid gray;
   border-radius: 4px;
   padding: 0 15px 8px 15px;
   width: 60%;
@@ -110,17 +110,18 @@ div.nobreak{ page-break-inside: avoid; }
   background-color: #ff661a;
   border-radius: 4px 4px 0px 0px;
 }
-#pdf-watermark-text{
-  position:absolute;
-  z-index:-1;
-  color:lightgrey;
-  font-size:65px;
-  //transform:rotate(-45deg);
-  //-webkit-transform:rotate(-45deg);
-  top: 600px;
-  left: 200px;
-  font-weight:bold;
-  color: #ffe6f2;
+.pdf-watermark-text{
+  position: absolute;
+  margin-top: 125px;
+  margin-left: 250px;
+  font-size: 40px !Important;
+  font-weight: bold;
+  border: 1px solid #ebeded;
+  border-radius: 5px;
+  padding: 8px;
+  color: #fae3e3;
+  background-color: #e6fffc;
+  z-index: -1;
 }
 .factsheet-title{
   font-size: 25px;
