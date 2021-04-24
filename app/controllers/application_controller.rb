@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   layout :set_layouts
+  before_action :set_app_name
 
   def after_sign_in_path_for(resource)
     if resource.present? && (resource.role_id == 1)
@@ -15,6 +16,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+    def set_app_name
+      @app_name = "Xpress Updates"
+    end
+
     def set_layouts
       if current_user.present? && current_user.is_super_admin
         return 'super_admin'

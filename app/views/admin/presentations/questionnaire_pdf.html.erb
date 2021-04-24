@@ -1,14 +1,9 @@
 <% @questions.each_with_index do | question, index | %>
   <% if index % 4 == 0%>
     <div class="pdf-page">
-      <!--
-        <div id="pdf-watermark-text">
-          <span class="channel-widget">Xpress News</span>
-        </div> 
-      -->
   <% end %>
   <div class="pdf-question-block">
-    <div class="pdf-watermark-text">Xpress Updates</div>
+    <div class="pdf-watermark-text"><%= @app_name %></div>
     <div class="pdf-current-affair-question">
       <span class="ques-index">Que <%= index+1%>.</span> &nbsp;<%= question.question%>
     </div>

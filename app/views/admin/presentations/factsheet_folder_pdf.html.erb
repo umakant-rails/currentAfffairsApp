@@ -1,12 +1,19 @@
 <% @factsheets.each_with_index do | factsheet, index | %>
-  <div class="pdf-page ">
-    <div class="factsheet-title">
-      <center><%= factsheet.title %></center>
+  <% if index % 2 == 0%>
+    <div class="factsheet-pdf-page ">
+  <% end %>
+    <div class="half-page-size">
+      <div class="pdf-watermark-text"><%= @app_name %></div>
+      <div class="factsheet-title">
+        <center><%= factsheet.title %></center>
+      </div>
+      <div class="pdf-question-block">
+        <%= raw factsheet.description %>
+      </div>
     </div>
-    <div class="pdf-question-block">
-      <%= raw factsheet.description %>
+  <% if (index % 2 == 1) || (factsheet.id == @factsheets.last.id)%>
     </div>
-  </div>
+  <% end %>
   <% if factsheet.id == @factsheets.last.id %>
     <div></div>
   <% end %>

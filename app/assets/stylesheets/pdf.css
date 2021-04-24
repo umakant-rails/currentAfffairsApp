@@ -1,7 +1,7 @@
 div.alwaysbreak { page-break-before: always; }
 div.nobreak:before { clear:both; }
 div.nobreak{ page-break-inside: avoid; }
-
+/* Start questionnaire css */
 .pdf-page{
   height:1340px;
   border: 2px solid black;
@@ -116,7 +116,7 @@ div.nobreak{ page-break-inside: avoid; }
   margin-left: 250px;
   font-size: 40px !Important;
   font-weight: bold;
-  border: 1px solid #ebeded;
+  border: 1px solid #9a9de3;
   border-radius: 5px;
   padding: 8px;
   color: #fae3e3;
@@ -132,3 +132,21 @@ div.nobreak{ page-break-inside: avoid; }
   padding: 1px 5px;
   background-color: #0069d9;
 }
+/* End questionnaire css */
+
+/* Start factsheet folder css */
+.factsheet-first-page{
+  height:1340px;
+  border: 2px solid black;
+  margin-bottom: 25px;
+}
+.factsheet-pdf-page{
+  height:1340px;
+  border: 2px solid black;
+  margin-bottom: 25px;
+}
+.half-page-size{
+  height: 660px;
+  margin-bottom: 10px;
+}
+/* End factsheet folder css */

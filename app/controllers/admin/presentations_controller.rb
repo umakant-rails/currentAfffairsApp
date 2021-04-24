@@ -62,6 +62,14 @@ class Admin::PresentationsController < ApplicationController
         render  pdf: "file_name",   # Excluding ".pdf" extension.
           template: "admin/presentations/factsheet_folder_pdf.html.erb",
           layout:   "factsheet_folder_pdf_layout.html.erb",
+          margin: {top: 6, bottom: 6, left: 6, right: 6},
+          header:  { left:'Xpress Updates', center:'Xpress Updates', 
+            right:'Xpress Updates', font_size: 8
+          },
+          footer:  { left:'Xpress Updates', center:'Xpress Updates', 
+            right:'Xpress Updates', font_size: 8
+          },
+          :show_as_html => false,
           :page_size => "A4"
       end
     end
