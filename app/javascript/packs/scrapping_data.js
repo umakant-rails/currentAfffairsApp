@@ -44,8 +44,23 @@ var scrappingDataFunctions = (function () {
       dataType: 'json',
       data: {action_type: action_type},
       success: function (response) {
-        console.log(response.status);
         if(response.status == true){-
+          appFunctions.setAlertMessage("Suceessfully '"+ action_type +"' to selected scrap data.", 
+            "alert-success");
+          $("#scrap-data-"+scrappingDatumId).remove();
+        } else {
+          appFunctions.setAlertMessage(action_type + " action is failed.", "alert-danger");
+        }
+      }
+    });
+  };
+  var deleteScrappingDatum = function(scrappingDatumId, action_type){
+    $.ajax({
+      url: '/super_admin/scrapping_data/' + scrappingDatumId,
+      type: 'DELETE',
+      dataType: 'json',
+      success: function (response) {
+        if(response.status == true){
           appFunctions.setAlertMessage("Suceessfully '"+ action_type +"' to selected scrap data.", 
             "alert-success");
           $("#scrap-data-"+scrappingDatumId).remove();
@@ -59,7 +74,8 @@ var scrappingDataFunctions = (function () {
     selectDataSource: selectDataSource,
     fetchDataFromScrappingSource: fetchDataFromScrappingSource,
     markAsHoldOrRead: markAsHoldOrRead,
-    markAsUnHold: markAsUnHold
+    markAsUnHold: markAsUnHold,
+    deleteScrappingDatum: deleteScrappingDatum
   }
 })();
 
@@ -107,6 +123,15 @@ $(document).ready(function(){
     var action_type = $(this).val();
     if(scrappingDatumId.length > 0) {
       scrappingDataFunctions.markAsUnHold(scrappingDatumId, action_type);
+    } else {
+      appFunctions.setAlertMessage("A Error has ocurred regarding this action.", "alert-danger");
+    }
+  });
+  $(".delete_scrapping_datum").on("click", function(){
+    var scrappingDatumId = $(this).attr("data-id");
+    var isTrue = confirm('Are you sure ?');
+    if(isTrue && (scrappingDatumId.length > 0)) {
+      scrappingDataFunctions.deleteScrappingDatum(scrappingDatumId, 'delete');
     } else {
       appFunctions.setAlertMessage("A Error has ocurred regarding this action.", "alert-danger");
     }

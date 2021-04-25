@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
-  validates :question, :option1, :option2, :option3, :option4, :answer, :scrapping_datum_id, presence: true
+  validates :question, :option1, :option2, :option3, :option4, :answer, presence: true
+
   belongs_to :scrapping_datum, optional: true
   #belongs_to :questionnaire, optional: true
   belongs_to :question_category, optional: true

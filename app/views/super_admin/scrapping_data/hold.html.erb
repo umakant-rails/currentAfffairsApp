@@ -7,6 +7,26 @@
 </div>
 <div class="row clear form-title-divider"></div>
 <div id="scrapping-data">
-  <%= render 'scrapping_datum', scrapping_data: @scrapping_data, action_name: params[:action], links_arry: [] %>
+  <%#= render 'scrapping_datum', scrapping_data: @scrapping_data, action_name: params[:action], links_arry: [] %>
+  <% @scrapping_data.present? && @scrapping_data.each_with_index do | scrapping_datum, index | %>
+    <div class="scrapping-datum" id="scrap-data-<%= scrapping_datum.id %>">
+      <div class="index-label"><%= format('%02d', index+1) %></div>
+      <div class="row">
+        <div class='data-title'> <%= raw scrapping_datum[:title] %> </div>
+        <div class='data-point'> <%= raw scrapping_datum[:description] %> </div>
+        <% if(scrapping_datum[:keypoints].present? && scrapping_datum[:keypoints].length > 0)%>
+          <div class='data-title'>Keypoints : </div>
+          <div class='data-point'> <%= raw scrapping_datum[:keypoints] %> </div>
+        <% end %>
+      </div>
+      <div class="row">
+        <input type="button" data-id= "<%= scrapping_datum.id %>" value="Mark As Un-Hold" class="btn btn-primary mark-as-unhold">
+        <input type="button" data-id= "<%= scrapping_datum.id %>" value="Mark As Read" class="btn btn-primary mark-as-read">
+        <%= link_to "javascript:void(0);", 'data-id': scrapping_datum.id, class: 'delete_scrapping_datum btn btn-danger' do %>
+          Delete <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 

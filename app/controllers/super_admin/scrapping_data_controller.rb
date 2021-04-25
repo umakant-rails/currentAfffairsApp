@@ -132,7 +132,7 @@ class SuperAdmin::ScrappingDataController < ApplicationController
     @scrapping_datum.destroy
     respond_to do |format|
       format.html { redirect_to scrapping_data_url, notice: 'Scrapping datum was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json {render json: {status: true}}
     end
   end
 

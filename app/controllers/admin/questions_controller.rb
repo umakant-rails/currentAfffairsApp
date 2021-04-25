@@ -44,13 +44,14 @@ class Admin::QuestionsController < ApplicationController
 
   def update
     @question = current_user.questions.find(params[:id])
+
     if @question.update(question_params)
       respond_to do |format|
         flash[:notice] = 'Question updated successfully.'
         format.html { render 'show'}
       end
     else
-      format.html { render :edit }
+      redirect_to edit_admin_question_path(params[:id])
     end
   end
 
