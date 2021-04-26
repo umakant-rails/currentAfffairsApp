@@ -9,10 +9,10 @@ var scrappingDataFunctions = (function () {
     $(element).find("input:radio").parent().addClass('selelcted-data-source');
   },
   fetchDataFromScrappingSource = function(dataSource, date_txt, linkTxt) {
+    $("#scrapping-data").html("<div class='loader'></div>");
     $.ajax({
       url: '/super_admin/scrapping_data/scrap_data/' + dataSource,
       type:"GET",
-      //dataType: 'json',
       dataType: 'script',
       data: {date: date_txt, link_txt: linkTxt},
       success: function () {
