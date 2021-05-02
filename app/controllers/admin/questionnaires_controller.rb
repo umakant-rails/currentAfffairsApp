@@ -55,7 +55,7 @@ class Admin::QuestionnairesController < ApplicationController
 
   def add_questions_page
     @questions=[], @added_questions= []
-    @questionnaires = current_user.questionnaires.order("created_at DESC").last(8)
+    @questionnaires = current_user.questionnaires.order("created_at DESC").first(10)
     @que_categories = QuestionCategory.all
     from_date = params[:from_date].present? ? params[:from_date].to_date : nil 
     to_date = params[:to_date].present? ? params[:to_date].to_date : nil
