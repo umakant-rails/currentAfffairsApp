@@ -3,7 +3,7 @@ class Question < ApplicationRecord
 
   belongs_to :scrapping_datum, optional: true
   #belongs_to :questionnaire, optional: true
-  belongs_to :question_category, optional: true
+  #belongs_to :question_category, optional: true
   belongs_to :user
 
   has_many  :question_category_questions, :dependent => :destroy

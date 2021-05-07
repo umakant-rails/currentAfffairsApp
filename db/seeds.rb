@@ -51,6 +51,10 @@ QuestionCategory.create(name: 'Sports & Games') if QuestionCategory.where(name: 
 QuestionCategory.create(name: 'New Program/Scheme') if QuestionCategory.where(name: 'New Program/Scheme').blank?
 QuestionCategory.create(name: 'National Affairs') if QuestionCategory.where(name: 'National Affairs').blank?
 QuestionCategory.create(name: 'Others') if QuestionCategory.where(name: 'Others').blank?
+QuestionCategory.create(name: 'Ratings') if QuestionCategory.where(name: 'Ratings').blank?
+QuestionCategory.create(name: 'Index') if QuestionCategory.where(name: 'Index').blank?
+QuestionCategory.create(name: 'MOU/MOA') if QuestionCategory.where(name: 'MOU/MOA').blank?
+
 
 QuestionnaireCategory.create(name: 'Daily Current Affairs') if QuestionnaireCategory.where(name: 'Daily Current Affairs').blank?
 QuestionnaireCategory.create(name: 'Computer Awareness') if QuestionnaireCategory.where(name: 'Computer Awareness').blank?

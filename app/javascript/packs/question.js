@@ -79,6 +79,18 @@ var questionFunctions = (function () {
       data: {},
       dataType: 'script',
       success: function (response) {
+        $("#question_categories").val("");
+      }
+    });
+  };
+  var getQuestionsByCategory = function(categoryId){
+    $.ajax({
+      url: '/admin/questions/' + categoryId + '/get_questions_by_category',
+      type:"GET",
+      data: {},
+      dataType: 'script',
+      success: function (response) {
+        $("#inputQuestionnaires").val("");
       }
     });
   };
@@ -90,7 +102,8 @@ var questionFunctions = (function () {
     editFacts: editFacts,
     closeFacts: closeFacts,
     addFacts: addFacts,
-    questionsOfQuestionnaire: questionsOfQuestionnaire
+    questionsOfQuestionnaire: questionsOfQuestionnaire,
+    getQuestionsByCategory: getQuestionsByCategory
   };
 })();
 
@@ -135,6 +148,14 @@ $(document).ready(function(){
     var questionnaireId = $(this).val();
     if(questionnaireId.length > 0){
       questionFunctions.questionsOfQuestionnaire(questionnaireId);
+    } else {
+      window.location = window.location.href;
+    }
+  });
+  $(".index-question-categories").on('change', function(){
+    var categoryId = $(this).val();
+    if(categoryId.length > 0){
+      questionFunctions.getQuestionsByCategory(categoryId);
     } else {
       window.location = window.location.href;
     }

@@ -10,10 +10,18 @@
   <tbody>
     <% if questions.present? %>
       <% questions.each_with_index do | question, index | %>
-        <tr style="color:#0056b3;">
-          <th scope="row"><%= get_question_index(page, index) %></th>
-          <td><%= question.question %></td>
-          <td><%= question.questionnaires.present? ? question.questionnaires[0].name : '' %></td>
+        <tr class="rows-txt">
+          <th scope="row">
+            <%= get_question_index(page, index) %>
+          </th>
+          <td>
+            <%= link_to admin_question_path(question), class: "title-txt" do %>
+              <%= question.question.truncate(75) %>
+            <% end %>
+          </td>
+          <td>
+            <%= question.questionnaires.present? ? question.questionnaires[0].name : '' %>
+          </td>
           <td>
             <%= link_to admin_question_path(question) do %>
               <i class="fas fa-eye" aria-hidden="true"></i>

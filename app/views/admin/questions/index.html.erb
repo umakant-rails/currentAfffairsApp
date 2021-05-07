@@ -1,15 +1,16 @@
-<br/>
-<div class="row">
-  <div class="col-md-7">
+<div class="row question-index-hdr">
+  <div class="col-md-6">
     <div class="question-form-title">
       <a href="<%= admin_questions_path %>" style="text-decoration: none;">Questions List</a>
     </div>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-3">
+    <%= select_tag 'question_categories', options_from_collection_for_select(@que_categories, "id", "name"), :prompt => "Select Category", class:"form-control index-question-categories" %>
+  </div>
+  <div class="col-md-3">
     <%= select_tag 'inputQuestionnaires', options_from_collection_for_select(@questionnaires, "id", "name"), :prompt => "Select Questionnaire", class:"form-control" %>
   </div>
 </div>
-<br/>
 <div id="questions-list">
   <%= render "question_list", questions: @questions, page: 1 %>
 </div>

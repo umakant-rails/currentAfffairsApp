@@ -22,10 +22,11 @@ Rails.application.routes.draw do
       get '/add_questions_page' => "questionnaires#add_questions_page", 
         as: :add_questions_page, on: :collection
       post '/add_questions' => "questionnaires#add_questions_in_questionnaire", as: :add_questions, on: :member
-      get '/questions' => "questionnaires#questions_of_questionnaire", as: :questions_of_questionnaire
+      get '/questions' => "questionnaires#questions_of_questionnaire", as: :questions_of_questionnaire, on: :member
     end
     resources :questions do
       get '/questions_for_fact'=> "questions#questions_for_fact", as: :questions_for_fact, on: :collection
+      get '/get_questions_by_category' => "questions#get_questions_by_category", as: :get_questions_by_category, on: :member
     end
     resources :presentations do
       get '/questionniares' => "presentations#questionniares", as: :questionniares, on: :collection

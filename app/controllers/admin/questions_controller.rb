@@ -1,6 +1,6 @@
 class Admin::QuestionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_state_and_quesion_category, only: [:new, :create, :edit]
+  before_action :set_state_and_quesion_category, only: [:index, :new, :create, :edit]
   #layout 'admin'
 
   def index
@@ -74,6 +74,17 @@ class Admin::QuestionsController < ApplicationController
     end
   end
 
+  def get_questions_by_category
+    @page = params[:page].blank? ? 0 : params[:page]
+    @questionnaires = current_user.questionnaires.order("created_at desc")
+    questions_tmp = current_user.questions.joins(:question_category_questions).where("question_category_questions.question_category_id=?", params[:id])
+    @questions = Kaminari.paginate_array(questions_tmp).page(params[:page]).per(10)
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+  end
+
   private
 
     def get_scrapping_data
@@ -83,7 +94,7 @@ class Admin::QuestionsController < ApplicationController
 
     def set_state_and_quesion_category
       @states = State.all
-      @que_categories = QuestionCategory.all
+      @que_categories = QuestionCategory.order("name asc")
     end
 
     def question_params

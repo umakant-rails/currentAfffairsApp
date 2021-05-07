@@ -56,7 +56,7 @@ class Admin::QuestionnairesController < ApplicationController
   def add_questions_page
     @questions=[], @added_questions= []
     @questionnaires = current_user.questionnaires.order("created_at DESC").first(10)
-    @que_categories = QuestionCategory.all
+    @que_categories = QuestionCategory.order("name asc")
     from_date = params[:from_date].present? ? params[:from_date].to_date : nil 
     to_date = params[:to_date].present? ? params[:to_date].to_date : nil
 
@@ -65,11 +65,11 @@ class Admin::QuestionnairesController < ApplicationController
     end
 
     if from_date.present? && to_date.present? && params[:question_category_id].present?
-      @questions =  current_user.questions.joins(:question_category_questions).where("question_category_questions.question_category_id = ? and questions.created_at between ? and ?", params[:question_category_id], from_date, to_date)
+      @questions =  current_user.questions.joins(:question_category_questions).where("question_category_questions.question_category_id = ? and questions.created_at between ? and ?", params[:question_category_id], from_date, to_date).order("questions.created_at ASC")
     elsif from_date.present? && to_date.present?
-      @questions =  current_user.questions.joins(:question_category_questions).where("question_category_questions.created_at between ? and ?", from_date, to_date)
+      @questions =  current_user.questions.joins(:question_category_questions).where("question_category_questions.created_at between ? and ?", from_date, to_date).order("questions.created_at ASC")
     else 
-      @questions =  current_user.questions.includes(:questionnaires).where(questionnaires: {id: nil})
+      @questions =  current_user.questions.includes(:questionnaires).where(questionnaires: {id: nil}).order("questions.created_at ASC")
     end
 
     @questions = @questions - @added_questions
@@ -88,7 +88,7 @@ class Admin::QuestionnairesController < ApplicationController
     end
     @added_questions = current_user.questionnaires.find(params[:id]).questions
     #@questions = Question.where(questionnaires: nil)
-    @questions =  current_user.questions.includes(:questionnaires).where(questionnaires: {id: nil})
+    @questions =  current_user.questions.includes(:questionnaires).where(questionnaires: {id: nil}).order("questions.created_at ASC")
     respond_to do |format|
       flash[:notice] = 'Question added successfully in Questionnaire.'
       format.html {}
@@ -115,6 +115,8 @@ class Admin::QuestionnairesController < ApplicationController
       end
     end
   end
+
+
 
   private
 
