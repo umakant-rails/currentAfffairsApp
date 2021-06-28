@@ -77,7 +77,7 @@ class Admin::QuestionsController < ApplicationController
   def get_questions_by_category
     @page = params[:page].blank? ? 0 : params[:page]
     @questionnaires = current_user.questionnaires.order("created_at desc")
-    questions_tmp = current_user.questions.joins(:question_category_questions).where("question_category_questions.question_category_id=?", params[:id])
+    questions_tmp = current_user.questions.joins(:question_category_questions).where("question_category_questions.question_category_id=?", params[:id]).order("questions.created_at desc")
     @questions = Kaminari.paginate_array(questions_tmp).page(params[:page]).per(10)
     respond_to do |format|
       format.html {}

@@ -45,7 +45,7 @@
     <div class="form-group col-lg-12">
       <label for="question" class="question-lbl">Question</label>
       <%= f.text_area :question, row: "2", class:"form-control textarea-custom", id: "question" %>
-      <%= f.hidden_field :scrapping_datum_id, value: question.scrapping_datum_id, class:"form-control", id: "scrapping_datum_id" %>
+      <%= f.hidden_field :scrapping_datum_id, class:"form-control", id: "scrapping_datum_id" %>
     </div>
   </div>
   <div class="form-row">

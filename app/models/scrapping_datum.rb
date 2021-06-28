@@ -151,9 +151,10 @@ class ScrappingDatum < ApplicationRecord
   private
 
   def traverse_to_element(collection, ca_array, is_keypoints)
+    is_keypoints = is_keypoints.present? ? is_keypoints : false
 
     collection.each_with_index do |child, index|
-      if child.name == "p" and child.children[0].name == "strong"
+      if (child.name == "p" || child.name == "div") && child.children.present? && child.children[0].name == "strong"
         hdr_txt = child.text
         title = (hdr_txt =~ /\d+\./)
         keypoints = hdr_txt.downcase.index("important")
@@ -171,7 +172,6 @@ class ScrappingDatum < ApplicationRecord
           hs[:keypoints] = child.to_xml
           is_keypoints = false
         end
-        #puts child.text
       end
       if child.name == "div"
         traverse_to_element(child.children, ca_array, is_keypoints)

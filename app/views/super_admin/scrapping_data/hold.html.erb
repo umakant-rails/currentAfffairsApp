@@ -12,7 +12,9 @@
     <div class="scrapping-datum" id="scrap-data-<%= scrapping_datum.id %>">
       <div class="index-label"><%= format('%02d', index+1) %></div>
       <div class="row">
-        <div class='data-title'> <%= raw scrapping_datum[:title] %> </div>
+        <div class='data-title'> 
+          <%= raw scrapping_datum[:title] %> <span style="color:#0069d9;">(<%= scrapping_datum.source %>)</span>
+        </div>
         <div class='data-point'> <%= raw scrapping_datum[:description] %> </div>
         <% if(scrapping_datum[:keypoints].present? && scrapping_datum[:keypoints].length > 0)%>
           <div class='data-title'>Keypoints : </div>

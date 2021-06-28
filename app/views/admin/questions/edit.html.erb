@@ -3,7 +3,7 @@
     <div class="col-lg-6" id ="scrapping-data-block">
       <div class="scrapping-data" data-scrap_data_id="<%= @scrapping_datum.id %>">
         <div class="row ca-header">
-          <%= raw @scrapping_datum.title %><span class="read-status <%= 'hide' unless @scrapping_datum.is_read %>">READ</span>
+          <%= raw @scrapping_datum.title %><span style="color:#0069d9;">(<%= @scrapping_datum.source %>)</span>
         </div>
         <div class="row ca-description">
           <%= raw @scrapping_datum.description %>

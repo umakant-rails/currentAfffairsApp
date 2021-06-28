@@ -54,7 +54,7 @@ QuestionCategory.create(name: 'Others') if QuestionCategory.where(name: 'Others'
 QuestionCategory.create(name: 'Ratings') if QuestionCategory.where(name: 'Ratings').blank?
 QuestionCategory.create(name: 'Index') if QuestionCategory.where(name: 'Index').blank?
 QuestionCategory.create(name: 'MOU/MOA') if QuestionCategory.where(name: 'MOU/MOA').blank?
-
+QuestionCategory.create(name: 'Mobile App') if QuestionCategory.where(name: 'Mobile App').blank?
 
 QuestionnaireCategory.create(name: 'Daily Current Affairs') if QuestionnaireCategory.where(name: 'Daily Current Affairs').blank?
 QuestionnaireCategory.create(name: 'Computer Awareness') if QuestionnaireCategory.where(name: 'Computer Awareness').blank?
